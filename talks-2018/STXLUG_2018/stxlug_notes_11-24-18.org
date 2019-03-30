@@ -1,0 +1,16 @@
+#+TITLE: CentOS Server How To
+#+AUTHOR: Eduardo Robles
+
+* Welcome to STXLUG Livestream
+** 11-24-18
+
+* Topic: CentOS Server How To
+** Meeting Notes
+*** What is CentOS server?
+**** CentOS vs. RHEL
+**** IBM buys Red Hat
+**** Future of CentOS
+*** How to setup a CentOS server
+**** Installation
+**** Differences between CentOS and Ubuntu server
+*** Final thoughts

@@ -1,0 +1,37 @@
+#+TITLE: Intro to Samba Server
+#+AUTHOR: Eduardo Robles
+
+* Welcome to STXLUG Livestream
+** 12-15-18
+
+* TOPIC: Intro to Samba Server
+
+** Meeting Notes
+*** Introduction and news
+**** Presenter: Eduardo Robles
+**** Microsoft goes full Chromium for it's Edge browser. [[https://www.theverge.com/2018/12/6/18128648/microsoft-edge-chrome-chromium-browser-changes][source]]
+*** What is a Samba Server?
+#+BEGIN_QUOTE
+Samba is a the standard Windows interoperability suite of programs for Linux and Unix.
+#+END_QUOTE
+[[https://samba.org][Source]]
+
+** Why Samba?
+**** Well Samba is relatively easy to setup and configure plus it's compatible on Windows, Linux, and Mac.
+**** Many "Network Attached Storage", (NAS for short) devices use Samba as a way to create network shares for business or home users.
+**** Great for home or work environments
+
+** How to Setup a Samba Server
+*** Before you start you should have a working Ubuntu 18.04 or 16.04 server.
+*** Digital Ocean [[https://www.digitalocean.com/community/tutorials/how-to-set-up-a-samba-share-for-a-small-organization-on-ubuntu-16-04][tutorial]].
+*** [[https://gitlab.com/stxnewslug/STXLUG-Meetups/blob/master/meetups/12-15-18_Meetup/installationGuide.md][Installation Guide]].
+** Final thoughts
+*** Samba is a great technology that allows you share files across a network easily.
+*** Many businesses deploy file servers with Samba.
+*** Samba is more than capable to run as your home file server.
+*** Running Samba on an Ubuntu server is a great choice for security and reliability.
+* Thank You
+#+BEGIN_QUOTE
+I just want to thank you all for joining me in these monthly virtual meetups. It's been a lot of fun doing these livestreams and I plan on doing bigger and better things for the LUG come next year.
+So thank you all again for the support and have yourselves a Happy Holidays, a Merry Christmas, and a Happy New Year! -Eduardo
+#+END_QUOTE

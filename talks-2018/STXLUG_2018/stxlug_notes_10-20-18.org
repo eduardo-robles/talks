@@ -1,0 +1,19 @@
+#+TITLE: Ubuntu Server How To
+#+AUTHOR: Eduardo Robles
+
+* Welcome to STXLUG Livestream
+** 10-20-18
+
+* Topic: Ubuntu Server How To
+** Meeting Notes
+*** How to setup an Ubuntu Server 
+**** Initial setup
+***** Update and Upgrade system
+***** Create a new account
+***** Configure Hostname
+***** Setup SSH
+**** Advanced setup
+***** Configure Firewall
+***** Configure time 
+***** Trim the fat
+****** Disable or remove unneeded packages
