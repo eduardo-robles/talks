@@ -2,7 +2,7 @@
 
 body{
 background-color: rgb(39, 33, 39);
-background-image: url(/home/eduardo/Projects/ERWTC-Marketing/Presentations/2019/ASCE_2019/img/erwtc_presentation_1920x1080.jpg);
+background-image: url(~/../../img/erwtc_presentation_1920x1080.jpg);
 background-position: center;
 background-repeat: no-repeat;
 background-size: cover;
