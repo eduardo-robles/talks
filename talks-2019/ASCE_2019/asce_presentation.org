@@ -120,16 +120,10 @@ And by "paranoid", I mean "extra-cautious.
 
 *** 
 - But it's their job to ensure that all the technology you need to get your job done works.
-#+BEGIN_NOTES
-[/home/eduardo/Projects/ERWTC-Marketing/Presentations/2019/ASCE_2019/img/call-tech-support-my-mouse-is-dead-funny.jpg]
-#+END_NOTES
 
 #+REVEAL_HTML: <img src="img/call-tech-support-my-mouse-is-dead-funny.jpg" width="550px" height="500px">
 *** 
 - So be patient and be professional.
-#+BEGIN_NOTES
-[/home/eduardo/Projects/ERWTC-Marketing/Presentations/2019/ASCE_2019/img/deleteCookies_funny.jpg] 
-#+END_NOTES
 
 #+REVEAL_HTML: <img src="img/deleteCookies_funny.jpg" width="550px" height="550px">
 
@@ -164,9 +158,6 @@ Cybersecurity policies include things such as...
 ** How to spot some of the most common cybersecurity threats
 It's good to have a healthy dose of skepticism.
 #+REVEAL_HTML: <img src="img/dontUnderstandSecurityFunny.jpeg" width="480px" height="400px">
-#+BEGIN_NOTES
-Add images of each of these attacks as examples
-#+END_NOTES
 
 *** Spearphishing/Phishing/Spam
 #+ATTR_REVEAL: :frag (appear)
@@ -198,11 +189,11 @@ Like old saying goes "It's easier to catch a fly with honey, than it is with vin
 * 4. Actionable steps to secure yourself from cyberattacks
 ** Take actionable steps to protect yourself and your data
 #+REVEAL_HTML:<iframe src="https://giphy.com/embed/ID4NXWnwuLnLq" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/ID4NXWnwuLnLq">via GIPHY</a></p> 
+** Deploy "Multifactor Authentication"
+#+ATTR_REVEAL: :frag (appear)
 #+BEGIN_NOTES
 Authenticator apps: Microsoft Authenticator, Google Authenticator, Duo Authenticator
 #+END_NOTES
-** Deploy "Multifactor Authentication"
-#+ATTR_REVEAL: :frag (appear)
 - Multifactor authentication refers to "logging into" accounts with 2 different steps.
 - The idea of is that you use "something you have" and "something you know".
 - A simple example is your debit card. You have your debit card and you know it's pin number. 
@@ -263,13 +254,13 @@ Seriously you could have dozed off during the entire presentation but please, pl
 * STOP USING THE SAME PASSWORD FOR EVERYTHING
 ** SERIOUSLY STOP USING THE SAME PASSWORD FOR EVERYTHING
 ** But seriously stop reusing old passwords
-#+BEGIN_NOTES
-Password recommendations: Bitwarden, Onepassword. See blog post.
-#+END_NOTES
 *** The LinkedIn hack demonstrates why you should NOT reuse passwords.
 Imagine if you used the same password for your personal/work email as you did for LinkedIn. Hackers would theoretically have access to both your LinkedIn and your email.
 *** But creating complicated passwords is hard. And how I'm supposed to remember all those random characters?
 *** Easy, use a password manager
+#+BEGIN_NOTES
+Password recommendations: Bitwarden, Onepassword. See blog post.
+#+END_NOTES
 - Password managers are great and I recommend everyone start using one.
 - They function like a safe for all your passwords.
 - They can generate strong random passwords for you and even check if your password has been exposed in security breach.
@@ -286,9 +277,6 @@ Use a passphrase for those occasions
 - Contact your I.T department right away and follow their instructions.
 - Contact your manager/boss.
 *** 
-#+BEGIN_NOTES
-[/home/eduardo/Projects/ERWTC-Marketing/Presentations/2019/ASCE_2019/img/paypalError_funny.jpg]
-#+END_NOTES
 #+REVEAL_HTML: <img src="img/paypalError_funny.jpg" width="480px" height="600px">
 *** Be prepared to give a statement. 
 - There may be questions as to how you were hacked, so be as honest as possible.
