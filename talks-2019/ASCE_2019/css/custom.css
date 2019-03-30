@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,700|IBM+Plex+Sans');
+
+body{
+background-color: rgb(39, 33, 39);
+background-image: url(/home/eduardo/Projects/ERWTC-Marketing/Presentations/2019/ASCE_2019/img/erwtc_presentation_1920x1080.jpg);
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+}
+
+.reveal{
+font-family: 'IBM Plex Sans', sans-serif;
+}
+
+/*Headers*/
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  font-family: 'IBM Plex Mono', monospace;
+  color: #fff;
+  text-align: center;
+}
+
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #2ecc71;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #2ecc71;
+  text-decoration: underline;
+}
+
+/*columns*/
+.column_left{
+float: left;
+width:50%;
+}
+.column_right{
+float: right;
+width:50%;
+}
+
+
+
+

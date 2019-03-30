@@ -1,0 +1,60 @@
+#+TITLE: RazDC a Linux Active Directory Replacement
+#+AUTHOR: Eduardo Robles
+#+OPTIONS: toc:nil
+
+* Welcome to STXLUG Livestream
+** 1-19-19
+
+* Topic: RazDC a Linux Active Directory Replacement
+
+** Meeting Notes
+*** Introduction and news
+**** Presenter: Eduardo Robles
+*** News
+**** Forbes challenges the community to use elementary OS [[https://www.forbes.com/sites/jasonevangelho/2019/01/15/introducing-the-elementary-os-5-linux-community-challenge/#1b43368f3810][link]]
+*** What RazDC?
+#+BEGIN_QUOTE
+RazDC is drop-in replacement for Active Directory
+#+END_QUOTE
+This is accoring to [[http://razd.com][Raz DC]] website which they claim RazDC aims to be Microsoft Active Directory compatible. But it offers a more
+lightweight and straightforward product to that of Microsofts Active Directory. The project currently is in Alpha but it 
+still a good Open Source alternative to Active Directory.
+*** What is Active Directory?
+#+BEGIN_QUOTE
+AD DS stoes information about user acounts, such as names, passwords, phone numbers, and so on, and enables other authorized users on the same network to access this information.
+#+END_QUOTE
+
+Read this great explainer on serverfault.com [[https://serverfault.com/questions/402580/what-is-active-directory-domain-services-and-how-does-it-work][link]]
+*** Why replace Active Directory?
+Active Directory is actually a great product from Microsoft. But unfornately, it run on Microsoft Server. There are Open Source identity managment systems
+but with the dominance of Microsoft Server in the enterprise space knowing Active Directory is important. But again the reason to replace
+Active Directory is because it is tied into Microsoft Server. Which means you have to pay for a license to use Microsoft Server and the 
+/Standard/ license costs a wooping $972! 
+
+Of course you can offset the cost if you buy a server that comes bundled with the license but why pay a premium when you can use 
+Open Source software to save on the costs. When you are a small business every savings helps and that's why using something like
+RazDC is valuable.
+*** Installing RazDC
+
+1. Download the iso from RazDC site
+2. Either install in a VM or bare-metal hardware
+3. Go through the standard CentOS installation
+4. On Reboot you will be presented with RazDC new installation wizard
+5. Go through the setup wizard and complete the installation
+6. Reboot
+7. Log into your new installation
+8. Configure your server
+*** Post installation
+**** I ran into an bug that did not allow me to log into the web interaface. I had to turn off SELinux on CentOS to allow the web interaface to run.
+***** ~echo 0 > /selinux/enforce~ to temporarily disable SElinux read more [[https://www.tecmint.com/disable-selinux-temporarily-permanently-in-centos-rhel-fedora/][here]]
+***** Configure ~SELINUX=disabled~ in ~/etc/selinux/configure~ to permanently disable SElinux, read more [[https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/security-enhanced_linux/sect-security-enhanced_linux-enabling_and_disabling_selinux-disabling_selinux][here]]
+**** If you install inside a VM be sure to make your network "bridged". Or else you will not be able to communicate with the server.
+
+** Final thoughts
+*** Well I think installing RazDC is easy enough and there are some rough edges but that's expected with Alpha software. Overall I'm excited of the prospects and I can't wait to see where the projects goes in the future.
+
+* Thank you
+
+#+BEGIN_QUOTE
+I want to thank you all for joining me again and I hope to bring you more of these livestreams in 2019!
+#+END_QUOTE

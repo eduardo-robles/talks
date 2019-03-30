@@ -1,0 +1,89 @@
+#+TITLE: ASCE Presentation Notes
+#+AUTHOR: Eduardo Robles
+#+EMAIL: eduado@eduardorobles.com
+#+OPTIONS: toc:nil
+
+* Event Details
+** 2019 Student Symposium
+*** When: April 10-13, 2019
+*** Where: South Padre Island, Texas
+*** Hosted by: ASCE Student Chapter at UTRGV
+*** Links: https://www.texasce.org/our-programs/student-symposium/
+
+* Abstract
+This presentation is on approaching Cybersecurity for Engineering professionals. As businesses get more connected and projects become more complex, it is good practice to have a good understanding of how to secure important business data and communications. And to work with their Information Technology departments to keep business operations running smoothly. Participants at the end of the talk should be familiar with these topics:
+1. Understand the importance of securing yourself and your business.
+2. How to work with I.T deparment to best protect the company.
+3. Learn to spot the most common cyberattacks.
+4. Actionable steps to secure yourself from cyberattacks.
+
+* Biggest cyber security threats
+** Spearphishing/Phishing/Spam
+*** Spearphising is targeted email or phone attacks. The attacker knows enough of your job/business to able to exploit you and get something usually extortion or theft.
+*** Phising is random emails that are impersonating a company or person usually after login credentials or spreading malware.
+*** Spam is a flood of emails to a users inbox, resulting in down servers or spreading malware if user clicks on them.
+** Social Engineering
+*** "It's easier to catch a fly with honey than with vinegar." It's an attack that goes after the biggest vulnerability in any business "it's people". 
+** Pirated Software
+*** Software licenses are expensive. But will you risk millions in damages just because you didn't want to pay a couple hundred or thousand dollars on legitimate software.
+** Malicious/Outdated software
+*** Malicious software can come from emails, USB drives, CD's/DVD's, or links. With links they don't necessarily have to be from bad sites. If you are getting files to work on a project from another firm and they were hacked those files could also be infected.
+*** Outdated software no longer receives security updates and can leave you business vulnerable to an attacker exploiting the software.
+
+
+* Create or adopt a security minded business culture
+** Assign or find someone to a "Cybersecurity Officer" position.
+** Create a cybersecurity policy.
+** Have regular cybersecurity awareness training for your employees.
+
+* Deploy Multifactor Authentication
+** Multifactor authentication refers to "logging into" accounts with 2 different steps.
+*** The idea of is that you use "something you have" and "something you know".
+*** A simple example is your debit card. You have your debit card and you know it's pin number. 
+
+* Determine Threat and Risk
+*** Assets
+**** Your employees data, bank/credit card info, 
+*** Threats
+**** A negative event that can cause losses or damages.
+*** Vulnerabilities
+**** A weakness in your business operations. E.I, do you lock your doors? do you have security cameras? do you lock your computer when you walk away from it? 
+*** Risks
+**** Basically what bad things can happen and how badly would it affect me? Well I don't deal with Invoices but I'll open that PDF just to see what it's about?
+*** Countermeasures
+**** What systems and plans do you have in place to get your business back from an cyber attack? 
+* Examples of hacks
+*** Video showing phishing, identify theft, and denial of service https://youtu.be/WgbWBRfNLdc
+*** LinkedIn users targeted with malicious malware via job offers https://www.proofpoint.com/us/threat-insight/post/fake-jobs-campaigns-delivering-moreeggs-backdoor-fake-job-offers
+*** Worst corporate hacks of all times - Bloomberg https://www.bloomberg.com/graphics/corporate-hacks-cyber-attacks/
+
+* Links
+https://www.fdic.gov/consumers/assistance/protection/brochures/cyberbusiness.pdf
+
+
+
+* How to add images to slides
+#+BEGIN_SRC org
+:PROPERTIES:
+:reveal_background: images/name-of-image
+:reveal_background_size: width-of-image
+:reveal_background_trans: slide
+:END:
+#+END_SRC
+
+* How to add speaker notes
+
+#+BEGIN_NOTES
+Add notes here....
+#+END_NOTES
+
+* Abstract + Bio
+In the ever increasing connectedness of the workplace it is important to secure yourself from cyberattacks. In the recent years the number of cyberattacks have risen and have cost businesses billions in damages. These attacks can have a real impact in the engineering field as they can affect everything from work stoppage to world energy supplies. 
+
+In this presetation I will go over some of the most recent major cyberattacks. I will demonstrate the nature of the attacks and the devastating damages they caused. 
+
+I will also present practicle steps toward protecting your companies senstive information. And steps anyone should take to better protect themselves from cyberattacks in todays work environment.
+When Eduardo Robles was a kid he built his own "room security", system from old computer parts. Since then Eduardo Robles has turned that passion for technology and security into a successful business. Eduardo Robles is a small business owner, adviser, and all around geek. He is driven by 4 core values of Honesty, Accountability, Integrity, and Transperancy.
+
+
+He is the owner of Eduardo Robles Web & Technology Consulting which has been serving the South Texas region for 3 years. He has consulted and worked with engineers, lawyers, accountants, and other small businesses in the area. He was worked on projects such as website development, network deployments, and secure data backup solutions.

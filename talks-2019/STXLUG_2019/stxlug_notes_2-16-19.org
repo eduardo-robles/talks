@@ -1,0 +1,62 @@
+#+TITLE: Block Ads On Your Network!
+#+AUTHOR: Eduardo Robles
+#+OPTIONS: toc:nil
+
+* Welcome to STXLUG Livestream
+** 2-16-19
+
+* Topic: Block Ads On Your Network
+
+** Meeting Notes
+*** Intro and News
+**** Presenter: Eduardo Robles
+*** News
+**** There's now a website! Visit [[https://stxlug.com][STXLUG Website]]
+
+*** Why block ads?
+**** Problem:
+Ads tend to slow down page load times. Slow page times lead to a dip in productivity. 
+
+**** Solution:
+There are several solutions to blocking ads on your computer. You can add an extension to your web browser (e.g Adblock plus).
+Or you can setup a firewall and blacklist Ad networks. But another easier solution is to deploy a [[https://pi-hole.net][Pi-hole]]. 
+
+**** What's a Pi-Hole?
+
+#+BEGIN_QUOTE
+A black hole for Internet advertisements
+#+END_QUOTE
+
+Pi-hole is an Open Source project that accepts donations for continued development. What Pi-Hole does is it becomes your DNS server allowing it to block Ads at the network level.
+So basically any domain or IP that is added to the DNS blacklist is stopped and it never reaches your intended device. 
+
+**** Getting started with Pi-hole
+
+0. Get a raspberry Pi, or a spare computer that you run Pi-hole on or run it on a Docker instance.
+1. Run the simple install script on the raspberry Pi (or whatever device you're running this on)
+1.1 You'll be prompted to setup an admin account plus other info about your network.
+2. Configure you Router to use the Pi-hole as a DNS server
+2.1 Check for DNS setting in router and change 1 DNS option to IP of Pi-hole device
+2.2 Check DHCP to reserve the Pi-hole IP address
+3. Reboot the Pi-hole
+4. Log into the web interface via http://ADDRESSTOPIHOLE/admin 
+5. Start browsing and say bye bye to ads!
+
+**** Some gotcha's
+Yes, Pi-hole blocks Ads but....it does NOT block ALL ads. But that's not Pi-hole's fault.
+Some ads just are tied to the providers domains so unless you blacklist some domains you're going to continue gettings ads. 
+For example:
+
+1. [[https://yahoo.com][Yahoo]]
+2. [[https://youtube.com][Youtube]]
+
+Also Pi-hole doesn't do much to block Ad trackers. So you're going to have to use something like [[https://www.eff.org/privacybadger][Privacy Badger]] to stop those type of Ad trackers.
+
+** Final thoughts
+*** I think Pi-hole is an awesome project and I really see some great results using for several months now. But there a some gotcha's that you have to consider. But generally if you want to speed up your internet Pi-hole can definitely help!
+
+* Thank You!
+
+#+BEGIN_QUOTE
+I want to thank you all joinin me again and I hope you all have a great day!
+#+END_QUOTE

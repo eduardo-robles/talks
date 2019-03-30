@@ -1,0 +1,32 @@
+* Every day should be Safer Internet Day
+
+https://www.grahamcluley.com/every-day-should-be-safer-internet-day/
+
+* The Difference Between Threats, Threat Actors, Vulnerabilities, and Risks | Daniel Miessler
+
+https://danielmiessler.com/study/threats-vulnerabilities-risks/
+
+* Protecting your Domain Names: Taking the First Steps - The Akamai Blog
+
+https://blogs.akamai.com/2019/02/protecting-your-domain-names-taking-the-first-steps.html
+
+* To Give a Great Presentation, Distill Your Message to Just 15 Words
+
+https://hbr.org/2018/11/to-give-a-great-presentation-distill-your-message-to-just-15-words?utm_source=twitter&utm_medium=social&utm_campaign=hbr
+
+* Presentations - G. Colin Campbell
+
+https://gcolincampbell.net/events/
+
+* Fighting the surveillance economy — A practical guide for individuals and companies
+
+https://medium.com/@vvecsei/fighting-the-surveillance-economy-a-practical-guide-for-individuals-and-companies-cb9719fe1098
+
+* Two-factor authentication versus two-step verification
+
+https://www.grahamcluley.com/factor-authentication-2fa-versus-step-verification-2sv/
+
+* The key to small business cyber security is a culture of security awareness - ProtonMail Blog
+
+https://protonmail.com/blog/small-business-cyber-security-culture-workplace/
+
