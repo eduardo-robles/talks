@@ -41,12 +41,12 @@ Main Topics:
 ** Why is cybersecurity important?
 *** We are more connected today than we have ever been before. 
 - Our jobs require us to use computer systems on a daily basis.
-- So we have to take extra steps to ensure that our work is safe from cyberattacks
+- So we have to take extra steps to ensure that our work is safe from cyberattacks.
 *** What's the cost to engineering professionals?
-- As engineers you often work on projects that deal directly with the general public
-- If your a victim of a cyberattack that can have a direct impact on public safety
+- As engineers you often work on projects that deal directly with the general public.
+- If your a victim of a cyberattack that can have a direct impact on public safety.
 *** Cyberattacks cost billions in damages every year
-- Nowadays opening the wrong email can take down the entire company network
+- Nowadays opening the wrong email can take down the entire company network.
 - Are you able to continue to work if your entire company network is down?
 #+BEGIN_NOTES
 So we have to seriously consider the impacts that a cyberattack can have. But to do so we have to learn more about the people behind these cyberattacks
@@ -56,7 +56,8 @@ So we have to seriously consider the impacts that a cyberattack can have. But to
 *** Continued
 - We need to stop stereotyping the "evil hackers" as a bunch "dudes in their mom's basements" staring at computer screens.
 - Most hackers start their careers at a very young [[https://www.theguardian.com/technology/2015/dec/08/average-age-of-cyber-attack-suspects-drops-to-17][age]] (avg. age is 15).
-- And you do NOT need a college degree to learn the skills to take down a business network. All you need is Youtube.
+- And you do NOT need a college degree to learn the skills to take down a business network.
+- *All you need is Youtube*.
 #+BEGIN_NOTES
 To practice engineering you need a degree and for some kinds of work an engineering license. But to hack a company all you need is the internet, where you can find all kinds of videos, forums, and manuals that show you all about hacking.
 #+END_NOTES
@@ -67,8 +68,8 @@ But first we need to understand misleading marketing jargon
 #+END_NOTES
 ** Are there "unhackable" systems?
 *** There is no such thing as "Unhackable" software or hardware 
-- This is marketing scam
-- Everything that runs in a computer is hackable
+- This is marketing scam.
+- Everything that runs in a computer is hackable.
 ** Can a system be hacker proof?
 *** No, every piece of software ever written has the potential of being exploited.
 - Software is written by humans and humans are imperfect creatures. We make mistakes.
@@ -104,6 +105,9 @@ But this is was LinkedIn, what does this have to do with my job or me? Well see 
 #+BEGIN_QUOTE
 It proved you don't have to be sophisticated do a lot of damage --- Richard A. Clarke, former Counterterrorism official at the National Security Council
 #+END_QUOTE
+*** Darknet Dairies Podcast
+The podcast /Darknet Dairies/ did an episode on the Saudi Aramco cyberattack. Here's a clip of that episode titled [[https://darknetdiaries.com/episode/30/][Shamoon]].
+#+REVEAL_HTML: <iframe src="https://darknetdiaries.com/episode/30/#t=571" width="480" height="400" frameborder="0"></iframe>
 
 ** Cyberattacks can cause serious damage
 *** Those are just 2 examples of some serious cyberattacks.
@@ -140,6 +144,12 @@ Cybersecurity policies include things such as...
 6. Workstation safety
 
 ** For managers/employers/owners
+*** Create or adopt a security minded business culture
+- Assign or find someone to a "Cybersecurity Officer" position.
+- Create a cybersecurity policy.
+- Have regular cybersecurity awareness training for your employees.
+
+** Continued...
 *** Determine Threat and Risk
 #+ATTR_REVEAL: :frag (appear)
 1. Assets: /Your employees data, bank/credit card info./
@@ -147,12 +157,6 @@ Cybersecurity policies include things such as...
 3. Vulnerabilities: /A weakness in your business operations. E.I, Do you lock your computer when you walk away from it?/ 
 4. Risks: /Basically what bad things can happen and how badly would it affect me?/
 5. Countermeasures: /What systems and plans do you have in place to get your business back from an cyber attack?/
-
-** Continued...
-*** Create or adopt a security minded business culture
-- Assign or find someone to a "Cybersecurity Officer" position.
-- Create a cybersecurity policy.
-- Have regular cybersecurity awareness training for your employees.
 
 * 3. Learn to spot the most common cyberattacks
 ** How to spot some of the most common cybersecurity threats
@@ -179,6 +183,7 @@ Like old saying goes "It's easier to catch a fly with honey, than it is with vin
 - This is software that is exploited to circumvent the license requirements.
 - Not only is it *illegal* to use pirated software, it can be extremely dangerous.
 - You cannot trust pirated software to act the way it was intended.
+- You can be in "Breach of Contract", when using pirated software. Many government contracts have clauses stating the use of pirated software is prohibited.
 - Software licenses are expensive. But will you risk millions in damages just because you didn't want to pay for legitimate software.
 *** Malicious/Outdated software
 - Malicious software can come from emails, USB drives, CD's/DVD's, or links. 
@@ -228,7 +233,11 @@ You have a file named ~roadWay_project_01.cad~
 ** More on backups
 You may be thinking "I'm I supposed to redo this strategy every time I make a change to my project?"
 *** 
+#+BEGIN_NOTES
+Project Wise for Backups
+#+END_NOTES
 - Not necessarily you will have to make a choice on the "types" of backups you will use.
+- Also, be sure to leverage any project management software your business may use to do automatically do backups.
 - There are 3 backup types.
 #+ATTR_REVEAL: :frag (appear)
 1. Full: A full backup of all data related to project, even if it's been backed up before.
@@ -241,8 +250,7 @@ I see this often, Windows decides to update and it breaks your computer or delet
 *** Upgrading between program versions
 When moving between versions of AutoCAD for example, a 2018 AutoCAD file may not open or work in the AutoCAD 2019. But having a backup can spare you a lot of headaches if you decided downgrade back to 2018.
 *** Project file hand-off becomes corrupted or lost
-You are assigned to work on a project and when you complete your portion you hand it off to the next engineer. The hand off doesn't go smoothly and the file ends up corrupted. But you have a backup of your work just before the hand off, so you can simply resend it.
-Or say your coworkers computer is no longer working and they lost all their work. Well they can at least pick up from your backup from the hand off. 
+You are assigned to work on a project and when you complete your portion you hand it off to the next engineer. The hand off doesn't go smoothly and the file ends up corrupted. Or say your coworkers computer is no longer working and they lost all their work. With a backup you can resend the file and work can continue. 
 
 ** Backups are important, so be sure to backup
 
@@ -266,7 +274,7 @@ Password recommendations: Bitwarden, Onepassword. See blog post.
 - They can generate strong random passwords for you and even check if your password has been exposed in security breach.
 - Just be sure to give your password manager a strong password.
 *** But what about the passwords I need to use on a daily basis?
-Use a passphrase for those occasions
+Use a passphrase for those occasions.
 *** Passphrases can be just as effective as random passwords.
 - Be sure to only use that passphrase once per service/site.
 - And make slight alterations to it, for example a lot of people use Bible verses, but hackers already know that. So change them up a bit, like switch letters for numbers or combine several verses into one.
@@ -294,15 +302,15 @@ Use a passphrase for those occasions
 
 * Conclusion 
 #+ATTR_REVEAL: :frag (appear)
-- So you should understand the importance of securing yourself and your company
-- You should now know how to best work with I.T departments to ensure company security
-- And you should treat cybersecurity as another safety measure your company takes to ensure safety
-- You should have an idea on how to spot the most common cyberattacks such as phishing
-- And finally you should have learned how to take action to best secure yourself and your company
+- So you should understand the importance of securing yourself and your company.
+- You should now know how to best work with I.T departments to ensure company security.
+- And you should treat cybersecurity as another safety measure your company takes to ensure safety.
+- You should have an idea on how to spot the most common cyberattacks such as phishing.
+- And finally you should have learned how to take action to best secure yourself and your company.
 * Final thoughts
-- If you take a proactive approach to security the less likely you will fall victim to a cyberattack
-- Cyberattacks are not going away and they will become more sophisticated in the future
-- So be sure to "extra-cautious", and have a healthy dose of paranoia
+- If you take a proactive approach to security the less likely you will fall victim to a cyberattack.
+- Cyberattacks are not going away and they will become more sophisticated in the future.
+- So be sure to "extra-cautious", and have a healthy dose of paranoia.
 * Questions/Comments
 
 * Thank You!
