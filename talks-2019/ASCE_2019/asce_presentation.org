@@ -9,7 +9,7 @@
 
 * 
 
-#+REVEAL_HTML:<h1>Cybersecurity for Engineers</h1> <h5>Eduardo Robles</h5> <h5>eduardo@eduardorobles.com</h5><p style="font-size: 18px; text-align:left;">A presentation for ASCE 2019 Student Symposium <br/> April 10, 2019</p><p style="font-size: 12px; text-align:right; margin: 10% 0 0 0;">twitter/instagram: @mrerwtc</p>
+#+REVEAL_HTML:<h1>Cybersecurity for Engineers</h1> <h5>Eduardo Robles</h5> <h5>eduardo@eduardorobles.com</h5><p style="font-size: 18px; text-align:left;">A presentation for ASCE 2019 Student Symposium <br/> April 10, 2019</p>
 
 
 * About speaker
@@ -229,6 +229,8 @@ You have a file named ~roadWay_project_01.cad~
 2. ~roadWay_project_01_copy1.cad~ will be saved elsewhere, like a company server or external hard-drive.
 *** 
 - 1 copy will be saved offsite, ~roadWay_project_01_copy2.cad~ can be saved to cloud storage or on an external hard-drive that is offsite from the office.
+*** 
+#+REVEAL_HTML: <img src="img/321_backupSkematic.jpg" width="700px" height="500px">
 
 ** More on backups
 You may be thinking "I'm I supposed to redo this strategy every time I make a change to my project?"
