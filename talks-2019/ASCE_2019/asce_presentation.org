@@ -9,7 +9,7 @@
 
 * 
 
-#+REVEAL_HTML:<h1>Cybersecurity for Engineers</h1> <h5>Eduardo Robles</h5> <h5>eduardo@eduardorobles.com</h5><p style="font-size: 18px; text-align:left;">A presentation for ASCE 2019 Student Symposium <br/> April 10, 2019</p>
+#+REVEAL_HTML:<h1>Cybersecurity for Engineers</h1> <h5>Eduardo Robles</h5> <h6>eduardo@eduardorobles.com</h6><p style="font-size: 18px; text-align:left;">A presentation for ASCE 2019 Student Symposium <br/> April 11, 2019</p><p style="font-size: 12px; text-align: left;">Find me at <a href="https://erwtc.com/links" target="_blank">https://erwtc.com/links</a></p>
 
 
 * About speaker
@@ -44,7 +44,7 @@ Main Topics:
 - So we have to take extra steps to ensure that our work is safe from cyberattacks.
 *** What's the cost to engineering professionals?
 - As engineers you often work on projects that deal directly with the general public.
-- If your a victim of a cyberattack that can have a direct impact on public safety.
+- Falling victim to cyberattack can have a negative effect on public safety.
 *** Cyberattacks cost billions in damages every year
 - Nowadays opening the wrong email can take down the entire company network.
 - Are you able to continue to work if your entire company network is down?
@@ -220,6 +220,9 @@ Did you get an email that looks suspicious? Don't open it, simply forward it to 
 - No, this is not the best backup strategy but it is a good start.
 - This strategy was developed by the United States Computer Emergency Readiness Team, you can read more about it [[https://www.us-cert.gov/sites/default/files/publications/data_backup_options.pdf][here]].
 ** Example
+#+BEGIN_NOTES
+Start video instead of showing all these steps.
+#+END_NOTES
 You have a file named ~roadWay_project_01.cad~ 
 *** 
 - This file will have 3 total copies ~roadWay_project_01.cad~, ~roadWay_project_01_copy1.cad~, ~roadWay_project_01_copy2.cad~
@@ -231,6 +234,9 @@ You have a file named ~roadWay_project_01.cad~
 - 1 copy will be saved offsite, ~roadWay_project_01_copy2.cad~ can be saved to cloud storage or on an external hard-drive that is offsite from the office.
 *** 
 #+REVEAL_HTML: <img src="img/321_backupSkematic.jpg" width="700px" height="500px">
+
+** Video demonstration
+#+REVEAL_HTML: <iframe width="560" height="315" src="https://www.youtube.com/embed/-mGziSYrMmw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
 
 ** More on backups
 You may be thinking "I'm I supposed to redo this strategy every time I make a change to my project?"
