@@ -1,1025 +1,816 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<!-- 2019-04-10 Wed 19:15 -->
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8"/>
 <title>Cybersecurity for Engineers</title>
-<meta name="generator" content="Org mode" />
-<meta name="author" content="Eduardo Robles" />
+<meta name="author" content="(Eduardo Robles)"/>
 <style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
-    padding: 3px;
-    border: 1px solid black;
-  }
-  pre.src:hover:before { display: inline;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+.underline { text-decoration: underline; }
 </style>
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/reveal.js/3.0.0/css/reveal.css"/>
 
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/reveal.js/3.0.0/css/theme/black.css" id="theme"/>
 
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+<link rel="stylesheet" href="css/custom.css"/>
 
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdn.jsdelivr.net/reveal.js/3.0.0/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
 </script>
 </head>
 <body>
-<div id="content">
-<h1 class="title">Cybersecurity for Engineers</h1>
+<div class="reveal">
+<div class="slides">
 
-<div id="outline-container-orge478811" class="outline-2">
-<h2 id="orge478811"></h2>
-<div class="outline-text-2" id="text-orge478811">
-</div>
-</div>
+<section>
+<section id="slide-org04f391a">
+<h2 id="org04f391a"></h2>
+<h1>Cybersecurity for Engineers</h1> <h5>By: Eduardo Robles</h5> <h6>Find me at <a href="https://erwtc.com/links" target="_blank">https://erwtc.com/links</a></h6><p style="font-size: 18px; text-align:left;">A presentation for ASCE 2019 Student Symposium <br/> April 11, 2019</p>
 
-<div id="outline-container-org41404c4" class="outline-2">
-<h2 id="org41404c4">About speaker</h2>
-<div class="outline-text-2" id="text-org41404c4">
-<div class="NOTES">
-<ul class="org-ul">
+
+</section>
+</section>
+<section>
+<section id="slide-org31cd30a">
+<h2 id="org31cd30a">About speaker</h2>
+<aside class="notes">
+<ul>
 <li>Hi I'm Eduardo Robles I run aMy requirements, which lead me to select reveal.js, are as follows:n I.T consulting company specializing in data backups and remote support.</li>
 <li>I got a degree in Anthropology and Mexican American Studies but don't worry I've been into computers since childhood.</li>
 <li>I even wrote several papers on "hacker/internet" culture for my degrees. (Ask me about it!)</li>
 <li>I'm currently pursuing a Master degree in I.T.</li>
 <li>You can check out my skills over on my Youtube channel or my business blog. <b>Bonus, I give out a lot of free advice over there.</b></li>
+
 </ul>
 
-</div>
-<ul class="org-ul">
+</aside>
+<ul>
 <li>Hi! I'm Eduardo Robles</li>
 <li>Owner of Eduardo Robles Web &amp; Technology Consulting (ERWTC)</li>
 <li>Since I was a kid technology was a passion of mine and I wanted to be an inventor.</li>
 <li>I would tinker and take apart all kinds of electronics, much to my mothers dismay.</li>
+
 </ul>
-</div>
-<div id="outline-container-org1ce40bf" class="outline-3">
-<h3 id="org1ce40bf"></h3>
-<div class="outline-text-3" id="text-org1ce40bf">
-<ul class="org-ul">
+</section>
+<section id="slide-org140cb01">
+<h3 id="org140cb01"></h3>
+<ul>
 <li>The primary function of my business is education and consultation all while specializing in remote support.</li>
 <li>I have worked with Engineers, Accountants, Lawyers and other small businesses.</li>
 <li>I have been serving the South Texas region for 3 years.</li>
 <li>I have degrees in Anthropology and Mexican American Studies.</li>
+
 </ul>
-</div>
-</div>
-</div>
-<div id="outline-container-org19115ff" class="outline-2">
-<h2 id="org19115ff">Cybersecurity for Engineers</h2>
-<div class="outline-text-2" id="text-org19115ff">
+</section>
+</section>
+<section>
+<section id="slide-org6a76738">
+<h2 id="org6a76738">Cybersecurity for Engineers</h2>
 <p>
 Main Topics:
 </p>
-<ol class="org-ol">
+<ol>
 <li>Understand the importance of securing yourself and your business.</li>
 <li>How to work with I.T department to best protect the company.</li>
 <li>Learn to spot the most common cyberattacks.</li>
 <li>Actionable steps to secure yourself from cyberattacks.</li>
+
 </ol>
-</div>
-</div>
 
 
-<div id="outline-container-orge4db58b" class="outline-2">
-<h2 id="orge4db58b">1. Understand the importance of securing yourself and your business</h2>
-<div class="outline-text-2" id="text-orge4db58b">
+</section>
+</section>
+<section>
+<section id="slide-orgf559676">
+<h2 id="orgf559676">1. Understand the importance of securing yourself and your business</h2>
+<div class="outline-text-2" id="text-orgf559676">
 </div>
-<div id="outline-container-orgfa6e802" class="outline-3">
-<h3 id="orgfa6e802">Why is cybersecurity important?</h3>
-<div class="outline-text-3" id="text-orgfa6e802">
+</section>
+<section id="slide-org162c03a">
+<h3 id="org162c03a">Why is cybersecurity important?</h3>
+<div class="outline-text-3" id="text-org162c03a">
 </div>
-<div id="outline-container-orgeadc2ed" class="outline-4">
-<h4 id="orgeadc2ed">We are more connected today than we have ever been before.</h4>
-<div class="outline-text-4" id="text-orgeadc2ed">
-<ul class="org-ul">
+</section>
+<section id="slide-orgafd0459">
+<h4 id="orgafd0459">We are more connected today than we have ever been before.</h4>
+<ul>
 <li>Our jobs require us to use computer systems on a daily basis.</li>
 <li>So we have to take extra steps to ensure that our work is safe from cyberattacks.</li>
+
 </ul>
-</div>
-</div>
-<div id="outline-container-org1e516a1" class="outline-4">
-<h4 id="org1e516a1">What's the cost to engineering professionals?</h4>
-<div class="outline-text-4" id="text-org1e516a1">
-<ul class="org-ul">
+</section>
+<section id="slide-orgc8a527f">
+<h4 id="orgc8a527f">What's the cost to engineering professionals?</h4>
+<ul>
 <li>As engineers you often work on projects that deal directly with the general public.</li>
 <li>Falling victim to cyberattack can have a negative effect on public safety.</li>
+
 </ul>
-</div>
-</div>
-<div id="outline-container-orgdd860e2" class="outline-4">
-<h4 id="orgdd860e2">Cyberattacks cost billions in damages every year</h4>
-<div class="outline-text-4" id="text-orgdd860e2">
-<ul class="org-ul">
+</section>
+<section id="slide-org2e5f1e3">
+<h4 id="org2e5f1e3">Cyberattacks cost billions in damages every year</h4>
+<ul>
 <li>Nowadays opening the wrong email can take down the entire company network.</li>
 <li>Are you able to continue to work if your entire company network is down?</li>
+
 </ul>
-<div class="NOTES">
+<aside class="notes">
 <p>
 So we have to seriously consider the impacts that a cyberattack can have. But to do so we have to learn more about the people behind these cyberattacks
 </p>
 
-</div>
-</div>
-</div>
-<div id="outline-container-org692c215" class="outline-4">
-<h4 id="org692c215">Hackers are extremely smart and not lazy.</h4>
-<div class="outline-text-4" id="text-org692c215">
-</div>
-</div>
-<div id="outline-container-org07e5114" class="outline-4">
-<h4 id="org07e5114">Continued</h4>
-<div class="outline-text-4" id="text-org07e5114">
-<ul class="org-ul">
+</aside>
+</section>
+<section id="slide-orgd38a54a">
+<h4 id="orgd38a54a">Hackers are extremely smart and not lazy.</h4>
+<iframe src="https://giphy.com/embed/RyXVu4ZW454IM" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/RyXVu4ZW454IM">via GIPHY</a></p>
+</section>
+<section id="slide-orgc1a7896">
+<h4 id="orgc1a7896">Continued</h4>
+<ul>
 <li>We need to stop stereotyping the "evil hackers" as a bunch "dudes in their mom's basements" staring at computer screens.</li>
 <li>Most hackers start their careers at a very young <a href="https://www.theguardian.com/technology/2015/dec/08/average-age-of-cyber-attack-suspects-drops-to-17">age</a> (avg. age is 15).</li>
 <li>And you do NOT need a college degree to learn the skills to take down a business network.</li>
 <li><b>All you need is Youtube</b>.</li>
+
 </ul>
-<div class="NOTES">
+<aside class="notes">
 <p>
 To practice engineering you need a degree and for some kinds of work an engineering license. But to hack a company all you need is the internet, where you can find all kinds of videos, forums, and manuals that show you all about hacking.
 </p>
 
-</div>
-</div>
-</div>
-</div>
+</aside>
 
-<div id="outline-container-org799febe" class="outline-3">
-<h3 id="org799febe">Let's see some examples of hacks</h3>
-<div class="outline-text-3" id="text-org799febe">
-<div class="NOTES">
+</section>
+<section id="slide-orgbf06c63">
+<h3 id="orgbf06c63">Let's see some examples of hacks</h3>
+<aside class="notes">
 <p>
 But first we need to understand misleading marketing jargon
 </p>
 
+</aside>
+</section>
+<section id="slide-org548d5c7">
+<h3 id="org548d5c7">Are there "unhackable" systems?</h3>
+<div class="outline-text-3" id="text-org548d5c7">
 </div>
-</div>
-</div>
-<div id="outline-container-org285f1a6" class="outline-3">
-<h3 id="org285f1a6">Are there "unhackable" systems?</h3>
-<div class="outline-text-3" id="text-org285f1a6">
-</div>
-<div id="outline-container-org753c42a" class="outline-4">
-<h4 id="org753c42a">There is no such thing as "Unhackable" software or hardware</h4>
-<div class="outline-text-4" id="text-org753c42a">
-<ul class="org-ul">
+</section>
+<section id="slide-org2c3fd2e">
+<h4 id="org2c3fd2e">There is no such thing as "Unhackable" software or hardware</h4>
+<ul>
 <li>This is marketing scam.</li>
 <li>Everything that runs in a computer is hackable.</li>
+
 </ul>
+</section>
+<section id="slide-org531a4e8">
+<h3 id="org531a4e8">Can a system be hacker proof?</h3>
+<div class="outline-text-3" id="text-org531a4e8">
 </div>
-</div>
-</div>
-<div id="outline-container-org9ff775f" class="outline-3">
-<h3 id="org9ff775f">Can a system be hacker proof?</h3>
-<div class="outline-text-3" id="text-org9ff775f">
-</div>
-<div id="outline-container-org8ba51fc" class="outline-4">
-<h4 id="org8ba51fc">No, every piece of software ever written has the potential of being exploited.</h4>
-<div class="outline-text-4" id="text-org8ba51fc">
-<ul class="org-ul">
+</section>
+<section id="slide-orgd37241c">
+<h4 id="orgd37241c">No, every piece of software ever written has the potential of being exploited.</h4>
+<ul>
 <li>Software is written by humans and humans are imperfect creatures. We make mistakes.</li>
 <li>Errors in software a commonly known as "bugs".</li>
+
 </ul>
-<div class="NOTES">
+<aside class="notes">
 <p>
 You can take steps to secure yourself but even the most secure systems can be hacked.
 </p>
 
-</div>
-</div>
-</div>
-</div>
+</aside>
 
-<div id="outline-container-orga12ef01" class="outline-3">
-<h3 id="orga12ef01">2016 LinkedIn Hack</h3>
-<div class="outline-text-3" id="text-orga12ef01">
+</section>
+<section id="slide-org2727f53">
+<h3 id="org2727f53">2016 LinkedIn Hack</h3>
+<div class="outline-text-3" id="text-org2727f53">
 </div>
-<div id="outline-container-org79ba873" class="outline-4">
-<h4 id="org79ba873">LinkedIn <a href="https://www.troyhunt.com/observations-and-thoughts-on-the-linkedin-data-breach/">breach</a> in 2016</h4>
-<div class="outline-text-4" id="text-org79ba873">
-<ul class="org-ul">
+</section>
+<section id="slide-orga832f8c">
+<h4 id="orga832f8c">LinkedIn <a href="https://www.troyhunt.com/observations-and-thoughts-on-the-linkedin-data-breach/">breach</a> in 2016</h4>
+<ul>
 <li><b>167 Million</b> accounts were exposed in this attack.</li>
 <li>I'm sure at least 2 people in this room were affected by this. I was affected by this.</li>
+
 </ul>
-<div class="NOTES">
+<aside class="notes">
 <p>
 I was affected by this breach and LinkedIn sent me an email telling me to reset my password. Instead I deleted my account.
 I recently signed up again but I take serious steps to secure it.
 But this is was LinkedIn, what does this have to do with my job or me? Well see the next hack.
 </p>
 
-</div>
-</div>
-</div>
+</aside>
 
-<div id="outline-container-org63346e9" class="outline-4">
-<h4 id="org63346e9">LinkedIn fake job postings</h4>
-<div class="outline-text-4" id="text-org63346e9">
-<ul class="org-ul">
+</section>
+<section id="slide-org9c8f827">
+<h4 id="org9c8f827">LinkedIn fake job postings</h4>
+<ul>
 <li>LinkedIn is a social network for "professionals", hackers know this.</li>
 <li>It is common practice for many professionals to use their company emails to sign up for LinkedIn.</li>
 <li>So hackers exploit this and find ways to attack you, in this case their were sending fake job posting to trick you into clicking them.</li>
 <li>The attack would basically steal your credentials for LinkedIn.</li>
-</ul>
-</div>
-</div>
-</div>
 
-<div id="outline-container-org491df60" class="outline-3">
-<h3 id="org491df60">More hacks&#x2026;</h3>
-<div class="outline-text-3" id="text-org491df60">
+</ul>
+
+</section>
+<section id="slide-org84c0bd9">
+<h3 id="org84c0bd9">More hacks&#x2026;</h3>
+<div class="outline-text-3" id="text-org84c0bd9">
 </div>
-<div id="outline-container-orgb65197b" class="outline-4">
-<h4 id="orgb65197b">Saudi Aramco</h4>
-<div class="outline-text-4" id="text-orgb65197b">
-<ul class="org-ul">
+</section>
+<section id="slide-org209152c">
+<h4 id="org209152c">Saudi Aramco</h4>
+<ul>
 <li>Saudi Aramco is one the most profitable company in the entire world. And they suffered a massive cyberattack in 2012 that forced the <b>entire company to disconnect from the internet</b> entirely.</li>
 <li>Saudi Aramco has oil wells that are connected to the internet to monitor their status. They had to manually send engineers out the wells to personally manage them.</li>
+
 </ul>
-</div>
-</div>
-<div id="outline-container-orgc074ae7" class="outline-4">
-<h4 id="orgc074ae7"></h4>
-<div class="outline-text-4" id="text-orgc074ae7">
-<ul class="org-ul">
+</section>
+<section id="slide-org0286e7e">
+<h4 id="org0286e7e"></h4>
+<ul>
 <li>The <a href="https://www.computerworld.com/article/2472753/saudi-aramco-reels-under-curse-of-shamoon-virus-.html">attack</a> was so devastating that it destroyed <b>30,000 workstations</b>!</li>
 <li>Estimates indicate that this attack cost them Billions in damages.</li>
+
 </ul>
 
-<blockquote>
+<blockquote nil>
 <p>
 It proved you don't have to be sophisticated do a lot of damage &#x2014; Richard A. Clarke, former Counterterrorism official at the National Security Council
 </p>
 </blockquote>
-</div>
-</div>
-<div id="outline-container-org23004e0" class="outline-4">
-<h4 id="org23004e0">Darknet Dairies Podcast</h4>
-<div class="outline-text-4" id="text-org23004e0">
+</section>
+<section id="slide-org5a36932">
+<h4 id="org5a36932">Darknet Dairies Podcast</h4>
 <p>
 The podcast <i>Darknet Dairies</i> did an episode on the Saudi Aramco cyberattack. Here's a clip of that episode titled <a href="https://darknetdiaries.com/episode/30/">Shamoon</a>.
 </p>
-</div>
-</div>
-</div>
+<audio controls name="media"><source src="notes/saudiAramcoExample_audio.mp3" type="audio/mpeg"></audio></p>
 
-<div id="outline-container-orgfb5560a" class="outline-3">
-<h3 id="orgfb5560a">Cyberattacks can cause serious damage</h3>
-<div class="outline-text-3" id="text-orgfb5560a">
+<aside class="notes">
+<p>
+&lt;iframe src="<a href="https://darknetdiaries.com/episode/30/#t=571">https://darknetdiaries.com/episode/30/#t=571</a>" width="480" height="400" frameborder="0"&gt;&lt;/iframe&gt;
+</p>
+
+</aside>
+</section>
+<section id="slide-org3c7dcb4">
+<h3 id="org3c7dcb4">Cyberattacks can cause serious damage</h3>
+<div class="outline-text-3" id="text-org3c7dcb4">
 </div>
-<div id="outline-container-org9e325d9" class="outline-4">
-<h4 id="org9e325d9">Those are just 2 examples of some serious cyberattacks.</h4>
-<div class="outline-text-4" id="text-org9e325d9">
-<ul class="org-ul">
+</section>
+<section id="slide-orgae8b4a5">
+<h4 id="orgae8b4a5">Those are just 2 examples of some serious cyberattacks.</h4>
+<ul>
 <li>The general idea is that no system is safe from attacks.</li>
 <li>So you should be extra paranoid and take steps to ensure that you protect yourself and your company.</li>
+
 </ul>
-<blockquote>
+<blockquote nil>
 <p>
 And by "paranoid", I mean "extra-cautious.
 </p>
 </blockquote>
-</div>
-</div>
-</div>
-</div>
 
-<div id="outline-container-orgbdf4e0a" class="outline-2">
-<h2 id="orgbdf4e0a">2. How to work with I.T department to best protect the company.</h2>
-<div class="outline-text-2" id="text-orgbdf4e0a">
+</section>
+</section>
+<section>
+<section id="slide-org50fba01">
+<h2 id="org50fba01">2. How to work with I.T department to best protect the company.</h2>
+<div class="outline-text-2" id="text-org50fba01">
 </div>
-<div id="outline-container-org28f39b3" class="outline-3">
-<h3 id="org28f39b3">Listen to your I.T department</h3>
-<div class="outline-text-3" id="text-org28f39b3">
-<ul class="org-ul">
+</section>
+<section id="slide-orgf1ba1fe">
+<h3 id="orgf1ba1fe">Listen to your I.T department</h3>
+<ul>
 <li>I.T departments get a bad rap.</li>
-</ul>
-</div>
 
-<div id="outline-container-org66624df" class="outline-4">
-<h4 id="org66624df"></h4>
-<div class="outline-text-4" id="text-org66624df">
-<ul class="org-ul">
+</ul>
+<iframe src="https://giphy.com/embed/FspLvJQlQACXu" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/made-by-me-the-it-crowd-FspLvJQlQACXu">via GIPHY</a></p>
+
+</section>
+<section id="slide-org1a05f8d">
+<h4 id="org1a05f8d"></h4>
+<ul>
 <li>But it's their job to ensure that all the technology you need to get your job done works.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org1909386" class="outline-4">
-<h4 id="org1909386"></h4>
-<div class="outline-text-4" id="text-org1909386">
-<ul class="org-ul">
-<li>So be patient and be professional.</li>
-</ul>
-</div>
-</div>
-</div>
 
-<div id="outline-container-orgaad3f79" class="outline-3">
-<h3 id="orgaad3f79">Follow your companies security policy</h3>
-<div class="outline-text-3" id="text-orgaad3f79">
-<ul class="org-ul">
-<li>Many companies have security policies in place and they probably have a section on Cybersecurity.</li>
 </ul>
-</div>
-<div id="outline-container-orga266135" class="outline-4">
-<h4 id="orga266135"></h4>
-<div class="outline-text-4" id="text-orga266135">
+
+<img src="img/call-tech-support-my-mouse-is-dead-funny.jpg" width="550px" height="500px">
+</section>
+<section id="slide-orgd6ce132">
+<h4 id="orgd6ce132"></h4>
+<ul>
+<li>So be patient and be professional.</li>
+
+</ul>
+
+<img src="img/deleteCookies_funny.jpg" width="550px" height="550px">
+
+</section>
+<section id="slide-org4afb2e2">
+<h3 id="org4afb2e2">Follow your companies security policy</h3>
+<ul>
+<li>Many companies have security policies in place and they probably have a section on Cybersecurity.</li>
+
+</ul>
+</section>
+<section id="slide-org0e77f6b">
+<h4 id="org0e77f6b"></h4>
 <p>
 Cybersecurity policies include things such as&#x2026;
 </p>
-<ol class="org-ol">
-<li>Recommendations of software to use and what not to use</li>
-<li>Email safety tips</li>
-<li>Password policies</li>
-<li>Cybersecurity training for employees</li>
-<li>Data retention policies</li>
-<li>Workstation safety</li>
-</ol>
-</div>
-</div>
-</div>
+<ol>
+<li class="fragment appear">Recommendations of software to use and what not to use</li>
+<li class="fragment appear">Email safety tips</li>
+<li class="fragment appear">Password policies</li>
+<li class="fragment appear">Cybersecurity training for employees</li>
+<li class="fragment appear">Data retention policies</li>
+<li class="fragment appear">Workstation safety</li>
 
-<div id="outline-container-orgecb9cac" class="outline-3">
-<h3 id="orgecb9cac">For managers/employers/owners</h3>
-<div class="outline-text-3" id="text-orgecb9cac">
+</ol>
+
+</section>
+<section id="slide-orga02affd">
+<h3 id="orga02affd">For managers/employers/owners</h3>
+<div class="outline-text-3" id="text-orga02affd">
 </div>
-<div id="outline-container-orgfc05925" class="outline-4">
-<h4 id="orgfc05925">Create or adopt a security minded business culture</h4>
-<div class="outline-text-4" id="text-orgfc05925">
-<ul class="org-ul">
+</section>
+<section id="slide-org0f605df">
+<h4 id="org0f605df">Create or adopt a security minded business culture</h4>
+<ul>
 <li>Assign or find someone to a "Cybersecurity Officer" position.</li>
 <li>Create a cybersecurity policy.</li>
 <li>Have regular cybersecurity awareness training for your employees.</li>
+
 </ul>
-</div>
-</div>
-</div>
 
-<div id="outline-container-org939fcb3" class="outline-3">
-<h3 id="org939fcb3">Continued&#x2026;</h3>
-<div class="outline-text-3" id="text-org939fcb3">
+</section>
+<section id="slide-org1cb2417">
+<h3 id="org1cb2417">Continued&#x2026;</h3>
+<div class="outline-text-3" id="text-org1cb2417">
 </div>
-<div id="outline-container-org91cb516" class="outline-4">
-<h4 id="org91cb516">Determine Threat and Risk</h4>
-<div class="outline-text-4" id="text-org91cb516">
-<ol class="org-ol">
-<li>Assets: <i>Your employees data, bank/credit card info.</i></li>
-<li>Threats: <i>A negative event that can cause losses or damages.</i></li>
-<li>Vulnerabilities: <i>A weakness in your business operations. E.I, Do you lock your computer when you walk away from it?</i></li>
-<li>Risks: <i>Basically what bad things can happen and how badly would it affect me?</i></li>
-<li>Countermeasures: <i>What systems and plans do you have in place to get your business back from an cyber attack?</i></li>
+</section>
+<section id="slide-orga5869aa">
+<h4 id="orga5869aa">Determine Threat and Risk</h4>
+<ol>
+<li class="fragment appear">Assets: <i>Your employees data, bank/credit card info.</i></li>
+<li class="fragment appear">Threats: <i>A negative event that can cause losses or damages.</i></li>
+<li class="fragment appear">Vulnerabilities: <i>A weakness in your business operations. E.I, Do you lock your computer when you walk away from it?</i></li>
+<li class="fragment appear">Risks: <i>Basically what bad things can happen and how badly would it affect me?</i></li>
+<li class="fragment appear">Countermeasures: <i>What systems and plans do you have in place to get your business back from an cyber attack?</i></li>
+
 </ol>
-</div>
-</div>
-</div>
-</div>
 
-<div id="outline-container-orga3e5fd4" class="outline-2">
-<h2 id="orga3e5fd4">3. Learn to spot the most common cyberattacks</h2>
-<div class="outline-text-2" id="text-orga3e5fd4">
+</section>
+</section>
+<section>
+<section id="slide-org06fcff7">
+<h2 id="org06fcff7">3. Learn to spot the most common cyberattacks</h2>
+<div class="outline-text-2" id="text-org06fcff7">
 </div>
-<div id="outline-container-orgbfb457f" class="outline-3">
-<h3 id="orgbfb457f">How to spot some of the most common cybersecurity threats</h3>
-<div class="outline-text-3" id="text-orgbfb457f">
+</section>
+<section id="slide-orgb685669">
+<h3 id="orgb685669">How to spot some of the most common cybersecurity threats</h3>
 <p>
 It's good to have a healthy dose of skepticism.
 </p>
-</div>
+<img src="img/dontUnderstandSecurityFunny.jpeg" width="480px" height="400px">
 
-<div id="outline-container-org20b265f" class="outline-4">
-<h4 id="org20b265f">Spearphishing/Phishing/Spam</h4>
-<div class="outline-text-4" id="text-org20b265f">
-<ol class="org-ol">
-<li>Spearphising is targeted email or phone attacks. The attacker knows enough of your job/business to able to exploit you and get something usually extortion or theft.</li>
-<li>Phising is random emails that are impersonating a company or person. Usually after login credentials or spreading malware.</li>
-<li>Spam is a flood of emails to a users inbox, resulting in crippling company servers or spreading malware.</li>
+</section>
+<section id="slide-org867bba6">
+<h4 id="org867bba6">Spearphishing/Phishing/Spam</h4>
+<ol>
+<li class="fragment appear">Spearphising is targeted email or phone attacks. The attacker knows enough of your job/business to able to exploit you and get something usually extortion or theft.</li>
+<li class="fragment appear">Phising is random emails that are impersonating a company or person. Usually after login credentials or spreading malware.</li>
+<li class="fragment appear">Spam is a flood of emails to a users inbox, resulting in crippling company servers or spreading malware.</li>
+
 </ol>
-</div>
-</div>
-<div id="outline-container-org55dd26b" class="outline-4">
-<h4 id="org55dd26b">"Your Invoice is past Due" email</h4>
-<div class="outline-text-4" id="text-org55dd26b">
-<ul class="org-ul">
+</section>
+<section id="slide-org4acc79a">
+<h4 id="org4acc79a">"Your Invoice is past Due" email</h4>
+<ul>
 <li>This is a common phising/spam email I see all the time.</li>
 <li>If you are an intern or entry level engineer, you have no business opening emails about invoices.</li>
 <li>If your job role doesn't require you to look at invoices, don't open emails about them.</li>
+
 </ul>
-</div>
-</div>
-<div id="outline-container-org4bb144d" class="outline-4">
-<h4 id="org4bb144d">Social Engineering</h4>
-<div class="outline-text-4" id="text-org4bb144d">
-<ul class="org-ul">
+</section>
+<section id="slide-orga627347">
+<h4 id="orga627347">Social Engineering</h4>
+<ul>
 <li>Is an attack that goes after the biggest vulnerability in any business "it's people".</li>
 <li>If you get an email or call about a project make sure to verify you are speaking with the correct person.</li>
 <li>Young engineers in the room, be mindful of this when working on projects.</li>
+
 </ul>
-<div class="NOTES">
+<aside class="notes">
 <p>
 Like old saying goes "It's easier to catch a fly with honey, than it is with vinegar"
 </p>
 
-</div>
-</div>
-</div>
-<div id="outline-container-orgc33f779" class="outline-4">
-<h4 id="orgc33f779">Pirated Software</h4>
-<div class="outline-text-4" id="text-orgc33f779">
-<ul class="org-ul">
+</aside>
+</section>
+<section id="slide-org5d31610">
+<h4 id="org5d31610">Pirated Software</h4>
+<ul>
 <li>This is software that is exploited to circumvent the license requirements.</li>
 <li>Not only is it <b>illegal</b> to use pirated software, it can be extremely dangerous.</li>
 <li>You cannot trust pirated software to act the way it was intended.</li>
 <li>You can be in "Breach of Contract", when using pirated software. Many government contracts have clauses stating the use of pirated software is prohibited.</li>
 <li>Software licenses are expensive. But will you risk millions in damages just because you didn't want to pay for legitimate software.</li>
+
 </ul>
-</div>
-</div>
-<div id="outline-container-org37a8e7b" class="outline-4">
-<h4 id="org37a8e7b">Malicious/Outdated software</h4>
-<div class="outline-text-4" id="text-org37a8e7b">
-<ul class="org-ul">
+</section>
+<section id="slide-orgfbae24b">
+<h4 id="orgfbae24b">Malicious/Outdated software</h4>
+<ul>
 <li>Malicious software can come from emails, USB drives, CD's/DVD's, or links.</li>
 <li>Links don't necessarily have to be from bad sites. If you are getting files to work on a project from another firm and they were hacked those files could also be infected.</li>
 <li>Outdated software no longer receives security updates and can leave you business vulnerable to an attacker by them exploiting the security hole in the software.</li>
+
 </ul>
+</section>
+<section id="slide-org355da16">
+<h4 id="org355da16">Video Demonstration</h4>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/WgbWBRfNLdc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</section>
+</section>
+<section>
+<section id="slide-org70e4754">
+<h2 id="org70e4754">4. Actionable steps to secure yourself from cyberattacks</h2>
+<div class="outline-text-2" id="text-org70e4754">
 </div>
-</div>
-<div id="outline-container-orgf852be6" class="outline-4">
-<h4 id="orgf852be6">Video Demonstration</h4>
-<div class="outline-text-4" id="text-orgf852be6">
-</div>
-</div>
-</div>
-</div>
-<div id="outline-container-orge3c8fa1" class="outline-2">
-<h2 id="orge3c8fa1">4. Actionable steps to secure yourself from cyberattacks</h2>
-<div class="outline-text-2" id="text-orge3c8fa1">
-</div>
-<div id="outline-container-org482e673" class="outline-3">
-<h3 id="org482e673">Take actionable steps to protect yourself and your data</h3>
-<div class="outline-text-3" id="text-org482e673">
-</div>
-</div>
-<div id="outline-container-org8e83d09" class="outline-3">
-<h3 id="org8e83d09">Deploy "Multifactor Authentication"</h3>
-<div class="outline-text-3" id="text-org8e83d09">
-<div class="NOTES">
+</section>
+<section id="slide-orgd74c170">
+<h3 id="orgd74c170">Take actionable steps to protect yourself and your data</h3>
+<iframe src="https://giphy.com/embed/ID4NXWnwuLnLq" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/ID4NXWnwuLnLq">via GIPHY</a></p>
+</section>
+<section id="slide-org8163122">
+<h3 id="org8163122">Deploy "Multifactor Authentication"</h3>
+<aside class="notes">
 <p>
 Authenticator apps: Microsoft Authenticator, Google Authenticator, Duo Authenticator
 </p>
 
-</div>
-<ul class="org-ul">
+</aside>
+<ul>
 <li>Multifactor authentication refers to "logging into" accounts with 2 different steps.</li>
 <li>The idea of is that you use "something you have" and "something you know".</li>
 <li>A simple example is your debit card. You have your debit card and you know it's pin number.</li>
 <li>It's a good idea to use this not just for work but in your personal life as well.</li>
+
 </ul>
-</div>
-</div>
-<div id="outline-container-org39b07be" class="outline-3">
-<h3 id="org39b07be">Follow company security policy</h3>
-<div class="outline-text-3" id="text-org39b07be">
+</section>
+<section id="slide-org2ab0c15">
+<h3 id="org2ab0c15">Follow company security policy</h3>
 <p>
 Did you get an email that looks suspicious? Don't open it, simply forward it to IT or mark it spam. 
 </p>
-<ul class="org-ul">
+<ul>
 <li>SERIOUSLY DO NOT OPEN IT.</li>
+
 </ul>
-</div>
-</div>
-<div id="outline-container-org422146a" class="outline-3">
-<h3 id="org422146a">Backup your work or other important data</h3>
-<div class="outline-text-3" id="text-org422146a">
-<ul class="org-ul">
+</section>
+<section id="slide-orgc43cb90">
+<h3 id="orgc43cb90">Backup your work or other important data</h3>
+<ul>
 <li>There 2 strategies you need to think about.</li>
+
 </ul>
-<ol class="org-ol">
-<li>Backups: a backup is done for security purposes. If your computer fails or if you are hacked you can get back to work from a backup.</li>
-<li>Archives: an archive is a backup that you do not need immediately but you will need to recall it for a specific situation. For example you may have archived a project file a year ago but you now need to recall because of an audit.</li>
+<ol>
+<li class="fragment appear">Backups: a backup is done for security purposes. If your computer fails or if you are hacked you can get back to work from a backup.</li>
+<li class="fragment appear">Archives: an archive is a backup that you do not need immediately but you will need to recall it for a specific situation. For example you may have archived a project file a year ago but you now need to recall because of an audit.</li>
+
 </ol>
-</div>
-</div>
-<div id="outline-container-orgb86a728" class="outline-3">
-<h3 id="orgb86a728">You should implement a backup strategy</h3>
-<div class="outline-text-3" id="text-orgb86a728">
-<ul class="org-ul">
+</section>
+<section id="slide-org3d2c4d7">
+<h3 id="org3d2c4d7">You should implement a backup strategy</h3>
+<ul>
 <li>In general you can use the 3-2-1 strategy
-<ul class="org-ul">
+<ul>
 <li>3 total copies of your data</li>
 <li>2 local copies but on different places</li>
 <li>1 offsite copy of your data</li>
+
 </ul></li>
+
 </ul>
-</div>
-</div>
-<div id="outline-container-org87050a6" class="outline-3">
-<h3 id="org87050a6">Is this the best backup strategy?</h3>
-<div class="outline-text-3" id="text-org87050a6">
-<ul class="org-ul">
+</section>
+<section id="slide-org4348b33">
+<h3 id="org4348b33">Is this the best backup strategy?</h3>
+<ul>
 <li>No, this is not the best backup strategy but it is a good start.</li>
 <li>This strategy was developed by the United States Computer Emergency Readiness Team, you can read more about it <a href="https://www.us-cert.gov/sites/default/files/publications/data_backup_options.pdf">here</a>.</li>
+
 </ul>
-</div>
-</div>
-<div id="outline-container-org15635a4" class="outline-3">
-<h3 id="org15635a4">Example</h3>
-<div class="outline-text-3" id="text-org15635a4">
-<div class="NOTES">
+</section>
+<section id="slide-org3ed04c4">
+<h3 id="org3ed04c4">Example</h3>
+<aside class="notes">
 <p>
 Start video instead of showing all these steps.
 </p>
 
-</div>
+</aside>
 <p>
 You have a file named <code>roadWay_project_01.cad</code> 
 </p>
-</div>
-<div id="outline-container-orge4d225c" class="outline-4">
-<h4 id="orge4d225c"></h4>
-<div class="outline-text-4" id="text-orge4d225c">
-<ul class="org-ul">
+</section>
+<section id="slide-org69d8cb3">
+<h4 id="org69d8cb3"></h4>
+<ul>
 <li>This file will have 3 total copies <code>roadWay_project_01.cad</code>, <code>roadWay_project_01_copy1.cad</code>, <code>roadWay_project_01_copy2.cad</code></li>
+
 </ul>
-</div>
-</div>
-<div id="outline-container-org29ef8f2" class="outline-4">
-<h4 id="org29ef8f2"></h4>
-<div class="outline-text-4" id="text-org29ef8f2">
-<ul class="org-ul">
+</section>
+<section id="slide-org05c3dd6">
+<h4 id="org05c3dd6"></h4>
+<ul>
 <li>2 copies will be local</li>
 <li><code>roadWay_project_01.cad</code> will be your working copy</li>
 <li><code>roadWay_project_01_copy1.cad</code> will be saved elsewhere, like a company server or external hard-drive.</li>
+
 </ul>
-</div>
-</div>
-<div id="outline-container-org36fde57" class="outline-4">
-<h4 id="org36fde57"></h4>
-<div class="outline-text-4" id="text-org36fde57">
-<ul class="org-ul">
+</section>
+<section id="slide-org4ddd6cb">
+<h4 id="org4ddd6cb"></h4>
+<ul>
 <li>1 copy will be saved offsite, <code>roadWay_project_01_copy2.cad</code> can be saved to cloud storage or on an external hard-drive that is offsite from the office.</li>
+
 </ul>
-</div>
-</div>
-<div id="outline-container-org57ac9b8" class="outline-4">
-<h4 id="org57ac9b8"></h4>
-<div class="outline-text-4" id="text-org57ac9b8">
-</div>
-</div>
-</div>
+</section>
+<section id="slide-orge1dd814">
+<h4 id="orge1dd814"></h4>
+<img src="img/321_backupSkematic.jpg" width="700px" height="500px">
 
-<div id="outline-container-org2a8075a" class="outline-3">
-<h3 id="org2a8075a">Video demonstration</h3>
-<div class="outline-text-3" id="text-org2a8075a">
-</div>
-</div>
+</section>
+<section id="slide-org96f536d">
+<h3 id="org96f536d">Video demonstration</h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-mGziSYrMmw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<div id="outline-container-org0572ad1" class="outline-3">
-<h3 id="org0572ad1">More on backups</h3>
-<div class="outline-text-3" id="text-org0572ad1">
+</section>
+<section id="slide-org9239fdf">
+<h3 id="org9239fdf">More on backups</h3>
 <p>
 You may be thinking "I'm I supposed to redo this strategy every time I make a change to my project?"
 </p>
-</div>
-<div id="outline-container-orga63c2f9" class="outline-4">
-<h4 id="orga63c2f9"></h4>
-<div class="outline-text-4" id="text-orga63c2f9">
-<div class="NOTES">
+</section>
+<section id="slide-orgc2e1aaa">
+<h4 id="orgc2e1aaa"></h4>
+<aside class="notes">
 <p>
 Project Wise for Backups
 </p>
 
-</div>
-<ul class="org-ul">
+</aside>
+<ul>
 <li>Not necessarily you will have to make a choice on the "types" of backups you will use.</li>
 <li>Also, be sure to leverage any project management software your business may use to do automatically do backups.</li>
 <li>There are 3 backup types.</li>
-</ul>
-<ol class="org-ol">
-<li>Full: A full backup of all data related to project, even if it's been backed up before.</li>
-<li>Incremental: Only backup the changes or new files to a project since the last backup.</li>
-<li>Differential: All data that has been changed from the last full backup.</li>
-</ol>
-</div>
-</div>
-</div>
 
-<div id="outline-container-org9b6a746" class="outline-3">
-<h3 id="org9b6a746">Let's see some examples of how backups help</h3>
-<div class="outline-text-3" id="text-org9b6a746">
+</ul>
+<ol>
+<li class="fragment appear">Full: A full backup of all data related to project, even if it's been backed up before.</li>
+<li class="fragment appear">Incremental: Only backup the changes or new files to a project since the last backup.</li>
+<li class="fragment appear">Differential: All data that has been changed from the last full backup.</li>
+
+</ol>
+
+</section>
+<section id="slide-org1ac7592">
+<h3 id="org1ac7592">Let's see some examples of how backups help</h3>
+<div class="outline-text-3" id="text-org1ac7592">
 </div>
-<div id="outline-container-orgf8b4473" class="outline-4">
-<h4 id="orgf8b4473">The dreaded "Windows update broke something"</h4>
-<div class="outline-text-4" id="text-orgf8b4473">
+</section>
+<section id="slide-orgd6fe5f0">
+<h4 id="orgd6fe5f0">The dreaded "Windows update broke something"</h4>
 <p>
 I see this often, Windows decides to update and it breaks your computer or deletes a project file. Well if you have a backup you can breathe a bit easier. When you get your computer working again you can continue working from the backups.
 </p>
-</div>
-</div>
-<div id="outline-container-orgbc7b498" class="outline-4">
-<h4 id="orgbc7b498">Upgrading between program versions</h4>
-<div class="outline-text-4" id="text-orgbc7b498">
+</section>
+<section id="slide-org4c25d8a">
+<h4 id="org4c25d8a">Upgrading between program versions</h4>
 <p>
 When moving between versions of AutoCAD for example, a 2018 AutoCAD file may not open or work in the AutoCAD 2019. But having a backup can spare you a lot of headaches if you decided downgrade back to 2018.
 </p>
-</div>
-</div>
-<div id="outline-container-org16b3b29" class="outline-4">
-<h4 id="org16b3b29">Project file hand-off becomes corrupted or lost</h4>
-<div class="outline-text-4" id="text-org16b3b29">
+</section>
+<section id="slide-org833c072">
+<h4 id="org833c072">Project file hand-off becomes corrupted or lost</h4>
 <p>
 You are assigned to work on a project and when you complete your portion you hand it off to the next engineer. The hand off doesn't go smoothly and the file ends up corrupted. Or say your coworkers computer is no longer working and they lost all their work. With a backup you can resend the file and work can continue. 
 </p>
-</div>
-</div>
-</div>
 
-<div id="outline-container-org5fd1b5c" class="outline-3">
-<h3 id="org5fd1b5c">Backups are important, so be sure to backup</h3>
-</div>
-</div>
+</section>
+<section id="slide-org59415f0">
+<h3 id="org59415f0">Backups are important, so be sure to backup</h3>
 
-<div id="outline-container-orga5a3f80" class="outline-2">
-<h2 id="orga5a3f80">Now, the most important piece of advice I'm going to give.</h2>
-<div class="outline-text-2" id="text-orga5a3f80">
-<div class="NOTES">
+</section>
+</section>
+<section>
+<section id="slide-orgc186c2c">
+<h2 id="orgc186c2c">Now, the most important piece of advice I'm going to give.</h2>
+<aside class="notes">
 <p>
 Seriously you could have dozed off during the entire presentation but please, please pay attention to this part.
 </p>
 
+</aside>
+</section>
+</section>
+<section>
+<section id="slide-org7b89ac8">
+<h2 id="org7b89ac8">And that is&#x2026;</h2>
+</section>
+</section>
+<section>
+<section id="slide-orgc8b8a83">
+<h2 id="orgc8b8a83">STOP USING THE SAME PASSWORD FOR EVERYTHING</h2>
+<div class="outline-text-2" id="text-orgc8b8a83">
 </div>
+</section>
+<section id="slide-orge2a13eb">
+<h3 id="orge2a13eb">SERIOUSLY STOP USING THE SAME PASSWORD FOR EVERYTHING</h3>
+</section>
+<section id="slide-orgf48ab55">
+<h3 id="orgf48ab55">But seriously stop reusing old passwords</h3>
+<div class="outline-text-3" id="text-orgf48ab55">
 </div>
-</div>
-<div id="outline-container-orgb2b86fc" class="outline-2">
-<h2 id="orgb2b86fc">And that is&#x2026;</h2>
-</div>
-<div id="outline-container-orgc5b3572" class="outline-2">
-<h2 id="orgc5b3572">STOP USING THE SAME PASSWORD FOR EVERYTHING</h2>
-<div class="outline-text-2" id="text-orgc5b3572">
-</div>
-<div id="outline-container-org4806190" class="outline-3">
-<h3 id="org4806190">SERIOUSLY STOP USING THE SAME PASSWORD FOR EVERYTHING</h3>
-</div>
-<div id="outline-container-orgdd4719d" class="outline-3">
-<h3 id="orgdd4719d">But seriously stop reusing old passwords</h3>
-<div class="outline-text-3" id="text-orgdd4719d">
-</div>
-<div id="outline-container-org10bc221" class="outline-4">
-<h4 id="org10bc221">The LinkedIn hack demonstrates why you should NOT reuse passwords.</h4>
-<div class="outline-text-4" id="text-org10bc221">
+</section>
+<section id="slide-org114cbeb">
+<h4 id="org114cbeb">The LinkedIn hack demonstrates why you should NOT reuse passwords.</h4>
 <p>
 Imagine if you used the same password for your personal/work email as you did for LinkedIn. Hackers would theoretically have access to both your LinkedIn and your email.
 </p>
-</div>
-</div>
-<div id="outline-container-org69c6b5e" class="outline-4">
-<h4 id="org69c6b5e">But creating complicated passwords is hard. And how I'm supposed to remember all those random characters?</h4>
-</div>
-<div id="outline-container-orgd5e27d9" class="outline-4">
-<h4 id="orgd5e27d9">Easy, use a password manager</h4>
-<div class="outline-text-4" id="text-orgd5e27d9">
-<div class="NOTES">
+</section>
+<section id="slide-orgf8426b8">
+<h4 id="orgf8426b8">But creating complicated passwords is hard. And how I'm supposed to remember all those random characters?</h4>
+</section>
+<section id="slide-orga50c16d">
+<h4 id="orga50c16d">Easy, use a password manager</h4>
+<aside class="notes">
 <p>
 Password recommendations: Bitwarden, Onepassword. See blog post.
 </p>
 
-</div>
-<ul class="org-ul">
+</aside>
+<ul>
 <li>Password managers are great and I recommend everyone start using one.</li>
 <li>They function like a safe for all your passwords.</li>
 <li>They can generate strong random passwords for you and even check if your password has been exposed in security breach.</li>
 <li>Just be sure to give your password manager a strong password.</li>
+
 </ul>
-</div>
-</div>
-<div id="outline-container-org00cbe35" class="outline-4">
-<h4 id="org00cbe35">But what about the passwords I need to use on a daily basis?</h4>
-<div class="outline-text-4" id="text-org00cbe35">
+</section>
+<section id="slide-org7b63dd2">
+<h4 id="org7b63dd2">But what about the passwords I need to use on a daily basis?</h4>
 <p>
 Use a passphrase for those occasions.
 </p>
-</div>
-</div>
-<div id="outline-container-org0001d9d" class="outline-4">
-<h4 id="org0001d9d">Passphrases can be just as effective as random passwords.</h4>
-<div class="outline-text-4" id="text-org0001d9d">
-<ul class="org-ul">
+</section>
+<section id="slide-org7854ebd">
+<h4 id="org7854ebd">Passphrases can be just as effective as random passwords.</h4>
+<ul>
 <li>Be sure to only use that passphrase once per service/site.</li>
 <li>And make slight alterations to it, for example a lot of people use Bible verses, but hackers already know that. So change them up a bit, like switch letters for numbers or combine several verses into one.</li>
-</ul>
-</div>
-</div>
-</div>
 
-<div id="outline-container-orgaeddbdc" class="outline-3">
-<h3 id="orgaeddbdc">What to do if you are hacked?</h3>
-<div class="outline-text-3" id="text-orgaeddbdc">
+</ul>
+
+</section>
+<section id="slide-orgbe881ab">
+<h3 id="orgbe881ab">What to do if you are hacked?</h3>
+<div class="outline-text-3" id="text-orgbe881ab">
 </div>
-<div id="outline-container-org465c712" class="outline-4">
-<h4 id="org465c712">You think you were hacked, what do you do?</h4>
-</div>
-<div id="outline-container-orgade73d6" class="outline-4">
-<h4 id="orgade73d6"></h4>
-<div class="outline-text-4" id="text-orgade73d6">
-</div>
-</div>
-<div id="outline-container-org440ba72" class="outline-4">
-<h4 id="org440ba72"></h4>
-<div class="outline-text-4" id="text-org440ba72">
-<ul class="org-ul">
+</section>
+<section id="slide-orgeafddbd">
+<h4 id="orgeafddbd">You think you were hacked, what do you do?</h4>
+</section>
+<section id="slide-orgaa81e86">
+<h4 id="orgaa81e86"></h4>
+<img src="img/paypalError_funny.jpg" width="480px" height="600px">
+
+</section>
+<section id="slide-org22e9f42">
+<h4 id="org22e9f42"></h4>
+<ul>
 <li>Contact your I.T department right away and follow their instructions.</li>
 <li>Contact your manager/boss.</li>
+
 </ul>
-</div>
-</div>
-<div id="outline-container-org9876579" class="outline-4">
-<h4 id="org9876579">Be prepared to give a statement.</h4>
-<div class="outline-text-4" id="text-org9876579">
-<ul class="org-ul">
+
+</section>
+<section id="slide-org30c128b">
+<h4 id="org30c128b">Be prepared to give a statement.</h4>
+<ul>
 <li>There may be questions as to how you were hacked, so be as honest as possible.</li>
 <li>The information you provide can be extremely helpful in either stopping or fixing the problem.</li>
+
 </ul>
-</div>
-</div>
-<div id="outline-container-orgb9d4839" class="outline-4">
-<h4 id="orgb9d4839"></h4>
-<div class="outline-text-4" id="text-orgb9d4839">
-</div>
-</div>
-<div id="outline-container-orgdb6747a" class="outline-4">
-<h4 id="orgdb6747a">For managers/employers/owners</h4>
-<div class="outline-text-4" id="text-orgdb6747a">
+</section>
+<section id="slide-org8b98a52">
+<h4 id="org8b98a52"></h4>
+<img src="img/incaseofCyberAttackFunny.png" width="480px"  height="500px">
+</section>
+<section id="slide-orgbca4b29">
+<h4 id="orgbca4b29">For managers/employers/owners</h4>
+<div class="outline-text-4" id="text-orgbca4b29">
 </div>
 <ul class="org-ul">
-<li><a id="org90febd4"></a>If your company is hacked follow your security policy<br />
-<div class="outline-text-5" id="text-org90febd4">
-<ul class="org-ul">
-<li>Get I.T to work on the solution as quickly as possible.</li>
-<li>Provide I.T with any resource they may need.</li>
-<li>Help manage employees so they don't disrupt I.T from accomplish their task.</li>
-<li>Contact anyone else the company who needs to be informed e.i. CEO, CIO, CTO, owner, upper management.</li>
-<li>Lastly, contact law enforcement if hacking is criminal in nature.</li>
+<li><a id="org9107f2e"></a>If your company is hacked follow your security policy<br />
+<ul>
+<li class="fragment appear">Get I.T to work on the solution as quickly as possible.</li>
+<li class="fragment appear">Provide I.T with any resource they may need.</li>
+<li class="fragment appear">Help manage employees so they don't disrupt I.T from accomplish their task.</li>
+<li class="fragment appear">Contact anyone else the company who needs to be informed e.i. CEO, CIO, CTO, owner, upper management.</li>
+<li class="fragment appear">Lastly, contact law enforcement if hacking is criminal in nature.</li>
+
 </ul>
-</div>
 </li>
 </ul>
-</div>
-</div>
-</div>
 
-<div id="outline-container-org0ec449e" class="outline-2">
-<h2 id="org0ec449e">Conclusion</h2>
-<div class="outline-text-2" id="text-org0ec449e">
-<ul class="org-ul">
-<li>So you should understand the importance of securing yourself and your company.</li>
-<li>You should now know how to best work with I.T departments to ensure company security.</li>
-<li>And you should treat cybersecurity as another safety measure your company takes to ensure safety.</li>
-<li>You should have an idea on how to spot the most common cyberattacks such as phishing.</li>
-<li>And finally you should have learned how to take action to best secure yourself and your company.</li>
+</section>
+</section>
+<section>
+<section id="slide-org3debb67">
+<h2 id="org3debb67">Conclusion</h2>
+<ul>
+<li class="fragment appear">So you should understand the importance of securing yourself and your company.</li>
+<li class="fragment appear">You should now know how to best work with I.T departments to ensure company security.</li>
+<li class="fragment appear">And you should treat cybersecurity as another safety measure your company takes to ensure safety.</li>
+<li class="fragment appear">You should have an idea on how to spot the most common cyberattacks such as phishing.</li>
+<li class="fragment appear">And finally you should have learned how to take action to best secure yourself and your company.</li>
+
 </ul>
-</div>
-</div>
-<div id="outline-container-org2efa125" class="outline-2">
-<h2 id="org2efa125">Final thoughts</h2>
-<div class="outline-text-2" id="text-org2efa125">
-<ul class="org-ul">
+</section>
+</section>
+<section>
+<section id="slide-orgd483726">
+<h2 id="orgd483726">Final thoughts</h2>
+<ul>
 <li>If you take a proactive approach to security the less likely you will fall victim to a cyberattack.</li>
 <li>Cyberattacks are not going away and they will become more sophisticated in the future.</li>
 <li>So be sure to "extra-cautious", and have a healthy dose of paranoia.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orgd13cf61" class="outline-2">
-<h2 id="orgd13cf61">Questions/Comments</h2>
-</div>
 
-<div id="outline-container-org22db152" class="outline-2">
-<h2 id="org22db152">Thank You!</h2>
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org083ca36">
+<h2 id="org083ca36">Questions/Comments</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-org7875412">
+<h2 id="org7875412">Thank You!</h2>
+</section>
+</section>
 </div>
 </div>
-<div id="postamble" class="status">
-<p class="author">Author: Eduardo Robles</p>
-<p class="date">Created: 2019-04-10 Wed 19:15</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
-</div>
+<script src="https://cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/head.min.js"></script>
+<script src="https://cdn.jsdelivr.net/reveal.js/3.0.0/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+overview: true,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'slide', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'https://cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+});
+</script>
 </body>
 </html>
