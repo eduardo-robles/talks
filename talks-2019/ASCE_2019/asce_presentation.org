@@ -289,7 +289,7 @@ Use a passphrase for those occasions.
 ** What to do if you are hacked?
 *** You think you were hacked, what do you do?
 *** 
-  #+REVEAL_HTML: <img src="img/paypalError_funny.jpg" width="480px" height="600px">
+  #+REVEAL_HTML: <img src="img/paypalError_funy.jpg" width="480px" height="600px">
 *** 
 - Contact your I.T department right away and follow their instructions.
 - Contact your manager/boss.
