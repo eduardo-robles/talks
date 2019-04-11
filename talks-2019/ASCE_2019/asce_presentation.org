@@ -9,8 +9,7 @@
 
 * 
 
-#+REVEAL_HTML:<h1>Cybersecurity for Engineers</h1> <h5>Eduardo Robles</h5> <h6>eduardo@eduardorobles.com</h6><p style="font-size: 18px; text-align:left;">A presentation for ASCE 2019 Student Symposium <br/> April 11, 2019</p><p style="font-size: 12px; text-align: left;">Find me at <a href="https://erwtc.com/links" target="_blank">https://erwtc.com/links</a></p>
-
+#+REVEAL_HTML:<h1>Cybersecurity for Engineers</h1> <h5>By: Eduardo Robles</h5> <h6><Find me at <a href="https://erwtc.com/links" target="_blank">https://erwtc.com/links</a></h6><p style="font-size: 18px; text-align:left;">A presentation for ASCE 2019 Student Symposium <br/> April 11, 2019</p>
 
 * About speaker
 #+BEGIN_NOTES
@@ -290,10 +289,10 @@ Use a passphrase for those occasions.
 ** What to do if you are hacked?
 *** You think you were hacked, what do you do?
 *** 
+  #+REVEAL_HTML: <img src="img/paypalError_funny.jpg" width="480px" height="600px">
+*** 
 - Contact your I.T department right away and follow their instructions.
 - Contact your manager/boss.
-*** 
-#+REVEAL_HTML: <img src="img/paypalError_funny.jpg" width="480px" height="600px">
 *** Be prepared to give a statement. 
 - There may be questions as to how you were hacked, so be as honest as possible.
 - The information you provide can be extremely helpful in either stopping or fixing the problem.
