@@ -1,0 +1,94 @@
+#+BLOG: STXLUG
+#+POSTID: 88
+#+DATE: [2019-04-19 Fri 20:17]
+#+TITLE: Meetup 4-20-19
+#+AUTHOR: Eduardo Robles
+#+OPTIONS: toc:nil num:nil
+
+* Welcome to STXLUG Livestream
+** 4-20-19
+
+* Topic: Encrypt Data and Communications
+
+** Meeting Notes
+*** Intro and News
+**** Presenter: Eduardo Robles
+**** Ubuntu 19.04 available for download now https://ubuntu.com
+  
+*** Quick intro to encryption
+**** /Encryption/ - ~The process of obscuring information to mameetup-4-20-19/kewp-login.php?loggedout=true it unreadable without special knowledge, key files, or passwords.~
+**** Encryption can benefit everyone because it ensures tgat the data you are working with is safe from tampering.
+
+*** Luks Encryption
+**** Linux Unified Keys System https://gitlab.com/cryptsetup/cryptsetup/
+**** This is a utility that helps encrypt devices in Linux.
+**** LUKS can be very useful when you want to encrypt whole devices like a external hard drive or usb drive.
+*** LUKS Tutorial
+** Tutorial
+*** Original tutorial found at https://averagelinuxuser.com/encrypt-hard-drive-in-linux/
+*** INSTALLING LUKS ON UBUNTU
+**** Install LUKS
+***** ~sudo apt install cryptsetup~
+**** List Partitions
+***** ~lsblk~
+
+*** BEGIN CREATING ENCRYPTED PARTITION
+**** Encrypt the desired partition
+***** ~sudo cryptsetup --verbose --verify-passphrase luksFormat /dev/sdbX~
+***** /where X is the number of partition, unless there only a single partition/
+***** You will be prompted to enter a password. Make sure it's a strong and memorable one!!
+**** Open the encrypted partition
+***** ~sudo cryptsetup luksOpen /dev/sdbX sdbX~
+**** Create a filesystem on encrypted partition
+***** ~sudo mkfs.ext4 /dev/mapper/sdbX~
+**** Fine your ext4 partition (optional)
+***** ~sudo tune2fs -m 0 /dev/mapper/sdbX~
+
+*** TESTING THE ENCRYPTED PARTITION
+**** Create a directory in the partition
+***** ~sudo mkdir /mnt/secure~
+**** Now mount the partition
+***** ~sudo mount /dev/mapper/sdbX /mnt/secure~
+**** Now create a test file
+***** ~sudo touch /mnt/encrypted/test.txt~
+**** Change permissions so regular user can have access to partition (Optional)
+***** ~sudo chown -R `whoami`:users /mnt/secure~
+**** Test file permission on partition
+***** ~touch /mnt/secure/test2.txt~
+***** /If the above command worked then you have the correct permission for your regular user, if not then check the previous command and try again./
+
+*** FINISH TESTING AND UNMOUNT PARTITION
+**** Unmount partition
+***** ~sudo umount /dev/mapper/sdbX~
+**** Close encrypted partition
+***** ~sudo cryptsetup luksClose sdbX~
+
+** Continued
+*** GPG Encryption
+**** GnuPrivacyGuard is a tool that uses key-pair system to encrypt data.
+**** This is a great tool that is good for encrypting single files or messages.
+
+*** Keybase
+**** Keybase is platform that emphasizes privacy and security
+**** Keybase offers encrypted communication, files sync, and online repudiation.
+
+*** Signal
+**** Signal aims to provide an encrypted messaging platform.
+**** Signal is a great replacement for messaging apps such as Facebook Messenger or Whatsapp
+
+*** Wire
+**** Wire is a messaging platform that looks to secure 1:1 or group messaging with encryption
+
+*** Tresorit
+**** Tresorit is secure and encrypted Dropboox replacement.
+
+** Final thoughts
+*** I have showed how you can encrypt data on a drive and other tools that help with encrypted communications. It's always a good idea to learn some of these skills so you can protect your data.
+
+* Thanks!
+
+=Thanks everyone who joined in and I hope you have a great weekend!=
+
+#+BEGIN_QUOTE
+Support my [[https://ko-fi.com/mrerwtc][endeavors]]!
+#+END_QUOTE

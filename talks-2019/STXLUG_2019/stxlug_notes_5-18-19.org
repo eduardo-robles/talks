@@ -1,0 +1,87 @@
+#+BLOG: STXLUG
+#+POSTID: 178
+#+DATE: [2019-05-17 Fri 17:10]
+#+TITLE: Meetup 5-18-19
+#+AUTHOR: Eduardo Robles
+#+OPTIONS: toc:nil num:nil
+
+* Welcome to STXLUG Livestream
+** 5-18-19
+
+* Topic: Build a Virtualization Server
+
+** Meeting Notes
+*** Intro and News
+**** Presenter: Eduardo Robles https://eduardorobles.com
+**** Bsides RGV http://www.securitybsides.com/w/page/131143080/BSidesRGV2019
+**** Red Hat RHEL 8 now available for download https://developers.redhat.com/blog/2019/05/07/red-hat-enterprise-linux-8-now-generally-available/
+**** 8 Way to Contribute to the Linux Community https://www.forbes.com/sites/jasonevangelho/2019/05/13/8-ways-contribute-desktop-linux-community-marketing-documentation-art-testing/#7a7b06474df8
+**** Tacos and Linxu: Easy Linux Commands Youtube https://www.youtube.com/playlist?list=PLFKHa1ER1Ce9d0ZUvbS9xwP8XDB5GSRLS
+
+** Tutorial
+1. Install CentOS on your machine.
+   - I installed CentOS with the GNOME Desktop and the Development Tools, System
+     Administration Tool Add-Ons.
+   - Be sure to mark the user you create as an Adminstrator.
+2. Update CentOS before beginning the KVM installation.
+3. Begin installing all required packages.
+
+   #+begin_src bash
+   ~$ yum -y install epel-release deltarpm chronyd wget
+   ~$ yum makecache
+   ~$ yum -y update
+   ~$ yum install libvirt-python libvirt libvirt-daemon-config-network qemu-kvm python-ethtool sos \
+             python-ipaddr nfs-utils iscsi-initiator-utils pyparted python-libguestfs libguestfs-tools novnc \
+             spice-html5 python-configobj python-magic python-paramiko python-pillow virt-top
+
+   ~$ systemctl enable chronyd
+   ~$ systemctl restart chronyd
+
+   ~$ yum -y install http://kimchi-project.github.io/gingerbase/downloads/latest/ginger-base.el7.centos.noarch.rpm \
+             http://kimchi-project.github.io/ginger/downloads/latest/ginger.el7.centos.noarch.rpm \
+             https://github.com/kimchi-project/wok/releases/download/2.5.0/wok-2.5.0-0.el7.centos.noarch.rpm \
+             https://github.com/kimchi-project/kimchi/releases/download/2.5.0/kimchi-2.5.0-0.el7.centos.noarch.rpm
+
+   ~$ firewall-cmd --add-port=8000/tcp --permanent
+   ~$ firewall-cmd --add-port=8001/tcp --permanent
+   ~$ firewall-cmd --reload
+   ~$ semanage permissive -a httpd_t
+
+
+   ~$ systemctl enable wokd nginx
+   ~$ systemctl restart wokd nginx firewalld
+   #+end_src
+
+
+- ~chronyd~ package was not available, your case may be different.
+- I ran into some issues with ~selinux~ I was able to get it working via the
+  "Troubleshooting" guide on the Kimchi github page.
+- Once all the packages are installed with no errors you can open up a web
+  browser and go to the dashboard.
+- Visit ~https://ip-to-server:8001~
+- Log into the dashboard with you local credentials.
+- Create a new VM!
+
+*** Managing ISO files
+You can download iso files directly to you machine or you can move them
+manually. The directory where Kimchi looks for ISO files is
+~/var/lib/kimchi/isos~
+**** Using a bittorent client in the command line
+Transmission is a popular desktop Bittorrent client for Linux and it also comes
+with a command line interface. Here's how to use it with a torrent file.
+
+#+begin_src bash
+~$ transmission-cli torrentfile.iso.torrent ~w ~/directory/to/download/
+#+end_src
+
+
+** Final thoughts
+*** I think this a great project if you want to run a home server. Even though this is older hardware it works quite well. Imagine if you were to run a similar server on newer hardware? And there are plenty of other "virtualization" software that can accomplish this. Proxmox, VMware, ESXSi and plenty of others.
+
+* Thanks!
+
+=Thanks everyone who joined in and I hope you have a great weekend!=
+
+#+BEGIN_QUOTE
+Buy me a [[https://ko-fi.com/mrerwtc][coffee]]!
+#+END_QUOTE
