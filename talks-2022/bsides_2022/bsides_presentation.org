@@ -1,0 +1,26 @@
+#+REVEAL_ROOT: http://cdn.jsdelivr.net/reveal.js/3.0.0/
+#+REVEAL_THEME: Solarized
+#+REVEAL_SLIDE:
+#+OPTIONS: toc:nil num:nil
+#+DATE: 05-21-22
+#+AUTHOR: Eduardo Robles
+#+TITLE: Securing SSH Keys with MFA
+
+*
+
+#+REVEAL_HTML:<h1>Securing SSH Keys with MFA</h1> <h5>By: Eduardo Robles</h5> <h6>Find me at <a href="https://eduardorobles.com/links" target="_blank">https://eduardorobles.com/links</a></h6><p style="font-size: 18px; text-align:left;">A presentation for BSidesRGV 2022 <br/> May 21, 2022</p>
+
+* About speaker
+#+BEGIN_NOTES
+- Hi I'm Eduardo Robles I
+- You can check out my skills over on my Youtube channel or my business blog. *Bonus, I give out a lot of free advice over there.*
+#+END_NOTES
+- Hi! I'm Eduardo Robles I work at the City of Pharr Innovation & Technlogy department as a Support Analyst.
+- Since I was a kid technology was a passion of mine and I wanted to be an inventor.
+- You can check out my skills over on my Youtube channel or my business blog. *Bonus, I give out a lot of free advice over there.*
+
+* Securing SSH Keys with MFA
+Main Topics:
+1. Demonstrate how to implement MFA on SSH keys
+2. Learn the benefits and downsides to MFA on SSH keys
+3. Some tips/tricks for SSH management

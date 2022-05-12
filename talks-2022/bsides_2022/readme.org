@@ -1,0 +1,6 @@
+* Talks for BsidesRGV 2022
+** Presenter
+*** Eduardo Robles
+*** https://eduardorobles.com
+*** https://linkedin.com/hello-im-eduardo
+*** https://twitter.com/tacosandlinux
