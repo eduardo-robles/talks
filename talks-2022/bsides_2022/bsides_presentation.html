@@ -13,7 +13,7 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/beige.css" id="theme"/>
 
-<link rel="stylesheet" href="dracula"/>
+
 <!-- If the query includes 'print-pdf', include the PDF print sheet -->
 <script>
     if( window.location.search.match( /print-pdf/gi ) ) {
@@ -28,14 +28,13 @@
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide">Securing SSH Keys with MFA
-Eduardo Robles
-% Website: https://eduardorobles.com
+<section id="sec-title-slide"><h1 class="title">Securing SSH Keys with MFA</h1><p class="subtitle"></p>
+<h2 class="date">05-21-22</h2><p class="date">Created: 2022-05-14 Sat 13:02</p>
 </section>
 
 <section>
-<section id="slide-org00b130d">
-<h2 id="org00b130d">About speaker</h2>
+<section id="slide-org8e44a25">
+<h2 id="org8e44a25">About speaker</h2>
 <ul>
 <li>Hi! I'm Eduardo Robles I work at the City of Pharr Innovation &amp; Technlogy department as a Support Analyst.</li>
 <li>Since I was a kid technology was a passion of mine and I wanted to be an inventor.</li>
@@ -46,8 +45,8 @@ Eduardo Robles
 </section>
 </section>
 <section>
-<section id="slide-org33d407d">
-<h2 id="org33d407d">Securing SSH Keys with MFA</h2>
+<section id="slide-org8b2f67e">
+<h2 id="org8b2f67e">Securing SSH Keys with MFA</h2>
 <p>
 Main Topics:
 </p>
@@ -61,29 +60,29 @@ Main Topics:
 </section>
 </section>
 <section>
-<section id="slide-org59d4aee">
-<h2 id="org59d4aee">Create SSH Key</h2>
-<div class="outline-text-2" id="text-org59d4aee">
+<section id="slide-org021dfcf">
+<h2 id="org021dfcf">Create SSH Key</h2>
+<div class="outline-text-2" id="text-org021dfcf">
 </div>
 </section>
-<section id="slide-org6f6c77d">
-<h3 id="org6f6c77d">Create a "ed25519" key</h3>
+<section id="slide-orga857990">
+<h3 id="orga857990">Create a "ed25519" key</h3>
 <div class="org-src-container">
 
-<pre   ><code class="bash" >ssh-keygen -t ed25519 -f ~/.ssh/nameofkey -N '' -C "comment goes here"
+<pre  class="src src-bash"   ><code trim>ssh-keygen -t ed25519 -f ~/.ssh/nameofkey -N <span style="color: #f1fa8c;">''</span> -C <span style="color: #f1fa8c;">"comment goes here"</span>
 </code></pre>
 </div>
 </section>
-<section id="slide-org811f34a">
-<h3 id="org811f34a">Create an "RSA" key</h3>
+<section id="slide-org52bfe7b">
+<h3 id="org52bfe7b">Create an "RSA" key</h3>
 <div class="org-src-container">
 
-<pre   ><code class="bash" >ssh-keygen -t rsa -f ~/.ssh/nameofkey -N '' -C "comment goes here"
+<pre  class="src src-bash"   ><code trim>ssh-keygen -t rsa -f ~/.ssh/nameofkey -N <span style="color: #f1fa8c;">''</span> -C <span style="color: #f1fa8c;">"comment goes here"</span>
 </code></pre>
 </div>
 </section>
-<section id="slide-org71753f6">
-<h3 id="org71753f6">Explanation</h3>
+<section id="slide-orgf2b86bd">
+<h3 id="orgf2b86bd">Explanation</h3>
 <ul>
 <li>-t option is for the type of keys to be created (ex. ed25519)</li>
 <li>-f option is the filename and location of the keys (ex. <code>/path/to/file</code>)</li>
@@ -95,68 +94,68 @@ Main Topics:
 </section>
 </section>
 <section>
-<section id="slide-orgc7541dd">
-<h2 id="orgc7541dd">Demonstrating SSH Key Generation</h2>
+<section id="slide-orgb472541">
+<h2 id="orgb472541">Demonstrating SSH Key Generation</h2>
 </section>
 </section>
 <section>
-<section id="slide-org7c79ce9">
-<h2 id="org7c79ce9">Adding SSH Key To Agent</h2>
-<div class="outline-text-2" id="text-org7c79ce9">
+<section id="slide-org28b5c99">
+<h2 id="org28b5c99">Adding SSH Key To Agent</h2>
+<div class="outline-text-2" id="text-org28b5c99">
 </div>
 </section>
-<section id="slide-org6649a31">
-<h4 id="org6649a31">Check if SSH Agent is running</h4>
+<section id="slide-org7b441df">
+<h4 id="org7b441df">Check if SSH Agent is running</h4>
 <p>
 This is to add the keys to the SSH Agent
 </p>
 <div class="org-src-container">
 
-<pre   ><code class="bash" >eval "$(ssh-agent -s)"
+<pre  class="src src-bash"   ><code trim><span style="color: #ffb86c;">eval</span> <span style="color: #f1fa8c;">"$(</span><span style="color: #bd93f9; font-weight: bold;">ssh-agent</span><span style="color: #f1fa8c;"> -s)"</span>
 </code></pre>
 </div>
 
 </section>
-<section id="slide-orga0774d3">
-<h4 id="orga0774d3">Add the Keys to SSH Agent</h4>
+<section id="slide-org37a74c5">
+<h4 id="org37a74c5">Add the Keys to SSH Agent</h4>
 <div class="org-src-container">
 
-<pre   ><code class="bash" >ssh-add ~/.ssh/nameofkey
+<pre  class="src src-bash"   ><code trim>ssh-add ~/.ssh/nameofkey
 </code></pre>
 </div>
 
 </section>
-<section id="slide-org862d5a0">
-<h4 id="org862d5a0">Verify Keys Added to SSH Agent</h4>
+<section id="slide-org335205a">
+<h4 id="org335205a">Verify Keys Added to SSH Agent</h4>
 <div class="org-src-container">
 
-<pre   ><code class="bash" >ssh-add -l
+<pre  class="src src-bash"   ><code trim>ssh-add -l
 </code></pre>
 </div>
 
 </section>
-<section id="slide-org685d11c">
-<h4 id="org685d11c">Copy Key to Remote Server</h4>
+<section id="slide-org3afe494">
+<h4 id="org3afe494">Copy Key to Remote Server</h4>
 <div class="org-src-container">
 
-<pre   ><code class="bash" >ssh-copy-id user@remote.server.location
+<pre  class="src src-bash"   ><code trim>ssh-copy-id user@remote.server.location
 </code></pre>
 </div>
 
 </section>
-<section id="slide-orgc0c5da1">
-<h4 id="orgc0c5da1">Copy Server Key to Host</h4>
+<section id="slide-org6808d41">
+<h4 id="org6808d41">Copy Server Key to Host</h4>
 <div class="org-src-container">
 
-<pre   ><code class="bash" >ssh-copy-id user@host.local
+<pre  class="src src-bash"   ><code trim>ssh-copy-id user@host.local
 </code></pre>
 </div>
 
 </section>
 </section>
 <section>
-<section id="slide-orgfd02c31">
-<h2 id="orgfd02c31">SSH Config File - Make SSH Easier</h2>
+<section id="slide-org8302ae5">
+<h2 id="org8302ae5">SSH Config File - Make SSH Easier</h2>
 <p>
 Let's look at a typical SSH command.
 </p>
@@ -166,28 +165,28 @@ Let's look at a typical SSH command.
 </p>
 
 </section>
-<section id="slide-org683b985">
-<h4 id="org683b985"><code>erobles@10.0.3.11</code> this states our username on the server and the IP/Hostname of the server</h4>
+<section id="slide-orgc21afdf">
+<h4 id="orgc21afdf"><code>erobles@10.0.3.11</code> this states our username on the server and the IP/Hostname of the server</h4>
 
 </section>
-<section id="slide-org453ee7a">
-<h4 id="org453ee7a"><code>-p 2300</code> the port we are connecting to on the server</h4>
+<section id="slide-org2ad2bfc">
+<h4 id="org2ad2bfc"><code>-p 2300</code> the port we are connecting to on the server</h4>
 
 </section>
-<section id="slide-orge96426d">
-<h4 id="orge96426d"><code>-i ~/.ssh/mykeys</code> the Public/Private keys used in the SSH connection</h4>
+<section id="slide-org61c5cb3">
+<h4 id="org61c5cb3"><code>-i ~/.ssh/mykeys</code> the Public/Private keys used in the SSH connection</h4>
 </section>
 </section>
 <section>
-<section id="slide-org007fb35">
-<h2 id="org007fb35">SSH Config File cont.</h2>
+<section id="slide-orgec8f8c2">
+<h2 id="orgec8f8c2">SSH Config File cont.</h2>
 <p>
 While this is fine, it can be time consuming and easily forgotten. So let's see how this commands translates to an SSH Config file.
 </p>
 
 <div class="org-src-container">
 
-<pre   ><code class="bash" >HOST myserver
+<pre  class="src src-bash"   ><code trim>HOST myserver
   HostName 10.0.3.11
   User erobles
   Port 2300
@@ -207,7 +206,10 @@ Reveal.initialize({
 
 // Optional libraries used to extend on reveal.js
 dependencies: [
- { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }]
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
 
 });
 
