@@ -1,20 +1,12 @@
 #+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
-#+REVEAL_THEME: simple
+#+REVEAL_THEME: beige
 #+REVEAL_SLIDE:
 #+OPTIONS: toc:nil num:nil
 #+DATE: 05-21-22
 #+AUTHOR: Eduardo Robles
 #+TITLE: Securing SSH Keys with MFA
 
-* test
-#+BEGIN_EXAMPLE
-#+REVEAL_HTML:<h1>Securing SSH Keys with MFA</h1> <h5>By: Eduardo Robles</h5> <h6>Find me at <a href="https://eduardorobles.com/links" target="_blank">https://eduardorobles.com/links</a></h6><p style="font-size: 18px; text-align:left;">A presentation for BSidesRGV 2022 <br/> May 21, 2022</p>
-#+END_EXAMPLE
 * About speaker
-#+BEGIN_NOTES
-- Hi I'm Eduardo Robles I
-- You can check out my skills over on my Youtube channel or my business blog. *Bonus, I give out a lot of free advice over there.*
-#+END_NOTES
 - Hi! I'm Eduardo Robles I work at the City of Pharr Innovation & Technlogy department as a Support Analyst.
 - Since I was a kid technology was a passion of mine and I wanted to be an inventor.
 - You can check out my skills over on my Youtube channel or my business blog. *Bonus, I give out a lot of free advice over there.*
