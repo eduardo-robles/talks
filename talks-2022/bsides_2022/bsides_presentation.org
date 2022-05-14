@@ -1,6 +1,7 @@
 #+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
 #+REVEAL_THEME: beige
 #+REVEAL_SLIDE:
+#+REVEAL_TITLE_SLIDE: %t %a %e %https://eduardorobles.com
 #+OPTIONS: toc:nil num:nil
 #+DATE: 05-21-22
 #+AUTHOR: Eduardo Robles
@@ -18,17 +19,21 @@ Main Topics:
 3. Some tips/tricks for SSH management
 
 * Create SSH Key
+** Create a "ed25519" key
    #+BEGIN_SRC bash
 ssh-keygen -t ed25519 -f ~/.ssh/nameofkey -N '' -C "comment goes here"
    #+END_SRC
-
+** Create an "RSA" key
    #+BEGIN_SRC bash
    ssh-keygen -t rsa -f ~/.ssh/nameofkey -N '' -C "comment goes here"
    #+END_SRC
-**** -t option is for the type of keys to be created (ex. ed25519)
-**** -f option is the filename and location of the keys (ex. =/path/to/file=)
-**** -N is the passphrase to be given, leave blank for no passphrase
-**** -C enter a comment to best find keys later (ex. "github key")
+** Explanation
+- -t option is for the type of keys to be created (ex. ed25519)
+- -f option is the filename and location of the keys (ex. =/path/to/file=)
+- -N is the passphrase to be given, leave blank for no passphrase
+- -C enter a comment to best find keys later (ex. "github key")
+
+* Demonstrating SSH Key Generation
 * Adding SSH Key To Agent
 CLOSED: [2022-03-22 Tue 08:11]
 :PROPERTIES:
