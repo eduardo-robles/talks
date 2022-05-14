@@ -2,6 +2,8 @@
 #+REVEAL_THEME: beige
 #+REVEAL_SLIDE:
 #+REVEAL_TITLE_SLIDE: %t %a %e %https://eduardorobles.com
+#+REVEAL_PLUGINS: (highlight)
+#+REVEAL_HIGHLIGHT_CSS: monokai
 #+OPTIONS: toc:nil num:nil
 #+DATE: 05-21-22
 #+AUTHOR: Eduardo Robles
@@ -37,27 +39,27 @@ ssh-keygen -t ed25519 -f ~/.ssh/nameofkey -N '' -C "comment goes here"
 * Adding SSH Key To Agent
 *** Check if SSH Agent is running
    This is to add the keys to the SSH Agent
-   #+BEGIN_SRC sh
+   #+BEGIN_SRC bash
    eval "$(ssh-agent -s)"
    #+END_SRC
 
 *** Add the Keys to SSH Agent
-   #+BEGIN_SRC sh
+   #+BEGIN_SRC bash
    ssh-add ~/.ssh/nameofkey
    #+END_SRC
 
 *** Verify Keys Added to SSH Agent
-   #+BEGIN_SRC sh
+   #+BEGIN_SRC bash
    ssh-add -l
    #+END_SRC
 
 *** Copy Key to Remote Server
-   #+BEGIN_SRC sh
+   #+BEGIN_SRC bash
    ssh-copy-id user@remote.server.location
    #+END_SRC
 
 *** Copy Server Key to Host
-#+BEGIN_SRC sh
+#+BEGIN_SRC bash
 ssh-copy-id user@host.local
 #+END_SRC
 
