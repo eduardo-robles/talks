@@ -35,10 +35,6 @@ ssh-keygen -t ed25519 -f ~/.ssh/nameofkey -N '' -C "comment goes here"
 
 * Demonstrating SSH Key Generation
 * Adding SSH Key To Agent
-CLOSED: [2022-03-22 Tue 08:11]
-:PROPERTIES:
-:EXPORT_FILE_NAME: add-ssh-key-to-agent
-:END:
 *** Check if SSH Agent is running
    This is to add the keys to the SSH Agent
    #+BEGIN_SRC sh
@@ -66,19 +62,15 @@ ssh-copy-id user@host.local
 #+END_SRC
 
 * SSH Config File - Make SSH Easier
-CLOSED: [2022-04-27 Wed 07:30]
-:PROPERTIES:
-:EXPORT_FILE_NAME: ssh-config-file-make-ssh-easier
-:END:
-How do you stay organized with SSH connections? Most of us simply search our terminals history to find SSH connections. You may do =history | grep "ssh"= or even =Ctrl+R= and search SSH. While that may work for a few connections, there is a better way: SSH Config file. An SSH Config file simply tells OpenSSH how to open up connections. The benefit is that you can keep all your connections all in one place. Plus you can use things like Jumphosts and Public Keys to make connections easier. Let's look at a typical SSH command.
+Let's look at a typical SSH command.
 
 =ssh erobles@10.0.3.11 -p 2300 -i ~/.ssh/mykeys=
 
-**** =erobles@10.0.3.11= this states our username on the server and the IP/Hostname of the server
+*** =erobles@10.0.3.11= this states our username on the server and the IP/Hostname of the server
 
-**** =-p 2300= the port we are connecting to on the server
+*** =-p 2300= the port we are connecting to on the server
 
-**** =-i ~/.ssh/mykeys= the Public/Private keys used in the SSH connection
+*** =-i ~/.ssh/mykeys= the Public/Private keys used in the SSH connection
 
 While this is fine, it can be time consuming and easily forgotten. So let's see how this commands translates to an SSH Config file.
 
