@@ -1,9 +1,8 @@
 #+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
 #+REVEAL_THEME: beige
 #+REVEAL_SLIDE:
-#+REVEAL_TITLE_SLIDE: %t %a %e %%https://eduardorobles.com
 #+REVEAL_PLUGINS: (highlight)
-#+REVEAL_HIGHLIGHT_CSS: monokai
+#+REVEAL_HIGHLIGHT_CSS: dracula
 #+OPTIONS: toc:nil num:nil
 #+DATE: 05-21-22
 #+AUTHOR: Eduardo Robles
