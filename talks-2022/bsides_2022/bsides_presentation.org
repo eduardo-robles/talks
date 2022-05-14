@@ -1,15 +1,15 @@
-#+REVEAL_ROOT: http://cdn.jsdelivr.net/reveal.js/3.0.0/
-#+REVEAL_THEME: Solarized
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+REVEAL_THEME: simple
 #+REVEAL_SLIDE:
 #+OPTIONS: toc:nil num:nil
 #+DATE: 05-21-22
 #+AUTHOR: Eduardo Robles
 #+TITLE: Securing SSH Keys with MFA
 
-*
-
+* test
+#+BEGIN_EXAMPLE
 #+REVEAL_HTML:<h1>Securing SSH Keys with MFA</h1> <h5>By: Eduardo Robles</h5> <h6>Find me at <a href="https://eduardorobles.com/links" target="_blank">https://eduardorobles.com/links</a></h6><p style="font-size: 18px; text-align:left;">A presentation for BSidesRGV 2022 <br/> May 21, 2022</p>
-
+#+END_EXAMPLE
 * About speaker
 #+BEGIN_NOTES
 - Hi I'm Eduardo Robles I
@@ -24,3 +24,72 @@ Main Topics:
 1. Demonstrate how to implement MFA on SSH keys
 2. Learn the benefits and downsides to MFA on SSH keys
 3. Some tips/tricks for SSH management
+
+* Create SSH Key
+   #+BEGIN_SRC bash
+ssh-keygen -t ed25519 -f ~/.ssh/nameofkey -N '' -C "comment goes here"
+   #+END_SRC
+
+   #+BEGIN_SRC bash
+   ssh-keygen -t rsa -f ~/.ssh/nameofkey -N '' -C "comment goes here"
+   #+END_SRC
+**** -t option is for the type of keys to be created (ex. ed25519)
+**** -f option is the filename and location of the keys (ex. =/path/to/file=)
+**** -N is the passphrase to be given, leave blank for no passphrase
+**** -C enter a comment to best find keys later (ex. "github key")
+* Adding SSH Key To Agent
+CLOSED: [2022-03-22 Tue 08:11]
+:PROPERTIES:
+:EXPORT_FILE_NAME: add-ssh-key-to-agent
+:END:
+*** Check if SSH Agent is running
+   This is to add the keys to the SSH Agent
+   #+BEGIN_SRC sh
+   eval "$(ssh-agent -s)"
+   #+END_SRC
+
+*** Add the Keys to SSH Agent
+   #+BEGIN_SRC sh
+   ssh-add ~/.ssh/nameofkey
+   #+END_SRC
+
+*** Verify Keys Added to SSH Agent
+   #+BEGIN_SRC sh
+   ssh-add -l
+   #+END_SRC
+
+*** Copy Key to Remote Server
+   #+BEGIN_SRC sh
+   ssh-copy-id user@remote.server.location
+   #+END_SRC
+
+*** Copy Server Key to Host
+#+BEGIN_SRC sh
+ssh-copy-id user@host.local
+#+END_SRC
+
+* SSH Config File - Make SSH Easier
+CLOSED: [2022-04-27 Wed 07:30]
+:PROPERTIES:
+:EXPORT_FILE_NAME: ssh-config-file-make-ssh-easier
+:END:
+How do you stay organized with SSH connections? Most of us simply search our terminals history to find SSH connections. You may do =history | grep "ssh"= or even =Ctrl+R= and search SSH. While that may work for a few connections, there is a better way: SSH Config file. An SSH Config file simply tells OpenSSH how to open up connections. The benefit is that you can keep all your connections all in one place. Plus you can use things like Jumphosts and Public Keys to make connections easier. Let's look at a typical SSH command.
+
+=ssh erobles@10.0.3.11 -p 2300 -i ~/.ssh/mykeys=
+
+**** =erobles@10.0.3.11= this states our username on the server and the IP/Hostname of the server
+
+**** =-p 2300= the port we are connecting to on the server
+
+**** =-i ~/.ssh/mykeys= the Public/Private keys used in the SSH connection
+
+While this is fine, it can be time consuming and easily forgotten. So let's see how this commands translates to an SSH Config file.
+
+#+BEGIN_SRC bash
+  HOST myserver
+    HostName 10.0.3.11
+    User erobles
+    Port 2300
+    IdentityFile ~/.ssh/mykeys
+#+END_SRC
+The example above achieves the same as the long SSH command in the previous example. You can save this file in =~/.ssh./= directory with the filename =ssh_config=. Once the file is saved you can type =ssh myserver=, OpenSSH will check the SSH config file for an entry =myserver= and execute an SSH connections with the options you specify. As you have more servers/machines you have to SSH into you simply add those the SSH config file. You can have 20, 40, or 100 connections all in one file! Working with an SSH Config file makes your SSH workflow much easier. It can also be helpful to keep track of SSH connectitons.
