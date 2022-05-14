@@ -11,9 +11,9 @@
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/simple.css" id="theme"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/beige.css" id="theme"/>
 
-
+<link rel="stylesheet" href="monokai"/>
 <!-- If the query includes 'print-pdf', include the PDF print sheet -->
 <script>
     if( window.location.search.match( /print-pdf/gi ) ) {
@@ -28,29 +28,12 @@
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide"><h1 class="title">Securing SSH Keys with MFA</h1><p class="subtitle"></p>
-<h2 class="date">05-21-22</h2><p class="date">Created: 2022-05-14 Sat 11:50</p>
+<section id="sec-title-slide">Securing SSH Keys with MFA Eduardo Robles <a href="mailto:eduardorobles@protonmail.com">eduardorobles@protonmail.com</a> %https://eduardorobles.com
 </section>
 
 <section>
-<section id="slide-org314da3c">
-<h2 id="org314da3c">test</h2>
-<pre class="example" id="org24b5fb2">
-#+REVEAL_HTML:&lt;h1&gt;Securing SSH Keys with MFA&lt;/h1&gt; &lt;h5&gt;By: Eduardo Robles&lt;/h5&gt; &lt;h6&gt;Find me at &lt;a href="https://eduardorobles.com/links" target="_blank"&gt;https://eduardorobles.com/links&lt;/a&gt;&lt;/h6&gt;&lt;p style="font-size: 18px; text-align:left;"&gt;A presentation for BSidesRGV 2022 &lt;br/&gt; May 21, 2022&lt;/p&gt;
-</pre>
-</section>
-</section>
-<section>
-<section id="slide-org64b5c03">
-<h2 id="org64b5c03">About speaker</h2>
-<aside class="notes">
-<ul>
-<li>Hi I'm Eduardo Robles I</li>
-<li>You can check out my skills over on my Youtube channel or my business blog. <b>Bonus, I give out a lot of free advice over there.</b></li>
-
-</ul>
-
-</aside>
+<section id="slide-orge53e426">
+<h2 id="orge53e426">About speaker</h2>
 <ul>
 <li>Hi! I'm Eduardo Robles I work at the City of Pharr Innovation &amp; Technlogy department as a Support Analyst.</li>
 <li>Since I was a kid technology was a passion of mine and I wanted to be an inventor.</li>
@@ -61,8 +44,8 @@
 </section>
 </section>
 <section>
-<section id="slide-orgfbe5f73">
-<h2 id="orgfbe5f73">Securing SSH Keys with MFA</h2>
+<section id="slide-orge4757e4">
+<h2 id="orge4757e4">Securing SSH Keys with MFA</h2>
 <p>
 Main Topics:
 </p>
@@ -76,115 +59,139 @@ Main Topics:
 </section>
 </section>
 <section>
-<section id="slide-orgc6e16d2">
-<h2 id="orgc6e16d2">Create SSH Key</h2>
+<section id="slide-orgd13b949">
+<h2 id="orgd13b949">Create SSH Key</h2>
+<div class="outline-text-2" id="text-orgd13b949">
+</div>
+</section>
+<section id="slide-org474b9a4">
+<h3 id="org474b9a4">Create a "ed25519" key</h3>
 <div class="org-src-container">
 
-<pre  class="src src-bash"   ><code trim>ssh-keygen -t ed25519 -f ~/.ssh/nameofkey -N <span style="color: #f1fa8c;">''</span> -C <span style="color: #f1fa8c;">"comment goes here"</span>
+<pre   ><code class="bash" >ssh-keygen -t ed25519 -f ~/.ssh/nameofkey -N '' -C "comment goes here"
 </code></pre>
 </div>
-
+</section>
+<section id="slide-org6268288">
+<h3 id="org6268288">Create an "RSA" key</h3>
 <div class="org-src-container">
 
-<pre  class="src src-bash"   ><code trim>ssh-keygen -t rsa -f ~/.ssh/nameofkey -N <span style="color: #f1fa8c;">''</span> -C <span style="color: #f1fa8c;">"comment goes here"</span>
+<pre   ><code class="bash" >ssh-keygen -t rsa -f ~/.ssh/nameofkey -N '' -C "comment goes here"
 </code></pre>
 </div>
-<ul class="org-ul">
-<li><a id="org2079d75"></a>-t option is for the type of keys to be created (ex. ed25519)<br /></li>
-<li><a id="orgfcb9785"></a>-f option is the filename and location of the keys (ex. <code>/path/to/file</code>)<br /></li>
-<li><a id="orgdcbf4fb"></a>-N is the passphrase to be given, leave blank for no passphrase<br /></li>
-<li><a id="orgac24058"></a>-C enter a comment to best find keys later (ex. "github key")<br /></li>
+</section>
+<section id="slide-org6cb0232">
+<h3 id="org6cb0232">Explanation</h3>
+<ul>
+<li>-t option is for the type of keys to be created (ex. ed25519)</li>
+<li>-f option is the filename and location of the keys (ex. <code>/path/to/file</code>)</li>
+<li>-N is the passphrase to be given, leave blank for no passphrase</li>
+<li>-C enter a comment to best find keys later (ex. "github key")</li>
+
 </ul>
+
 </section>
 </section>
 <section>
-<section id="slide-org7d79a51">
-<h2 id="org7d79a51">Adding SSH Key To Agent</h2>
+<section id="slide-orgf25fcb9">
+<h2 id="orgf25fcb9">Demonstrating SSH Key Generation</h2>
 </section>
-<section id="slide-orgd4a4843">
-<h4 id="orgd4a4843">Check if SSH Agent is running</h4>
+</section>
+<section>
+<section id="slide-org83bb569">
+<h2 id="org83bb569">Adding SSH Key To Agent</h2>
+<div class="outline-text-2" id="text-org83bb569">
+</div>
+</section>
+<section id="slide-org5fc5a8c">
+<h4 id="org5fc5a8c">Check if SSH Agent is running</h4>
 <p>
 This is to add the keys to the SSH Agent
 </p>
 <div class="org-src-container">
 
-<pre  class="src src-sh"   ><code trim><span style="color: #ffb86c;">eval</span> <span style="color: #f1fa8c;">"$(</span><span style="color: #bd93f9; font-weight: bold;">ssh-agent</span><span style="color: #f1fa8c;"> -s)"</span>
+<pre   ><code class="bash" >eval "$(ssh-agent -s)"
 </code></pre>
 </div>
 
 </section>
-<section id="slide-org44c20eb">
-<h4 id="org44c20eb">Add the Keys to SSH Agent</h4>
+<section id="slide-orgcad3e40">
+<h4 id="orgcad3e40">Add the Keys to SSH Agent</h4>
 <div class="org-src-container">
 
-<pre  class="src src-sh"   ><code trim>ssh-add ~/.ssh/nameofkey
+<pre   ><code class="bash" >ssh-add ~/.ssh/nameofkey
 </code></pre>
 </div>
 
 </section>
-<section id="slide-org1ae6a4a">
-<h4 id="org1ae6a4a">Verify Keys Added to SSH Agent</h4>
+<section id="slide-orga6794bf">
+<h4 id="orga6794bf">Verify Keys Added to SSH Agent</h4>
 <div class="org-src-container">
 
-<pre  class="src src-sh"   ><code trim>ssh-add -l
+<pre   ><code class="bash" >ssh-add -l
 </code></pre>
 </div>
 
 </section>
-<section id="slide-org32f286f">
-<h4 id="org32f286f">Copy Key to Remote Server</h4>
+<section id="slide-org07e23b3">
+<h4 id="org07e23b3">Copy Key to Remote Server</h4>
 <div class="org-src-container">
 
-<pre  class="src src-sh"   ><code trim>ssh-copy-id user@remote.server.location
+<pre   ><code class="bash" >ssh-copy-id user@remote.server.location
 </code></pre>
 </div>
 
 </section>
-<section id="slide-org83381ab">
-<h4 id="org83381ab">Copy Server Key to Host</h4>
+<section id="slide-org76031f0">
+<h4 id="org76031f0">Copy Server Key to Host</h4>
 <div class="org-src-container">
 
-<pre  class="src src-sh"   ><code trim>ssh-copy-id user@host.local
+<pre   ><code class="bash" >ssh-copy-id user@host.local
 </code></pre>
 </div>
 
 </section>
 </section>
 <section>
-<section id="slide-orgcf32140">
-<h2 id="orgcf32140">SSH Config File - Make SSH Easier</h2>
+<section id="slide-orgf89781d">
+<h2 id="orgf89781d">SSH Config File - Make SSH Easier</h2>
 <p>
-How do you stay organized with SSH connections? Most of us simply search our terminals history to find SSH connections. You may do <code>history | grep "ssh"</code> or even <code>Ctrl+R</code> and search SSH. While that may work for a few connections, there is a better way: SSH Config file. An SSH Config file simply tells OpenSSH how to open up connections. The benefit is that you can keep all your connections all in one place. Plus you can use things like Jumphosts and Public Keys to make connections easier. Let's look at a typical SSH command.
+Let's look at a typical SSH command.
 </p>
 
 <p>
 <code>ssh erobles@10.0.3.11 -p 2300 -i ~/.ssh/mykeys</code>
 </p>
 
-<ul class="org-ul">
-<li><a id="orgf1756fd"></a><code>erobles@10.0.3.11</code> this states our username on the server and the IP/Hostname of the server<br /></li>
+</section>
+<section id="slide-orga06cda3">
+<h4 id="orga06cda3"><code>erobles@10.0.3.11</code> this states our username on the server and the IP/Hostname of the server</h4>
 
-<li><a id="orgc5b5800"></a><code>-p 2300</code> the port we are connecting to on the server<br /></li>
+</section>
+<section id="slide-org35359ea">
+<h4 id="org35359ea"><code>-p 2300</code> the port we are connecting to on the server</h4>
 
-<li><a id="org42dd24a"></a><code>-i ~/.ssh/mykeys</code> the Public/Private keys used in the SSH connection<br />
+</section>
+<section id="slide-org1436b6e">
+<h4 id="org1436b6e"><code>-i ~/.ssh/mykeys</code> the Public/Private keys used in the SSH connection</h4>
+</section>
+</section>
+<section>
+<section id="slide-org1911dfa">
+<h2 id="org1911dfa">SSH Config File cont.</h2>
 <p>
 While this is fine, it can be time consuming and easily forgotten. So let's see how this commands translates to an SSH Config file.
 </p>
 
 <div class="org-src-container">
 
-<pre  class="src src-bash"   ><code trim>HOST myserver
+<pre   ><code class="bash" >HOST myserver
   HostName 10.0.3.11
   User erobles
   Port 2300
   IdentityFile ~/.ssh/mykeys
 </code></pre>
 </div>
-<p>
-The example above achieves the same as the long SSH command in the previous example. You can save this file in <code>~/.ssh./</code> directory with the filename <code>ssh_config</code>. Once the file is saved you can type <code>ssh myserver</code>, OpenSSH will check the SSH config file for an entry <code>myserver</code> and execute an SSH connections with the options you specify. As you have more servers/machines you have to SSH into you simply add those the SSH config file. You can have 20, 40, or 100 connections all in one file! Working with an SSH Config file makes your SSH workflow much easier. It can also be helpful to keep track of SSH connectitons.
-</p>
-</li>
-</ul>
 </section>
 </section>
 </div>
@@ -198,10 +205,7 @@ Reveal.initialize({
 
 // Optional libraries used to extend on reveal.js
 dependencies: [
- { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
- { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
- { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
- { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }]
 
 });
 
