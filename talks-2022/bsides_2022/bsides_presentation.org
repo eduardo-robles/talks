@@ -5,7 +5,7 @@
 #+REVEAL_HIGHLIGHT_CSS: dracula
 #+REVEAL_TITLE_SLIDE: %t
 #+REVEAL_TITLE_SLIDE: %a
-#+REVEAL_TITLE_SLIDE: %Website: https://eduardorobles.com
+#+REVEAL_TITLE_SLIDE: %% Website: https://eduardorobles.com
 #+OPTIONS: toc:nil num:nil
 #+DATE: 05-21-22
 #+AUTHOR: Eduardo Robles

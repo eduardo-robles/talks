@@ -13,7 +13,7 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/beige.css" id="theme"/>
 
-<link rel="stylesheet" href="monokai"/>
+<link rel="stylesheet" href="dracula"/>
 <!-- If the query includes 'print-pdf', include the PDF print sheet -->
 <script>
     if( window.location.search.match( /print-pdf/gi ) ) {
@@ -28,12 +28,14 @@
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide">Securing SSH Keys with MFA Eduardo Robles <a href="mailto:eduardorobles@protonmail.com">eduardorobles@protonmail.com</a> %https://eduardorobles.com
+<section id="sec-title-slide">Securing SSH Keys with MFA
+Eduardo Robles
+% Website: https://eduardorobles.com
 </section>
 
 <section>
-<section id="slide-orge53e426">
-<h2 id="orge53e426">About speaker</h2>
+<section id="slide-org00b130d">
+<h2 id="org00b130d">About speaker</h2>
 <ul>
 <li>Hi! I'm Eduardo Robles I work at the City of Pharr Innovation &amp; Technlogy department as a Support Analyst.</li>
 <li>Since I was a kid technology was a passion of mine and I wanted to be an inventor.</li>
@@ -44,8 +46,8 @@
 </section>
 </section>
 <section>
-<section id="slide-orge4757e4">
-<h2 id="orge4757e4">Securing SSH Keys with MFA</h2>
+<section id="slide-org33d407d">
+<h2 id="org33d407d">Securing SSH Keys with MFA</h2>
 <p>
 Main Topics:
 </p>
@@ -59,29 +61,29 @@ Main Topics:
 </section>
 </section>
 <section>
-<section id="slide-orgd13b949">
-<h2 id="orgd13b949">Create SSH Key</h2>
-<div class="outline-text-2" id="text-orgd13b949">
+<section id="slide-org59d4aee">
+<h2 id="org59d4aee">Create SSH Key</h2>
+<div class="outline-text-2" id="text-org59d4aee">
 </div>
 </section>
-<section id="slide-org474b9a4">
-<h3 id="org474b9a4">Create a "ed25519" key</h3>
+<section id="slide-org6f6c77d">
+<h3 id="org6f6c77d">Create a "ed25519" key</h3>
 <div class="org-src-container">
 
 <pre   ><code class="bash" >ssh-keygen -t ed25519 -f ~/.ssh/nameofkey -N '' -C "comment goes here"
 </code></pre>
 </div>
 </section>
-<section id="slide-org6268288">
-<h3 id="org6268288">Create an "RSA" key</h3>
+<section id="slide-org811f34a">
+<h3 id="org811f34a">Create an "RSA" key</h3>
 <div class="org-src-container">
 
 <pre   ><code class="bash" >ssh-keygen -t rsa -f ~/.ssh/nameofkey -N '' -C "comment goes here"
 </code></pre>
 </div>
 </section>
-<section id="slide-org6cb0232">
-<h3 id="org6cb0232">Explanation</h3>
+<section id="slide-org71753f6">
+<h3 id="org71753f6">Explanation</h3>
 <ul>
 <li>-t option is for the type of keys to be created (ex. ed25519)</li>
 <li>-f option is the filename and location of the keys (ex. <code>/path/to/file</code>)</li>
@@ -93,18 +95,18 @@ Main Topics:
 </section>
 </section>
 <section>
-<section id="slide-orgf25fcb9">
-<h2 id="orgf25fcb9">Demonstrating SSH Key Generation</h2>
+<section id="slide-orgc7541dd">
+<h2 id="orgc7541dd">Demonstrating SSH Key Generation</h2>
 </section>
 </section>
 <section>
-<section id="slide-org83bb569">
-<h2 id="org83bb569">Adding SSH Key To Agent</h2>
-<div class="outline-text-2" id="text-org83bb569">
+<section id="slide-org7c79ce9">
+<h2 id="org7c79ce9">Adding SSH Key To Agent</h2>
+<div class="outline-text-2" id="text-org7c79ce9">
 </div>
 </section>
-<section id="slide-org5fc5a8c">
-<h4 id="org5fc5a8c">Check if SSH Agent is running</h4>
+<section id="slide-org6649a31">
+<h4 id="org6649a31">Check if SSH Agent is running</h4>
 <p>
 This is to add the keys to the SSH Agent
 </p>
@@ -115,8 +117,8 @@ This is to add the keys to the SSH Agent
 </div>
 
 </section>
-<section id="slide-orgcad3e40">
-<h4 id="orgcad3e40">Add the Keys to SSH Agent</h4>
+<section id="slide-orga0774d3">
+<h4 id="orga0774d3">Add the Keys to SSH Agent</h4>
 <div class="org-src-container">
 
 <pre   ><code class="bash" >ssh-add ~/.ssh/nameofkey
@@ -124,8 +126,8 @@ This is to add the keys to the SSH Agent
 </div>
 
 </section>
-<section id="slide-orga6794bf">
-<h4 id="orga6794bf">Verify Keys Added to SSH Agent</h4>
+<section id="slide-org862d5a0">
+<h4 id="org862d5a0">Verify Keys Added to SSH Agent</h4>
 <div class="org-src-container">
 
 <pre   ><code class="bash" >ssh-add -l
@@ -133,8 +135,8 @@ This is to add the keys to the SSH Agent
 </div>
 
 </section>
-<section id="slide-org07e23b3">
-<h4 id="org07e23b3">Copy Key to Remote Server</h4>
+<section id="slide-org685d11c">
+<h4 id="org685d11c">Copy Key to Remote Server</h4>
 <div class="org-src-container">
 
 <pre   ><code class="bash" >ssh-copy-id user@remote.server.location
@@ -142,8 +144,8 @@ This is to add the keys to the SSH Agent
 </div>
 
 </section>
-<section id="slide-org76031f0">
-<h4 id="org76031f0">Copy Server Key to Host</h4>
+<section id="slide-orgc0c5da1">
+<h4 id="orgc0c5da1">Copy Server Key to Host</h4>
 <div class="org-src-container">
 
 <pre   ><code class="bash" >ssh-copy-id user@host.local
@@ -153,8 +155,8 @@ This is to add the keys to the SSH Agent
 </section>
 </section>
 <section>
-<section id="slide-orgf89781d">
-<h2 id="orgf89781d">SSH Config File - Make SSH Easier</h2>
+<section id="slide-orgfd02c31">
+<h2 id="orgfd02c31">SSH Config File - Make SSH Easier</h2>
 <p>
 Let's look at a typical SSH command.
 </p>
@@ -164,21 +166,21 @@ Let's look at a typical SSH command.
 </p>
 
 </section>
-<section id="slide-orga06cda3">
-<h4 id="orga06cda3"><code>erobles@10.0.3.11</code> this states our username on the server and the IP/Hostname of the server</h4>
+<section id="slide-org683b985">
+<h4 id="org683b985"><code>erobles@10.0.3.11</code> this states our username on the server and the IP/Hostname of the server</h4>
 
 </section>
-<section id="slide-org35359ea">
-<h4 id="org35359ea"><code>-p 2300</code> the port we are connecting to on the server</h4>
+<section id="slide-org453ee7a">
+<h4 id="org453ee7a"><code>-p 2300</code> the port we are connecting to on the server</h4>
 
 </section>
-<section id="slide-org1436b6e">
-<h4 id="org1436b6e"><code>-i ~/.ssh/mykeys</code> the Public/Private keys used in the SSH connection</h4>
+<section id="slide-orge96426d">
+<h4 id="orge96426d"><code>-i ~/.ssh/mykeys</code> the Public/Private keys used in the SSH connection</h4>
 </section>
 </section>
 <section>
-<section id="slide-org1911dfa">
-<h2 id="org1911dfa">SSH Config File cont.</h2>
+<section id="slide-org007fb35">
+<h2 id="org007fb35">SSH Config File cont.</h2>
 <p>
 While this is fine, it can be time consuming and easily forgotten. So let's see how this commands translates to an SSH Config file.
 </p>
