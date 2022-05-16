@@ -1,3 +1,5 @@
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+REVEAL_THEME: white
 #+OPTIONS: toc:nil num:nil
 #+DATE: 05-21-22
 #+AUTHOR: Eduardo Robles
@@ -6,17 +8,13 @@
 * About speaker
 - Hi! I'm Eduardo Robles I work at the City of Pharr Innovation & Technlogy department as a Support Analyst.
 - Since I was a kid technology was a passion of mine and I wanted to be an inventor.
-- You can check out my skills over on my blog or LinkedIn. *Bonus, I give out a lot of free advice over there.*
+- You can check out my skills over on my Youtube channel or my business blog. *Bonus, I give out a lot of free advice over there.*
 
 * Securing SSH Keys with MFA
 Main Topics:
 1. Demonstrate how to implement MFA on SSH keys
 2. Learn the benefits and downsides to MFA on SSH keys
 3. Some tips/tricks for SSH management
-
-* Before we begin...
-- This talk is for an intermediate users
-- OpenSSH version 8 or greater (both server and Client)
 
 * Create SSH Key
 ** Create a "ed25519" key
