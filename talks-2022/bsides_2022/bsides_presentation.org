@@ -20,13 +20,13 @@ Main Topics:
 
 * Create SSH Key
 ** Create a "ed25519" key
-   #+BEGIN_SRC shell
+#+BEGIN_SRC shell
 ssh-keygen -t ed25519 -f ~/.ssh/nameofkey -N '' -C "comment goes here"
-   #+END_SRC
+#+END_SRC
 ** Create an "RSA" key
-   #+BEGIN_SRC bash
-   ssh-keygen -t rsa -f ~/.ssh/nameofkey -N '' -C "comment goes here"
-   #+END_SRC
+#+BEGIN_SRC bash
+ssh-keygen -t rsa -f ~/.ssh/nameofkey -N '' -C "comment goes here"
+#+END_SRC
 ** Create a "ed25519-sk" key
 #+BEGIN_SRC bash
 ssh-keygen -t ed25519-sk -O resident -f ~/.ssh/id_testkey -N '' -C "test key for yubikey"
@@ -63,40 +63,40 @@ The key's randomart image is:
 * How SSH Authentication Works
 ** SSH And Yubikey
 - Magic of FIDO/U2F
-  https://www.openssh.com/txt/release-8.2
-  #+BEGIN_QUOTE
-  U2F/FIDO are open standards for inexpensive two-factor
+https://www.openssh.com/txt/release-8.2
+#+BEGIN_QUOTE
+U2F/FIDO are open standards for inexpensive two-factor
 authentication hardware that are widely used for website
 authentication.  In OpenSSH FIDO devices are supported by new public
 key types "ecdsa-sk" and "ed25519-sk", along with corresponding
 certificate types.
 #+END_QUOTE
 - How FIDO Works
-  #+BEGIN_QUOTE
-  During registration with an online service, the user’s client device creates a new key pair. It retains the private key and registers the public key with the online service. Authentication is done by the client device proving possession of the private key to the service by signing a challenge. The client’s private keys can be used only after they are unlocked locally on the device by the user.
-  #+END_QUOTE
-  [[https://fidoalliance.org/wp-content/uploads/2014/12/graphic_Registration.png][Source: https://fidoalliance.org/how-fido-works/]]
+#+BEGIN_QUOTE
+During registration with an online service, the user’s client device creates a new key pair. It retains the private key and registers the public key with the online service. Authentication is done by the client device proving possession of the private key to the service by signing a challenge. The client’s private keys can be used only after they are unlocked locally on the device by the user.
+#+END_QUOTE
+[[https://fidoalliance.org/wp-content/uploads/2014/12/graphic_Registration.png][Source: https://fidoalliance.org/how-fido-works/]]
 * Adding SSH Key To Agent
 *** Check if SSH Agent is running
-   This is to add the keys to the SSH Agent
-   #+BEGIN_SRC bash
-   eval "$(ssh-agent -s)"
-   #+END_SRC
+This is to add the keys to the SSH Agent
+#+BEGIN_SRC bash
+eval "$(ssh-agent -s)"
+#+END_SRC
 
 *** Add the Keys to SSH Agent
-   #+BEGIN_SRC bash
-   ssh-add ~/.ssh/nameofkey
-   #+END_SRC
+#+BEGIN_SRC bash
+ssh-add ~/.ssh/nameofkey
+#+END_SRC
 
 *** Verify Keys Added to SSH Agent
-   #+BEGIN_SRC bash
-   ssh-add -l
-   #+END_SRC
+#+BEGIN_SRC bash
+ssh-add -l
+#+END_SRC
 
 *** Copy Key to Remote Server
-   #+BEGIN_SRC bash
-   ssh-copy-id user@remote.server.location
-   #+END_SRC
+#+BEGIN_SRC bash
+ssh-copy-id user@remote.server.location
+#+END_SRC
 
 *** Copy Server Key to Host
 #+BEGIN_SRC bash
@@ -117,9 +117,9 @@ Let's look at a typical SSH command.
 While this is fine, it can be time consuming and easily forgotten. So let's see how this commands translates to an SSH Config file.
 
 #+BEGIN_SRC bash
-  HOST myserver
-    HostName 10.0.3.11
-    User erobles
-    Port 2300
-    IdentityFile ~/.ssh/mykeys
+HOST myserver
+HostName 10.0.3.11
+User erobles
+Port 2300
+IdentityFile ~/.ssh/mykeys
 #+END_SRC
