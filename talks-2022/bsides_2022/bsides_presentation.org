@@ -17,17 +17,23 @@ Main Topics:
 * Before we begin...
 - This talk is for an intermediate users
 - OpenSSH version 8 or greater (both server and Client)
-
+- This presentation is Linux/Unix heavy
+- OpenSSH is available on latest Windows builds but your mileage may vary (try WSL?)
 * How SSH Authentication Works
+** Keys, Keys, and more Keys!
+SSH employs *Public Key* authentication, meaning all cryptographic functions are done asymmetrically.
+[[https://www.digitalocean.com/community/tutorials/understanding-the-ssh-encryption-and-connection-process][DigitalOcean - Understanding the SSH Encryption and Connection Process]]
+
+#+BEGIN_QUOTE
+The more well-discussed use of asymmetrical encryption with SSH comes from SSH key-based authentication. SSH key pairs can be used to authenticate a client to a server. The client creates a key pair and then uploads the public key to any remote server it wishes to access. This is placed in a file called authorized_keys within the ~/.ssh directory in the user account’s home directory on the remote server.
+#+END_QUOTE
+** Public and Private Key Cryptography
+[[https://commons.wikimedia.org/wiki/File:Public-key-crypto-1.svg#/media/File:Public-key-crypto-1.svg][Source: Wikipedia - Public-key cryptography]]
 ** SSH And Yubikey
 - Magic of FIDO/U2F
 https://www.openssh.com/txt/release-8.2
 #+BEGIN_QUOTE
-U2F/FIDO are open standards for inexpensive two-factor
-authentication hardware that are widely used for website
-authentication.  In OpenSSH FIDO devices are supported by new public
-key types "ecdsa-sk" and "ed25519-sk", along with corresponding
-certificate types.
+U2F/FIDO are open standards for inexpensive two-factor authentication hardware that are widely used for website authentication. In OpenSSH FIDO devices are supported by new public key types "ecdsa-sk" and "ed25519-sk", along with corresponding certificate types.
 #+END_QUOTE
 - How FIDO Works
 #+BEGIN_QUOTE
