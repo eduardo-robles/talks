@@ -18,6 +18,22 @@ Main Topics:
 - This talk is for an intermediate users
 - OpenSSH version 8 or greater (both server and Client)
 
+* How SSH Authentication Works
+** SSH And Yubikey
+- Magic of FIDO/U2F
+https://www.openssh.com/txt/release-8.2
+#+BEGIN_QUOTE
+U2F/FIDO are open standards for inexpensive two-factor
+authentication hardware that are widely used for website
+authentication.  In OpenSSH FIDO devices are supported by new public
+key types "ecdsa-sk" and "ed25519-sk", along with corresponding
+certificate types.
+#+END_QUOTE
+- How FIDO Works
+#+BEGIN_QUOTE
+During registration with an online service, the user’s client device creates a new key pair. It retains the private key and registers the public key with the online service. Authentication is done by the client device proving possession of the private key to the service by signing a challenge. The client’s private keys can be used only after they are unlocked locally on the device by the user.
+#+END_QUOTE
+[[https://fidoalliance.org/wp-content/uploads/2014/12/graphic_Registration.png][Source: https://fidoalliance.org/how-fido-works/]]
 * Create SSH Key
 ** Create a "ed25519" key
 #+BEGIN_SRC shell
@@ -27,10 +43,6 @@ ssh-keygen -t ed25519 -f ~/.ssh/nameofkey -N '' -C "comment goes here"
 #+BEGIN_SRC bash
 ssh-keygen -t rsa -f ~/.ssh/nameofkey -N '' -C "comment goes here"
 #+END_SRC
-** Create a "ed25519-sk" key
-#+BEGIN_SRC bash
-ssh-keygen -t ed25519-sk -O resident -f ~/.ssh/id_testkey -N '' -C "test key for yubikey"
-#+END_SRC
 ** Explanation
 - -t option is for the type of keys to be created (ex. ed25519)
 - -f option is the filename and location of the keys (ex. =/path/to/file=)
@@ -38,6 +50,10 @@ ssh-keygen -t ed25519-sk -O resident -f ~/.ssh/id_testkey -N '' -C "test key for
 - -C enter a comment to best find keys later (ex. "github key")
 - -o resident to tell OpenSSH to use the FIDO2 standard
 * Demonstrating SSH Key Generation
+** Create a "ed25519-sk" key
+#+BEGIN_SRC bash
+ssh-keygen -t ed25519-sk -O resident -f ~/.ssh/id_testkey -N '' -C "test key for yubikey"
+#+END_SRC
 ** Example
 #+BEGIN_EXAMPLE
 Generating public/private ed25519-sk key pair.
@@ -60,22 +76,6 @@ The key's randomart image is:
 |          ..    E|
 +----[SHA256]-----+
 #+END_EXAMPLE
-* How SSH Authentication Works
-** SSH And Yubikey
-- Magic of FIDO/U2F
-https://www.openssh.com/txt/release-8.2
-#+BEGIN_QUOTE
-U2F/FIDO are open standards for inexpensive two-factor
-authentication hardware that are widely used for website
-authentication.  In OpenSSH FIDO devices are supported by new public
-key types "ecdsa-sk" and "ed25519-sk", along with corresponding
-certificate types.
-#+END_QUOTE
-- How FIDO Works
-#+BEGIN_QUOTE
-During registration with an online service, the user’s client device creates a new key pair. It retains the private key and registers the public key with the online service. Authentication is done by the client device proving possession of the private key to the service by signing a challenge. The client’s private keys can be used only after they are unlocked locally on the device by the user.
-#+END_QUOTE
-[[https://fidoalliance.org/wp-content/uploads/2014/12/graphic_Registration.png][Source: https://fidoalliance.org/how-fido-works/]]
 * Adding SSH Key To Agent
 *** Check if SSH Agent is running
 This is to add the keys to the SSH Agent
@@ -123,3 +123,4 @@ User erobles
 Port 2300
 IdentityFile ~/.ssh/mykeys
 #+END_SRC
+* Conclusion
