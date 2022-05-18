@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-05-17 Tue 06:26 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Securing SSH Keys with MFA</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Securing SSH Keys with MFA</h1>
+
+<div id="outline-container-orgbb547e9" class="outline-2">
+<h2 id="orgbb547e9">About speaker</h2>
+<div class="outline-text-2" id="text-orgbb547e9">
+<ul class="org-ul">
+<li>Hi! I'm Eduardo Robles I work at the City of Pharr Innovation &amp; Technlogy department as a Support Analyst.</li>
+<li>Since I was a kid technology was a passion of mine and I wanted to be an inventor.</li>
+<li>You can check out my skills over on my blog or LinkedIn. <b>Bonus, I give out a lot of free advice over there.</b></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org04173ad" class="outline-2">
+<h2 id="org04173ad">Securing SSH Keys with MFA</h2>
+<div class="outline-text-2" id="text-org04173ad">
+<p>
+Main Topics:
+</p>
+<ol class="org-ol">
+<li>Demonstrate how to implement MFA on SSH keys</li>
+<li>Learn the benefits and downsides to MFA on SSH keys</li>
+<li>Some tips/tricks for SSH management</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgc3d34b9" class="outline-2">
+<h2 id="orgc3d34b9">Before we begin&#x2026;</h2>
+<div class="outline-text-2" id="text-orgc3d34b9">
+<ul class="org-ul">
+<li>This talk is for an intermediate users</li>
+<li>OpenSSH version 8 or greater (both server and Client)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgcc5d938" class="outline-2">
+<h2 id="orgcc5d938">How SSH Authentication Works</h2>
+<div class="outline-text-2" id="text-orgcc5d938">
+</div>
+<div id="outline-container-org1f5f92a" class="outline-3">
+<h3 id="org1f5f92a">SSH And Yubikey</h3>
+<div class="outline-text-3" id="text-org1f5f92a">
+<ul class="org-ul">
+<li>Magic of FIDO/U2F</li>
+</ul>
+<p>
+<a href="https://www.openssh.com/txt/release-8.2">https://www.openssh.com/txt/release-8.2</a>
+</p>
+<blockquote>
+<p>
+U2F/FIDO are open standards for inexpensive two-factor
+authentication hardware that are widely used for website
+authentication.  In OpenSSH FIDO devices are supported by new public
+key types "ecdsa-sk" and "ed25519-sk", along with corresponding
+certificate types.
+</p>
+</blockquote>
+<ul class="org-ul">
+<li>How FIDO Works</li>
+</ul>
+<blockquote>
+<p>
+During registration with an online service, the user’s client device creates a new key pair. It retains the private key and registers the public key with the online service. Authentication is done by the client device proving possession of the private key to the service by signing a challenge. The client’s private keys can be used only after they are unlocked locally on the device by the user.
+</p>
+</blockquote>
+<p>
+<a href="https://fidoalliance.org/wp-content/uploads/2014/12/graphic_Registration.png">Source: https://fidoalliance.org/how-fido-works/</a>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orga03a630" class="outline-2">
+<h2 id="orga03a630">Create SSH Key</h2>
+<div class="outline-text-2" id="text-orga03a630">
+</div>
+<div id="outline-container-orgb132794" class="outline-3">
+<h3 id="orgb132794">Create a "ed25519" key</h3>
+<div class="outline-text-3" id="text-orgb132794">
+<div class="org-src-container">
+<pre class="src src-shell">ssh-keygen -t ed25519 -f ~/.ssh/nameofkey -N <span style="color: #f1fa8c;">''</span> -C <span style="color: #f1fa8c;">"comment goes here"</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5f05998" class="outline-3">
+<h3 id="org5f05998">Create an "RSA" key</h3>
+<div class="outline-text-3" id="text-org5f05998">
+<div class="org-src-container">
+<pre class="src src-bash">ssh-keygen -t rsa -f ~/.ssh/nameofkey -N <span style="color: #f1fa8c;">''</span> -C <span style="color: #f1fa8c;">"comment goes here"</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org49f4601" class="outline-3">
+<h3 id="org49f4601">Explanation</h3>
+<div class="outline-text-3" id="text-org49f4601">
+<ul class="org-ul">
+<li>-t option is for the type of keys to be created (ex. ed25519)</li>
+<li>-f option is the filename and location of the keys (ex. <code>/path/to/file</code>)</li>
+<li>-N is the passphrase to be given, leave blank for no passphrase</li>
+<li>-C enter a comment to best find keys later (ex. "github key")</li>
+<li>-o resident to tell OpenSSH to use the FIDO2 standard</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org59e915f" class="outline-2">
+<h2 id="org59e915f">Demonstrating SSH Key Generation</h2>
+<div class="outline-text-2" id="text-org59e915f">
+</div>
+<div id="outline-container-org3a1189b" class="outline-3">
+<h3 id="org3a1189b">Create a "ed25519-sk" key</h3>
+<div class="outline-text-3" id="text-org3a1189b">
+<div class="org-src-container">
+<pre class="src src-bash">ssh-keygen -t ed25519-sk -O resident -f ~/.ssh/id_testkey -N <span style="color: #f1fa8c;">''</span> -C <span style="color: #f1fa8c;">"test key for yubikey"</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3b5710f" class="outline-3">
+<h3 id="org3b5710f">Example</h3>
+<div class="outline-text-3" id="text-org3b5710f">
+<pre class="example" id="org6859db7">
+Generating public/private ed25519-sk key pair.
+You may need to touch your authenticator to authorize key generation.
+Enter PIN for authenticator:
+Your identification has been saved in /home/erobles/.ssh/id_testkey
+Your public key has been saved in /home/erobles/.ssh/id_testkey.pub
+The key fingerprint is:
+SHA256:ItBm//lTC8cpH1ikTQMWfIdtO2PDEvzwFqp2XdzffPs test key for yubikey
+The key's randomart image is:
++[ED25519-SK 256]-+
+|         .++ o   |
+|   .     .. X =  |
+|  . +      * @ +.|
+|   + .    . = @ +|
+|    . o S  = * *o|
+|     . o .* B . =|
+|        o. B o  o|
+|         .. o  . |
+|          ..    E|
++----[SHA256]-----+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org94e343f" class="outline-2">
+<h2 id="org94e343f">Adding SSH Key To Agent</h2>
+<div class="outline-text-2" id="text-org94e343f">
+</div>
+<div id="outline-container-org48addfc" class="outline-4">
+<h4 id="org48addfc">Check if SSH Agent is running</h4>
+<div class="outline-text-4" id="text-org48addfc">
+<p>
+This is to add the keys to the SSH Agent
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ffb86c;">eval</span> <span style="color: #f1fa8c;">"$(</span><span style="color: #bd93f9; font-weight: bold;">ssh-agent -s</span><span style="color: #f1fa8c;">)"</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgae09d9c" class="outline-4">
+<h4 id="orgae09d9c">Add the Keys to SSH Agent</h4>
+<div class="outline-text-4" id="text-orgae09d9c">
+<div class="org-src-container">
+<pre class="src src-bash">ssh-add ~/.ssh/nameofkey
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2ed3ce7" class="outline-4">
+<h4 id="org2ed3ce7">Verify Keys Added to SSH Agent</h4>
+<div class="outline-text-4" id="text-org2ed3ce7">
+<div class="org-src-container">
+<pre class="src src-bash">ssh-add -l
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org56fdf63" class="outline-4">
+<h4 id="org56fdf63">Copy Key to Remote Server</h4>
+<div class="outline-text-4" id="text-org56fdf63">
+<div class="org-src-container">
+<pre class="src src-bash">ssh-copy-id user@remote.server.location
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org659ce00" class="outline-4">
+<h4 id="org659ce00">Copy Server Key to Host</h4>
+<div class="outline-text-4" id="text-org659ce00">
+<div class="org-src-container">
+<pre class="src src-bash">ssh-copy-id user@host.local
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgce4b0da" class="outline-2">
+<h2 id="orgce4b0da">SSH Config File - Make SSH Easier</h2>
+<div class="outline-text-2" id="text-orgce4b0da">
+<p>
+Let's look at a typical SSH command.
+</p>
+
+<p>
+<code>ssh erobles@10.0.3.11 -p 2300 -i ~/.ssh/mykeys</code>
+</p>
+</div>
+
+<div id="outline-container-org90ca761" class="outline-4">
+<h4 id="org90ca761"><code>erobles@10.0.3.11</code> this states our username on the server and the IP/Hostname of the server</h4>
+</div>
+
+<div id="outline-container-org5e260b7" class="outline-4">
+<h4 id="org5e260b7"><code>-p 2300</code> the port we are connecting to on the server</h4>
+</div>
+
+<div id="outline-container-orgee006a3" class="outline-4">
+<h4 id="orgee006a3"><code>-i ~/.ssh/mykeys</code> the Public/Private keys used in the SSH connection</h4>
+</div>
+</div>
+<div id="outline-container-org313b7c1" class="outline-2">
+<h2 id="org313b7c1">SSH Config File cont.</h2>
+<div class="outline-text-2" id="text-org313b7c1">
+<p>
+While this is fine, it can be time consuming and easily forgotten. So let's see how this commands translates to an SSH Config file.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">HOST myserver
+HostName 10.0.3.11
+User erobles
+Port 2300
+IdentityFile ~/.ssh/mykeys
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 05-21-22</p>
+<p class="date">Created: 2022-05-17 Tue 06:26</p>
+</div>
+</body>
+</html>
