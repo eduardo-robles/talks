@@ -2,10 +2,25 @@
 #+DATE: 05-21-22
 #+AUTHOR: Eduardo Robles
 #+TITLE: Securing SSH Keys with MFA
+* BSIDESRGV 2022
+#+BEGIN_EXAMPLE
+    ____ _____ ________  ___________ ____  _______    __   ___   ____ ___  ___
+   / __ ) ___//  _/ __ \/ ____/ ___// __ \/ ____/ |  / /  |__ \ / __ \__ \|__ \
+  / __  \__ \ / // / / / __/  \__ \/ /_/ / / __ | | / /   __/ // / / /_/ /__/ /
+ / /_/ /__/ // // /_/ / /___ ___/ / _, _/ /_/ / | |/ /   / __// /_/ / __// __/
+/_____/____/___/_____/_____//____/_/ |_|\____/  |___/   /____/\____/____/____/
 
+#+END_EXAMPLE
+
+#+BEGIN_CENTER
+SECURING SSH KEYS WITH MFA
+BY
+EDUARDO ROBLES
+#+END_CENTER
 * About speaker
-- Hi! I'm Eduardo Robles I work at the City of Pharr Innovation & Technlogy department as a Support Analyst.
-- Since I was a kid technology was a passion of mine and I wanted to be an inventor.
+- Hi! I'm Eduardo Robles I work at the City of Pharr Innovation & Technology department as a Support Analyst.
+- Recent graduate in Cybersecurity.
+- I am the founder of the South Texas Linux Users Group.
 - You can check out my skills over on my blog or LinkedIn. *Bonus, I give out a lot of free advice over there.*
 
 * Securing SSH Keys with MFA
@@ -22,11 +37,11 @@ Main Topics:
 - OpenSSH is available on latest Windows builds but your mileage may vary (try WSL?)
 
 * What inspired this talk?
-- A projects, a raspberry pi, and ssh proxies.
+- A project, a raspberry pi, and ssh proxies.
 
 * How SSH Authentication Works
 ** Keys, Keys, and more Keys!
-SSH employs *Public Key* authentication, meaning all cryptographic functions are done asymmetrically.
+SSH employs *Public Key* authentication, meaning all cryptography functions are done asymmetrically.
 [[https://www.digitalocean.com/community/tutorials/understanding-the-ssh-encryption-and-connection-process][DigitalOcean - Understanding the SSH Encryption and Connection Process]]
 
 #+BEGIN_QUOTE
@@ -59,7 +74,7 @@ ssh-keygen -t rsa -f ~/.ssh/nameofkey -N '' -C "comment goes here"
 #+END_SRC
 ** Explanation
 - -t option is for the type of keys to be created (ex. ed25519)
-- -f option is the filename and location of the keys (ex. =/path/to/file=)
+- -f option is the file-name and location of the keys (ex. =/path/to/file=)
 - -N is the passphrase to be given, leave blank for no passphrase
 - -C enter a comment to best find keys later (ex. "github key")
 - -o resident to tell OpenSSH to use the FIDO2 standard
@@ -81,7 +96,7 @@ Your identification has been saved in /home/erobles/.ssh/id_testkey
 Your public key has been saved in /home/erobles/.ssh/id_testkey.pub
 The key fingerprint is:
 SHA256:ItBm//lTC8cpH1ikTQMWfIdtO2PDEvzwFqp2XdzffPs test key for yubikey
-The key's randomart image is:
+The key's random-art image is:
 +[ED25519-SK 256]-+
 |         .++ o   |
 |   .     .. X =  |
@@ -105,7 +120,7 @@ Multifactor authentications is great and when implemented correctly can help sec
 - Hostile users
 - ADA and Accessibility Issues
   Can users with disabilities uses your MFA?
-* Tips and Tricsk
+* Tips and Tricks
 ** Adding SSH Key To Agent
 *** Check if SSH Agent is running
 This is to add the keys to the SSH Agent
@@ -154,3 +169,7 @@ Port 2300
 IdentityFile ~/.ssh/mykeys
 #+END_SRC
 * Conclusion
+- I shown how to add an extra layer of security to your SSH Keys with MFA
+- Find a good balance between ease of use and security
+- There is so much to OpenSSH, check out the documentation
+- If this doesn't work maybe give SSH Certificates a try?

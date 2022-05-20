@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Securing SSH Keys with MFA</title>
+<meta name="author" content="Eduardo Robles"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/white.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdn.jsdelivr.net/npm/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">Securing SSH Keys with MFA</h1><p class="subtitle"></p>
+<h2 class="date">05-21-22</h2><p class="date">Created: 2022-05-20 Fri 06:28</p>
+</section>
+
+<section>
+<section id="slide-org16f0d56">
+<h2 id="org16f0d56">BSIDESRGV 2022</h2>
+<pre class="example" id="org3a27a6e">
+    ____ _____ ________  ___________ ____  _______    __   ___   ____ ___  ___
+   / __ ) ___//  _/ __ \/ ____/ ___// __ \/ ____/ |  / /  |__ \ / __ \__ \|__ \
+  / __  \__ \ / // / / / __/  \__ \/ /_/ / / __ | | / /   __/ // / / /_/ /__/ /
+ / /_/ /__/ // // /_/ / /___ ___/ / _, _/ /_/ / | |/ /   / __// /_/ / __// __/
+/_____/____/___/_____/_____//____/_/ |_|\____/  |___/   /____/\____/____/____/
+
+</pre>
+
+<div class="org-center">
+<p>
+SECURING SSH KEYS WITH MFA
+BY
+EDUARDO ROBLES
+</p>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org93b6c83">
+<h2 id="org93b6c83">About speaker</h2>
+<ul>
+<li>Hi! I'm Eduardo Robles I work at the City of Pharr Innovation &amp; Technology department as a Support Analyst.</li>
+<li>Recent graduate in Cybersecurity.</li>
+<li>I am the founder of the South Texas Linux Users Group.</li>
+<li>You can check out my skills over on my blog or LinkedIn. <b>Bonus, I give out a lot of free advice over there.</b></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org8b54a38">
+<h2 id="org8b54a38">Securing SSH Keys with MFA</h2>
+<p>
+Main Topics:
+</p>
+<ol>
+<li>Learn the basics of SSH key authentication</li>
+<li>Demonstrate how to implement MFA on SSH keys</li>
+<li>Learn the benefits and downsides to MFA on SSH keys</li>
+<li>Some tips/tricks for SSH management</li>
+
+</ol>
+
+</section>
+</section>
+<section>
+<section id="slide-org0543aec">
+<h2 id="org0543aec">Before we begin&#x2026;</h2>
+<ul>
+<li>This talk is for an intermediate users</li>
+<li>OpenSSH version 8 or greater (both server and Client)</li>
+<li>This presentation is Linux/Unix heavy</li>
+<li>OpenSSH is available on latest Windows builds but your mileage may vary (try WSL?)</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org3a0977e">
+<h2 id="org3a0977e">What inspired this talk?</h2>
+<ul>
+<li>A project, a raspberry pi, and ssh proxies.</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org86a0a64">
+<h2 id="org86a0a64">How SSH Authentication Works</h2>
+<div class="outline-text-2" id="text-org86a0a64">
+</div>
+</section>
+<section id="slide-org13f36d4">
+<h3 id="org13f36d4">Keys, Keys, and more Keys!</h3>
+<p>
+SSH employs <b>Public Key</b> authentication, meaning all cryptography functions are done asymmetrically.
+<a href="https://www.digitalocean.com/community/tutorials/understanding-the-ssh-encryption-and-connection-process">DigitalOcean - Understanding the SSH Encryption and Connection Process</a>
+</p>
+
+<blockquote >
+<p>
+The more well-discussed use of asymmetrical encryption with SSH comes from SSH key-based authentication. SSH key pairs can be used to authenticate a client to a server. The client creates a key pair and then uploads the public key to any remote server it wishes to access. This is placed in a file called authorized<sub>keys</sub> within the ~/.ssh directory in the user account’s home directory on the remote server.
+</p>
+</blockquote>
+</section>
+<section id="slide-org83a5d3c">
+<h3 id="org83a5d3c">Public and Private Key Cryptography</h3>
+<p>
+<a href="https://commons.wikimedia.org/wiki/File:Public-key-crypto-1.svg#/media/File:Public-key-crypto-1.svg">Source: Wikipedia - Public-key cryptography</a>
+</p>
+</section>
+<section id="slide-org0ab35b8">
+<h3 id="org0ab35b8">SSH And Yubikey</h3>
+<ul>
+<li>Magic of FIDO/U2F</li>
+
+</ul>
+<p>
+<a href="https://www.openssh.com/txt/release-8.2">https://www.openssh.com/txt/release-8.2</a>
+</p>
+<blockquote >
+<p>
+U2F/FIDO are open standards for inexpensive two-factor authentication hardware that are widely used for website authentication. In OpenSSH FIDO devices are supported by new public key types "ecdsa-sk" and "ed25519-sk", along with corresponding certificate types.
+</p>
+</blockquote>
+<ul>
+<li>How FIDO Works</li>
+
+</ul>
+<blockquote >
+<p>
+During registration with an online service, the user’s client device creates a new key pair. It retains the private key and registers the public key with the online service. Authentication is done by the client device proving possession of the private key to the service by signing a challenge. The client’s private keys can be used only after they are unlocked locally on the device by the user.
+</p>
+</blockquote>
+<p>
+<a href="https://fidoalliance.org/wp-content/uploads/2014/12/graphic_Registration.png">Source: https://fidoalliance.org/how-fido-works/</a>
+</p>
+</section>
+<section id="slide-org4988039">
+<h3 id="org4988039">SSH and TOTP</h3>
+<ul>
+<li>Once upon a time
+Time based One Time Passcode or TOTP for short is a method of securing authentication with short random codes. Codes are generated by an app or service like Google Authenticator or Microsoft Authenticator. You may be most familiar with using MFA app for your email or bank sign-on.</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-orgdd5d52e">
+<h2 id="orgdd5d52e">Create SSH Key</h2>
+<div class="outline-text-2" id="text-orgdd5d52e">
+</div>
+</section>
+<section id="slide-org90e48fb">
+<h3 id="org90e48fb">Create a "ed25519" key</h3>
+<div class="org-src-container">
+
+<pre  class="src src-shell"   ><code trim>ssh-keygen -t ed25519 -f ~/.ssh/nameofkey -N <span style="color: #8a3b3c;">''</span> -C <span style="color: #8a3b3c;">"comment goes here"</span>
+</code></pre>
+</div>
+</section>
+<section id="slide-orgc7934da">
+<h3 id="orgc7934da">Create an "RSA" key</h3>
+<div class="org-src-container">
+
+<pre  class="src src-bash"   ><code trim>ssh-keygen -t rsa -f ~/.ssh/nameofkey -N <span style="color: #8a3b3c;">''</span> -C <span style="color: #8a3b3c;">"comment goes here"</span>
+</code></pre>
+</div>
+</section>
+<section id="slide-orga438c76">
+<h3 id="orga438c76">Explanation</h3>
+<ul>
+<li>-t option is for the type of keys to be created (ex. ed25519)</li>
+<li>-f option is the file-name and location of the keys (ex. <code>/path/to/file</code>)</li>
+<li>-N is the passphrase to be given, leave blank for no passphrase</li>
+<li>-C enter a comment to best find keys later (ex. "github key")</li>
+<li>-o resident to tell OpenSSH to use the FIDO2 standard</li>
+
+</ul>
+</section>
+<section id="slide-org53b3a5f">
+<h3 id="org53b3a5f">Passwords, Passphrase, Passcode???</h3>
+<ul>
+<li>Password are usually for authenticating a user to a system</li>
+<li>Passphrases are used for SSH keys to lock/unlock the actual keys</li>
+<li>Passcode is usually a time based one time code used to secure an account with MFA</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-orgcab828c">
+<h2 id="orgcab828c">Demonstrating SSH Key Generation</h2>
+<div class="outline-text-2" id="text-orgcab828c">
+</div>
+</section>
+<section id="slide-org7d0b6d7">
+<h3 id="org7d0b6d7">Create a "ed25519-sk" key</h3>
+<div class="org-src-container">
+
+<pre  class="src src-bash"   ><code trim>ssh-keygen -t ed25519-sk -O resident -f ~/.ssh/id_testkey -N <span style="color: #8a3b3c;">''</span> -C <span style="color: #8a3b3c;">"test key for yubikey"</span>
+</code></pre>
+</div>
+</section>
+<section id="slide-orgc0251a3">
+<h3 id="orgc0251a3">Example</h3>
+<pre class="example" id="orgee57156">
+Generating public/private ed25519-sk key pair.
+You may need to touch your authenticator to authorize key generation.
+Enter PIN for authenticator:
+Your identification has been saved in /home/erobles/.ssh/id_testkey
+Your public key has been saved in /home/erobles/.ssh/id_testkey.pub
+The key fingerprint is:
+SHA256:ItBm//lTC8cpH1ikTQMWfIdtO2PDEvzwFqp2XdzffPs test key for yubikey
+The key's random-art image is:
++[ED25519-SK 256]-+
+|         .++ o   |
+|   .     .. X =  |
+|  . +      * @ +.|
+|   + .    . = @ +|
+|    . o S  = * *o|
+|     . o .* B . =|
+|        o. B o  o|
+|         .. o  . |
+|          ..    E|
++----[SHA256]-----+
+</pre>
+</section>
+<section id="slide-org9344d17">
+<h3 id="org9344d17">Create an SSH with TOTP</h3>
+</section>
+</section>
+<section>
+<section id="slide-org0a4ad33">
+<h2 id="org0a4ad33">MFA is awesome!</h2>
+<p>
+Multifactor authentications is great and when implemented correctly can help secure your environments. It can help ensure that you trust who is logging into your services. And ultimately can help in preventing costly security breaches.
+</p>
+</section>
+</section>
+<section>
+<section id="slide-orgdd6393f">
+<h2 id="orgdd6393f">Watch out for these things&#x2026;</h2>
+<ul>
+<li>Poorly setup MFA environments
+Adding to much complexity to MFA environments is not safer and does not increase security.</li>
+<li>Confusing roll-out
+Think of your users and chose the best path with the least resistance.</li>
+<li>Hostile users</li>
+<li>ADA and Accessibility Issues
+Can users with disabilities uses your MFA?</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org2a5efec">
+<h2 id="org2a5efec">Tips and Tricks</h2>
+<div class="outline-text-2" id="text-org2a5efec">
+</div>
+</section>
+<section id="slide-org1384406">
+<h3 id="org1384406">Adding SSH Key To Agent</h3>
+<div class="outline-text-3" id="text-org1384406">
+</div>
+</section>
+<section id="slide-org43782c8">
+<h4 id="org43782c8">Check if SSH Agent is running</h4>
+<p>
+This is to add the keys to the SSH Agent
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-bash"   ><code trim><span style="font-weight: bold;">eval</span> <span style="color: #8a3b3c;">"$(</span><span style="color: #383a42; font-weight: bold;">ssh-agent</span><span style="color: #8a3b3c;"> -s)"</span>
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgcbd19fa">
+<h4 id="orgcbd19fa">Add the Keys to SSH Agent</h4>
+<div class="org-src-container">
+
+<pre  class="src src-bash"   ><code trim>ssh-add ~/.ssh/nameofkey
+</code></pre>
+</div>
+<p>
+If you add your public key, OpenSSH will warn you to not use the public key.
+</p>
+</section>
+<section id="slide-org542d851">
+<h4 id="org542d851">Verify Keys Added to SSH Agent</h4>
+<div class="org-src-container">
+
+<pre  class="src src-bash"   ><code trim>ssh-add -l
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orge6c9f48">
+<h4 id="orge6c9f48">Copy Key to Remote Server</h4>
+<div class="org-src-container">
+
+<pre  class="src src-bash"   ><code trim>ssh-copy-id -i ~/.ssh/testkey.pub user@remote.server.location
+</code></pre>
+</div>
+<p>
+Remember that you want to share your public key. Never share your Private Key!
+</p>
+</section>
+<section id="slide-orgdb5f55d">
+<h4 id="orgdb5f55d">Copy Server Key to Host</h4>
+<div class="org-src-container">
+
+<pre  class="src src-bash"   ><code trim>ssh-copy-id user@host.local
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org0fa7cec">
+<h3 id="org0fa7cec">SSH Config File - Make SSH Easier</h3>
+<p>
+Let's look at a typical SSH command.
+</p>
+
+<p>
+<code>ssh erobles@10.0.3.11 -p 2300 -i ~/.ssh/mykeys</code>
+</p>
+
+</section>
+<section id="slide-org8884a2c">
+<h4 id="org8884a2c"><code>erobles@10.0.3.11</code> this states our username on the server and the IP/Hostname of the server</h4>
+
+</section>
+<section id="slide-orga607679">
+<h4 id="orga607679"><code>-p 2300</code> the port we are connecting to on the server</h4>
+
+</section>
+<section id="slide-org7c44607">
+<h4 id="org7c44607"><code>-i ~/.ssh/mykeys</code> the Public/Private keys used in the SSH connection</h4>
+</section>
+<section id="slide-org8fbaa03">
+<h3 id="org8fbaa03">SSH Config File cont.</h3>
+<p>
+While this is fine, it can be time consuming and easily forgotten. So let's see how this commands translates to an SSH Config file.
+</p>
+
+<div class="org-src-container">
+
+<pre  class="src src-bash"   ><code trim>HOST myserver
+HostName 10.0.3.11
+User erobles
+Port 2300
+IdentityFile ~/.ssh/mykeys
+</code></pre>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org80bdd41">
+<h2 id="org80bdd41">Conclusion</h2>
+<ul>
+<li>I shown how to add an extra layer of security to your SSH Keys with MFA</li>
+<li>Find a good balance between ease of use and security</li>
+<li>There is so much to OpenSSH, check out the documentation</li>
+<li>If this doesn't work maybe give SSH Certificates a try?</li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+
+});
+
+</script>
+</body>
+</html>

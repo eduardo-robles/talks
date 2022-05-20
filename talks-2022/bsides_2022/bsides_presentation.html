@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-05-19 Thu 10:58 -->
+<!-- 2022-05-20 Fri 06:25 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Securing SSH Keys with MFA</title>
@@ -218,21 +218,42 @@
 <body>
 <div id="content">
 <h1 class="title">Securing SSH Keys with MFA</h1>
+<div id="outline-container-org866c9ec" class="outline-2">
+<h2 id="org866c9ec">BSIDESRGV 2022</h2>
+<div class="outline-text-2" id="text-org866c9ec">
+<pre class="example" id="org19da37f">
+    ____ _____ ________  ___________ ____  _______    __   ___   ____ ___  ___
+   / __ ) ___//  _/ __ \/ ____/ ___// __ \/ ____/ |  / /  |__ \ / __ \__ \|__ \
+  / __  \__ \ / // / / / __/  \__ \/ /_/ / / __ | | / /   __/ // / / /_/ /__/ /
+ / /_/ /__/ // // /_/ / /___ ___/ / _, _/ /_/ / | |/ /   / __// /_/ / __// __/
+/_____/____/___/_____/_____//____/_/ |_|\____/  |___/   /____/\____/____/____/
 
-<div id="outline-container-org3add399" class="outline-2">
-<h2 id="org3add399">About speaker</h2>
-<div class="outline-text-2" id="text-org3add399">
+</pre>
+
+<div class="org-center">
+<p>
+SECURING SSH KEYS WITH MFA
+BY
+EDUARDO ROBLES
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org5dee22a" class="outline-2">
+<h2 id="org5dee22a">About speaker</h2>
+<div class="outline-text-2" id="text-org5dee22a">
 <ul class="org-ul">
-<li>Hi! I'm Eduardo Robles I work at the City of Pharr Innovation &amp; Technlogy department as a Support Analyst.</li>
-<li>Since I was a kid technology was a passion of mine and I wanted to be an inventor.</li>
+<li>Hi! I'm Eduardo Robles I work at the City of Pharr Innovation &amp; Technology department as a Support Analyst.</li>
+<li>Recent graduate in Cybersecurity.</li>
+<li>I am the founder of the South Texas Linux Users Group.</li>
 <li>You can check out my skills over on my blog or LinkedIn. <b>Bonus, I give out a lot of free advice over there.</b></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgce7ed88" class="outline-2">
-<h2 id="orgce7ed88">Securing SSH Keys with MFA</h2>
-<div class="outline-text-2" id="text-orgce7ed88">
+<div id="outline-container-orgc349c4a" class="outline-2">
+<h2 id="orgc349c4a">Securing SSH Keys with MFA</h2>
+<div class="outline-text-2" id="text-orgc349c4a">
 <p>
 Main Topics:
 </p>
@@ -245,9 +266,9 @@ Main Topics:
 </div>
 </div>
 
-<div id="outline-container-org610e4c8" class="outline-2">
-<h2 id="org610e4c8">Before we begin&#x2026;</h2>
-<div class="outline-text-2" id="text-org610e4c8">
+<div id="outline-container-org93f16f2" class="outline-2">
+<h2 id="org93f16f2">Before we begin&#x2026;</h2>
+<div class="outline-text-2" id="text-org93f16f2">
 <ul class="org-ul">
 <li>This talk is for an intermediate users</li>
 <li>OpenSSH version 8 or greater (both server and Client)</li>
@@ -257,24 +278,24 @@ Main Topics:
 </div>
 </div>
 
-<div id="outline-container-org496bfb5" class="outline-2">
-<h2 id="org496bfb5">What inspired this talk?</h2>
-<div class="outline-text-2" id="text-org496bfb5">
+<div id="outline-container-org8bea843" class="outline-2">
+<h2 id="org8bea843">What inspired this talk?</h2>
+<div class="outline-text-2" id="text-org8bea843">
 <ul class="org-ul">
-<li>A projects, a raspberry pi, and ssh proxies.</li>
+<li>A project, a raspberry pi, and ssh proxies.</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org5d6ead3" class="outline-2">
-<h2 id="org5d6ead3">How SSH Authentication Works</h2>
-<div class="outline-text-2" id="text-org5d6ead3">
+<div id="outline-container-org08f6065" class="outline-2">
+<h2 id="org08f6065">How SSH Authentication Works</h2>
+<div class="outline-text-2" id="text-org08f6065">
 </div>
-<div id="outline-container-org8d9261e" class="outline-3">
-<h3 id="org8d9261e">Keys, Keys, and more Keys!</h3>
-<div class="outline-text-3" id="text-org8d9261e">
+<div id="outline-container-orgf19dc05" class="outline-3">
+<h3 id="orgf19dc05">Keys, Keys, and more Keys!</h3>
+<div class="outline-text-3" id="text-orgf19dc05">
 <p>
-SSH employs <b>Public Key</b> authentication, meaning all cryptographic functions are done asymmetrically.
+SSH employs <b>Public Key</b> authentication, meaning all cryptography functions are done asymmetrically.
 <a href="https://www.digitalocean.com/community/tutorials/understanding-the-ssh-encryption-and-connection-process">DigitalOcean - Understanding the SSH Encryption and Connection Process</a>
 </p>
 
@@ -285,17 +306,17 @@ The more well-discussed use of asymmetrical encryption with SSH comes from SSH k
 </blockquote>
 </div>
 </div>
-<div id="outline-container-org05ffedc" class="outline-3">
-<h3 id="org05ffedc">Public and Private Key Cryptography</h3>
-<div class="outline-text-3" id="text-org05ffedc">
+<div id="outline-container-org3291ba1" class="outline-3">
+<h3 id="org3291ba1">Public and Private Key Cryptography</h3>
+<div class="outline-text-3" id="text-org3291ba1">
 <p>
 <a href="https://commons.wikimedia.org/wiki/File:Public-key-crypto-1.svg#/media/File:Public-key-crypto-1.svg">Source: Wikipedia - Public-key cryptography</a>
 </p>
 </div>
 </div>
-<div id="outline-container-org19dd2ac" class="outline-3">
-<h3 id="org19dd2ac">SSH And Yubikey</h3>
-<div class="outline-text-3" id="text-org19dd2ac">
+<div id="outline-container-orgd541849" class="outline-3">
+<h3 id="orgd541849">SSH And Yubikey</h3>
+<div class="outline-text-3" id="text-orgd541849">
 <ul class="org-ul">
 <li>Magic of FIDO/U2F</li>
 </ul>
@@ -320,9 +341,9 @@ During registration with an online service, the user’s client device creates a
 </p>
 </div>
 </div>
-<div id="outline-container-org094d0b7" class="outline-3">
-<h3 id="org094d0b7">SSH and TOTP</h3>
-<div class="outline-text-3" id="text-org094d0b7">
+<div id="outline-container-orgeb103ae" class="outline-3">
+<h3 id="orgeb103ae">SSH and TOTP</h3>
+<div class="outline-text-3" id="text-orgeb103ae">
 <ul class="org-ul">
 <li>Once upon a time
 Time based One Time Passcode or TOTP for short is a method of securing authentication with short random codes. Codes are generated by an app or service like Google Authenticator or Microsoft Authenticator. You may be most familiar with using MFA app for your email or bank sign-on.</li>
@@ -330,43 +351,43 @@ Time based One Time Passcode or TOTP for short is a method of securing authentic
 </div>
 </div>
 </div>
-<div id="outline-container-org6a312e3" class="outline-2">
-<h2 id="org6a312e3">Create SSH Key</h2>
-<div class="outline-text-2" id="text-org6a312e3">
+<div id="outline-container-orgaa43082" class="outline-2">
+<h2 id="orgaa43082">Create SSH Key</h2>
+<div class="outline-text-2" id="text-orgaa43082">
 </div>
-<div id="outline-container-orgad42fce" class="outline-3">
-<h3 id="orgad42fce">Create a "ed25519" key</h3>
-<div class="outline-text-3" id="text-orgad42fce">
+<div id="outline-container-org5a7b9b4" class="outline-3">
+<h3 id="org5a7b9b4">Create a "ed25519" key</h3>
+<div class="outline-text-3" id="text-org5a7b9b4">
 <div class="org-src-container">
-<pre class="src src-shell">ssh-keygen -t ed25519 -f ~/.ssh/nameofkey -N <span style="color: #dd8844;">''</span> -C <span style="color: #dd8844;">"comment goes here"</span>
+<pre class="src src-shell">ssh-keygen -t ed25519 -f ~/.ssh/nameofkey -N <span style="color: #8a3b3c;">''</span> -C <span style="color: #8a3b3c;">"comment goes here"</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org2695eb1" class="outline-3">
-<h3 id="org2695eb1">Create an "RSA" key</h3>
-<div class="outline-text-3" id="text-org2695eb1">
+<div id="outline-container-orgc0bd98f" class="outline-3">
+<h3 id="orgc0bd98f">Create an "RSA" key</h3>
+<div class="outline-text-3" id="text-orgc0bd98f">
 <div class="org-src-container">
-<pre class="src src-bash">ssh-keygen -t rsa -f ~/.ssh/nameofkey -N <span style="color: #dd8844;">''</span> -C <span style="color: #dd8844;">"comment goes here"</span>
+<pre class="src src-bash">ssh-keygen -t rsa -f ~/.ssh/nameofkey -N <span style="color: #8a3b3c;">''</span> -C <span style="color: #8a3b3c;">"comment goes here"</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgbaccfd6" class="outline-3">
-<h3 id="orgbaccfd6">Explanation</h3>
-<div class="outline-text-3" id="text-orgbaccfd6">
+<div id="outline-container-org399e5f6" class="outline-3">
+<h3 id="org399e5f6">Explanation</h3>
+<div class="outline-text-3" id="text-org399e5f6">
 <ul class="org-ul">
 <li>-t option is for the type of keys to be created (ex. ed25519)</li>
-<li>-f option is the filename and location of the keys (ex. <code>/path/to/file</code>)</li>
+<li>-f option is the file-name and location of the keys (ex. <code>/path/to/file</code>)</li>
 <li>-N is the passphrase to be given, leave blank for no passphrase</li>
 <li>-C enter a comment to best find keys later (ex. "github key")</li>
 <li>-o resident to tell OpenSSH to use the FIDO2 standard</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org0d4a4eb" class="outline-3">
-<h3 id="org0d4a4eb">Passwords, Passphrase, Passcode???</h3>
-<div class="outline-text-3" id="text-org0d4a4eb">
+<div id="outline-container-org0a7444e" class="outline-3">
+<h3 id="org0a7444e">Passwords, Passphrase, Passcode???</h3>
+<div class="outline-text-3" id="text-org0a7444e">
 <ul class="org-ul">
 <li>Password are usually for authenticating a user to a system</li>
 <li>Passphrases are used for SSH keys to lock/unlock the actual keys</li>
@@ -375,23 +396,23 @@ Time based One Time Passcode or TOTP for short is a method of securing authentic
 </div>
 </div>
 </div>
-<div id="outline-container-orgc6dcd7d" class="outline-2">
-<h2 id="orgc6dcd7d">Demonstrating SSH Key Generation</h2>
-<div class="outline-text-2" id="text-orgc6dcd7d">
+<div id="outline-container-orgc7ee1fc" class="outline-2">
+<h2 id="orgc7ee1fc">Demonstrating SSH Key Generation</h2>
+<div class="outline-text-2" id="text-orgc7ee1fc">
 </div>
-<div id="outline-container-org9ba3401" class="outline-3">
-<h3 id="org9ba3401">Create a "ed25519-sk" key</h3>
-<div class="outline-text-3" id="text-org9ba3401">
+<div id="outline-container-org94051d8" class="outline-3">
+<h3 id="org94051d8">Create a "ed25519-sk" key</h3>
+<div class="outline-text-3" id="text-org94051d8">
 <div class="org-src-container">
-<pre class="src src-bash">ssh-keygen -t ed25519-sk -O resident -f ~/.ssh/id_testkey -N <span style="color: #dd8844;">''</span> -C <span style="color: #dd8844;">"test key for yubikey"</span>
+<pre class="src src-bash">ssh-keygen -t ed25519-sk -O resident -f ~/.ssh/id_testkey -N <span style="color: #8a3b3c;">''</span> -C <span style="color: #8a3b3c;">"test key for yubikey"</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org82e0ced" class="outline-3">
-<h3 id="org82e0ced">Example</h3>
-<div class="outline-text-3" id="text-org82e0ced">
-<pre class="example" id="org333f2da">
+<div id="outline-container-orgf7b98ee" class="outline-3">
+<h3 id="orgf7b98ee">Example</h3>
+<div class="outline-text-3" id="text-orgf7b98ee">
+<pre class="example" id="orgd28cbc3">
 Generating public/private ed25519-sk key pair.
 You may need to touch your authenticator to authorize key generation.
 Enter PIN for authenticator:
@@ -399,7 +420,7 @@ Your identification has been saved in /home/erobles/.ssh/id_testkey
 Your public key has been saved in /home/erobles/.ssh/id_testkey.pub
 The key fingerprint is:
 SHA256:ItBm//lTC8cpH1ikTQMWfIdtO2PDEvzwFqp2XdzffPs test key for yubikey
-The key's randomart image is:
+The key's random-art image is:
 +[ED25519-SK 256]-+
 |         .++ o   |
 |   .     .. X =  |
@@ -414,21 +435,21 @@ The key's randomart image is:
 </pre>
 </div>
 </div>
-<div id="outline-container-org59ea47b" class="outline-3">
-<h3 id="org59ea47b">Create an SSH with TOTP</h3>
+<div id="outline-container-org6f9d793" class="outline-3">
+<h3 id="org6f9d793">Create an SSH with TOTP</h3>
 </div>
 </div>
-<div id="outline-container-orgd2de00d" class="outline-2">
-<h2 id="orgd2de00d">MFA is awesome!</h2>
-<div class="outline-text-2" id="text-orgd2de00d">
+<div id="outline-container-orgd40822b" class="outline-2">
+<h2 id="orgd40822b">MFA is awesome!</h2>
+<div class="outline-text-2" id="text-orgd40822b">
 <p>
 Multifactor authentications is great and when implemented correctly can help secure your environments. It can help ensure that you trust who is logging into your services. And ultimately can help in preventing costly security breaches.
 </p>
 </div>
 </div>
-<div id="outline-container-orgf7f24ad" class="outline-2">
-<h2 id="orgf7f24ad">Watch out for these things&#x2026;</h2>
-<div class="outline-text-2" id="text-orgf7f24ad">
+<div id="outline-container-orgbc5c05c" class="outline-2">
+<h2 id="orgbc5c05c">Watch out for these things&#x2026;</h2>
+<div class="outline-text-2" id="text-orgbc5c05c">
 <ul class="org-ul">
 <li>Poorly setup MFA environments
 Adding to much complexity to MFA environments is not safer and does not increase security.</li>
@@ -440,30 +461,30 @@ Can users with disabilities uses your MFA?</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org4580d3f" class="outline-2">
-<h2 id="org4580d3f">Tips and Tricsk</h2>
-<div class="outline-text-2" id="text-org4580d3f">
+<div id="outline-container-org01f4656" class="outline-2">
+<h2 id="org01f4656">Tips and Tricks</h2>
+<div class="outline-text-2" id="text-org01f4656">
 </div>
-<div id="outline-container-org7411855" class="outline-3">
-<h3 id="org7411855">Adding SSH Key To Agent</h3>
-<div class="outline-text-3" id="text-org7411855">
+<div id="outline-container-org65c7e3a" class="outline-3">
+<h3 id="org65c7e3a">Adding SSH Key To Agent</h3>
+<div class="outline-text-3" id="text-org65c7e3a">
 </div>
-<div id="outline-container-org68095be" class="outline-4">
-<h4 id="org68095be">Check if SSH Agent is running</h4>
-<div class="outline-text-4" id="text-org68095be">
+<div id="outline-container-org303fed2" class="outline-4">
+<h4 id="org303fed2">Check if SSH Agent is running</h4>
+<div class="outline-text-4" id="text-org303fed2">
 <p>
 This is to add the keys to the SSH Agent
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="font-weight: bold;">eval</span> <span style="color: #dd8844;">"$(</span><span style="color: #424242; font-weight: bold;">ssh-agent</span><span style="color: #dd8844;"> -s)"</span>
+<pre class="src src-bash"><span style="font-weight: bold;">eval</span> <span style="color: #8a3b3c;">"$(</span><span style="color: #383a42; font-weight: bold;">ssh-agent</span><span style="color: #8a3b3c;"> -s)"</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org5354cfd" class="outline-4">
-<h4 id="org5354cfd">Add the Keys to SSH Agent</h4>
-<div class="outline-text-4" id="text-org5354cfd">
+<div id="outline-container-orge74a80e" class="outline-4">
+<h4 id="orge74a80e">Add the Keys to SSH Agent</h4>
+<div class="outline-text-4" id="text-orge74a80e">
 <div class="org-src-container">
 <pre class="src src-bash">ssh-add ~/.ssh/nameofkey
 </pre>
@@ -473,9 +494,9 @@ If you add your public key, OpenSSH will warn you to not use the public key.
 </p>
 </div>
 </div>
-<div id="outline-container-org6cddabf" class="outline-4">
-<h4 id="org6cddabf">Verify Keys Added to SSH Agent</h4>
-<div class="outline-text-4" id="text-org6cddabf">
+<div id="outline-container-orga2a44fa" class="outline-4">
+<h4 id="orga2a44fa">Verify Keys Added to SSH Agent</h4>
+<div class="outline-text-4" id="text-orga2a44fa">
 <div class="org-src-container">
 <pre class="src src-bash">ssh-add -l
 </pre>
@@ -483,9 +504,9 @@ If you add your public key, OpenSSH will warn you to not use the public key.
 </div>
 </div>
 
-<div id="outline-container-org2453367" class="outline-4">
-<h4 id="org2453367">Copy Key to Remote Server</h4>
-<div class="outline-text-4" id="text-org2453367">
+<div id="outline-container-orgeab3b72" class="outline-4">
+<h4 id="orgeab3b72">Copy Key to Remote Server</h4>
+<div class="outline-text-4" id="text-orgeab3b72">
 <div class="org-src-container">
 <pre class="src src-bash">ssh-copy-id -i ~/.ssh/testkey.pub user@remote.server.location
 </pre>
@@ -495,9 +516,9 @@ Remember that you want to share your public key. Never share your Private Key!
 </p>
 </div>
 </div>
-<div id="outline-container-org63cc624" class="outline-4">
-<h4 id="org63cc624">Copy Server Key to Host</h4>
-<div class="outline-text-4" id="text-org63cc624">
+<div id="outline-container-orgbcb74ae" class="outline-4">
+<h4 id="orgbcb74ae">Copy Server Key to Host</h4>
+<div class="outline-text-4" id="text-orgbcb74ae">
 <div class="org-src-container">
 <pre class="src src-bash">ssh-copy-id user@host.local
 </pre>
@@ -506,9 +527,9 @@ Remember that you want to share your public key. Never share your Private Key!
 </div>
 </div>
 
-<div id="outline-container-org4c1c6d7" class="outline-3">
-<h3 id="org4c1c6d7">SSH Config File - Make SSH Easier</h3>
-<div class="outline-text-3" id="text-org4c1c6d7">
+<div id="outline-container-org1c22db2" class="outline-3">
+<h3 id="org1c22db2">SSH Config File - Make SSH Easier</h3>
+<div class="outline-text-3" id="text-org1c22db2">
 <p>
 Let's look at a typical SSH command.
 </p>
@@ -518,21 +539,21 @@ Let's look at a typical SSH command.
 </p>
 </div>
 
-<div id="outline-container-org4ab9ace" class="outline-4">
-<h4 id="org4ab9ace"><code>erobles@10.0.3.11</code> this states our username on the server and the IP/Hostname of the server</h4>
+<div id="outline-container-org5fcde18" class="outline-4">
+<h4 id="org5fcde18"><code>erobles@10.0.3.11</code> this states our username on the server and the IP/Hostname of the server</h4>
 </div>
 
-<div id="outline-container-orged806c7" class="outline-4">
-<h4 id="orged806c7"><code>-p 2300</code> the port we are connecting to on the server</h4>
+<div id="outline-container-org7f1f296" class="outline-4">
+<h4 id="org7f1f296"><code>-p 2300</code> the port we are connecting to on the server</h4>
 </div>
 
-<div id="outline-container-orgdcbc0e8" class="outline-4">
-<h4 id="orgdcbc0e8"><code>-i ~/.ssh/mykeys</code> the Public/Private keys used in the SSH connection</h4>
+<div id="outline-container-orgdf89e82" class="outline-4">
+<h4 id="orgdf89e82"><code>-i ~/.ssh/mykeys</code> the Public/Private keys used in the SSH connection</h4>
 </div>
 </div>
-<div id="outline-container-orge6d6173" class="outline-3">
-<h3 id="orge6d6173">SSH Config File cont.</h3>
-<div class="outline-text-3" id="text-orge6d6173">
+<div id="outline-container-orgd377573" class="outline-3">
+<h3 id="orgd377573">SSH Config File cont.</h3>
+<div class="outline-text-3" id="text-orgd377573">
 <p>
 While this is fine, it can be time consuming and easily forgotten. So let's see how this commands translates to an SSH Config file.
 </p>
@@ -548,13 +569,21 @@ IdentityFile ~/.ssh/mykeys
 </div>
 </div>
 </div>
-<div id="outline-container-org60d6fdb" class="outline-2">
-<h2 id="org60d6fdb">Conclusion</h2>
+<div id="outline-container-org1a397f2" class="outline-2">
+<h2 id="org1a397f2">Conclusion</h2>
+<div class="outline-text-2" id="text-org1a397f2">
+<ul class="org-ul">
+<li>I shown how to add an extra layer of security to your SSH Keys with MFA</li>
+<li>Find a good balance between ease of use and security</li>
+<li>There is so much to OpenSSH, check out the documentation</li>
+<li>If this doesn't work maybe give SSH Certificates a try?</li>
+</ul>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="date">Date: 05-21-22</p>
-<p class="date">Created: 2022-05-19 Thu 10:58</p>
+<p class="date">Created: 2022-05-20 Fri 06:25</p>
 </div>
 </body>
 </html>
