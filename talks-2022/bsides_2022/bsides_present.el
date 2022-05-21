@@ -4,7 +4,7 @@
   "Generating a ssh key"
   (demo-it-run-in-shell "ssh-keygen -t ed25519-sk -f ~/.ssh/id_demokey -N '' -C 'demo key for bsides'"))
 
-(demo-it-create :windows-below :fullscreen :advanced-mode :use-shell :variable-width
+(demo-it-create :windows-below :fullscreen :advanced-mode :use-shell :variable-width :insert-fast :text-large
 		(demo-it-presentation "bsides_presentation.org")
 		;;About Speaker
 		demo-it-presentation-advance
