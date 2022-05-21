@@ -2,7 +2,7 @@
 
 (defun ssh-demo/ssh-keygen ()
   "Generating a ssh key"
-  (demo-it-run-in-shell "ssh-keygen -t ed25519-sk -f ~/.ssh/id_testkey -N '' -C 'test key for'"))
+  (demo-it-run-in-shell "ssh-keygen -t ed25519-sk -f ~/.ssh/id_demokey -N '' -C 'demo key for bsides'"))
 
 (demo-it-create :windows-below :fullscreen :advanced-mode :use-shell :variable-width
 		(demo-it-presentation "bsides_presentation.org")
