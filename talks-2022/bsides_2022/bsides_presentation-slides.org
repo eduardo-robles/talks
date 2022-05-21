@@ -4,7 +4,6 @@
 #+DATE: 05-21-22
 #+AUTHOR: Eduardo Robles
 #+TITLE: Securing SSH Keys with MFA
-
 * BSIDESRGV 2022
 #+BEGIN_EXAMPLE
     ____ _____ ________  ___________ ____  _______    __   ___   ____ ___  ___
@@ -69,50 +68,38 @@ During registration with an online service, the user’s client device creates a
 * Create SSH Key
 ** Create a "ed25519" key
 #+BEGIN_SRC shell
-ssh-keygen -t ed25519 -f ~/.ssh/nameofkey -N '' -C "comment goes here"
-#+END_SRC
-** Create an "RSA" key
-#+BEGIN_SRC bash
-ssh-keygen -t rsa -f ~/.ssh/nameofkey -N '' -C "comment goes here"
+ssh-keygen -t ed25519-sk -f ~/.ssh/id_testkey -N '' -C "comment goes here"
 #+END_SRC
 ** Explanation
 - -t option is for the type of keys to be created (ex. ed25519)
 - -f option is the file-name and location of the keys (ex. =/path/to/file=)
 - -N is the passphrase to be given, leave blank for no passphrase
 - -C enter a comment to best find keys later (ex. "github key")
-- -o resident to tell OpenSSH to use the FIDO2 standard
 ** Passwords, Passphrase, Passcode???
 - Password are usually for authenticating a user to a system
 - Passphrases are used for SSH keys to lock/unlock the actual keys
 - Passcode is usually a time based one time code used to secure an account with MFA
-* Demonstrating SSH Key Generation
-** Create a "ed25519-sk" key
-#+BEGIN_SRC bash
-ssh-keygen -t ed25519-sk -O resident -f ~/.ssh/id_testkey -N '' -C "test key for yubikey"
-#+END_SRC
-** Example
-#+BEGIN_EXAMPLE
-Generating public/private ed25519-sk key pair.
-You may need to touch your authenticator to authorize key generation.
-Enter PIN for authenticator:
-Your identification has been saved in /home/erobles/.ssh/id_testkey
-Your public key has been saved in /home/erobles/.ssh/id_testkey.pub
-The key fingerprint is:
-SHA256:ItBm//lTC8cpH1ikTQMWfIdtO2PDEvzwFqp2XdzffPs test key for yubikey
-The key's random-art image is:
-+[ED25519-SK 256]-+
-|         .++ o   |
-|   .     .. X =  |
-|  . +      * @ +.|
-|   + .    . = @ +|
-|    . o S  = * *o|
-|     . o .* B . =|
-|        o. B o  o|
-|         .. o  . |
-|          ..    E|
-+----[SHA256]-----+
-#+END_EXAMPLE
 ** Create an SSH with TOTP
+*** TOTP with Google Authenticator
+#+BEGIN_SRC bash
+sudo apt install libpam-google-authenticator -y
+#+END_SRC
+*** Configure TOTP Service
+#+BEGIN_SRC bash
+google-authenticator
+#+END_SRC
+- You will need to answer the following questions to your needs.
+*** Scan QR Code from Google Authenticator
+*** Edit SSH Service
+**** Edit =/etc/pam.d/sshd= add to end of file
+=auth required pam_google_athenticator.so=
+**** Edit =/etc/ssh/sshd_config= change the following
+#+BEGIN_SRC bash
+ChallengeResponseAuthentication yes
+UsePAM yes
+#+END_SRC
+**** Restart SSH Service
+=sudo systemctl restart sshd=
 * MFA is awesome!
 Multifactor authentications is great and when implemented correctly can help secure your environments. It can help ensure that you trust who is logging into your services. And ultimately can help in preventing costly security breaches.
 * Watch out for these things...
@@ -146,11 +133,6 @@ ssh-add -l
 ssh-copy-id -i ~/.ssh/testkey.pub user@remote.server.location
 #+END_SRC
 Remember that you want to share your public key. Never share your Private Key!
-*** Copy Server Key to Host
-#+BEGIN_SRC bash
-ssh-copy-id user@host.local
-#+END_SRC
-
 ** SSH Config File - Make SSH Easier
 Let's look at a typical SSH command.
 
@@ -172,7 +154,16 @@ Port 2300
 IdentityFile ~/.ssh/mykeys
 #+END_SRC
 * Conclusion
-- I shown how to add an extra layer of security to your SSH Keys with MFA
+- I've shown how to add an extra layer of security to your SSH Keys with MFA
 - Find a good balance between ease of use and security
 - There is so much to OpenSSH, check out the documentation
 - If this doesn't work maybe give SSH Certificates a try?
+* Thanks!
+#+BEGIN_EXAMPLE
+  ________  _____    _   ____ _______    ____ _____ ________  ___________
+ /_  __/ / / /   |  / | / / //_/ ___/   / __ ) ___//  _/ __ \/ ____/ ___/
+  / / / /_/ / /| | /  |/ / ,<  \__ \   / __  \__ \ / // / / / __/  \__ \
+ / / / __  / ___ |/ /|  / /| |___/ /  / /_/ /__/ // // /_/ / /___ ___/ /
+/_/ /_/ /_/_/  |_/_/ |_/_/ |_/____/  /_____/____/___/_____/_____//____/
+
+#+END_EXAMPLE
