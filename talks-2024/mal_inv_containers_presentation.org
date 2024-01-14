@@ -1,0 +1,9 @@
+#+REVEAL_ROOT: http://cdn.jsdelivr.net/reveal.js/3.0.0/
+#+REVEAL_THEME: Solarized
+#+REVEAL_SLIDE: 
+#+OPTIONS: toc:nil num:nil
+#+DATE: 
+#+AUTHOR:
+#+TITLE:
+
+* Title
