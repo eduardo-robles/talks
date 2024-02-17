@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Malware Investigations and Threat Hunting</title>
+<meta name="author" content="Eduardo Robles"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/white.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdn.jsdelivr.net/npm/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">Malware Investigations and Threat Hunting</h1><p class="subtitle"></p>
+<h2 class="date">20240216</h2><p class="date">Created: 2024-02-16 Fri 22:11</p>
+</section>
+
+<section>
+<section id="slide-orga0285be">
+<h2 id="orga0285be">Malware Investigations and Threat Hunting</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-org959d1ef">
+<h2 id="org959d1ef">About Me</h2>
+<ul>
+<li>Hi! I'm Eduardo Robles I work for County of Hidalgo IT dept as a Cybersecurity Analyst III</li>
+<li>Founder of South Texas Linux Users Group.</li>
+<li>You can check out my skills on my blog or LinkedIn.
+<b>Bonus, I give out a lot of free advice over there</b></li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-orgda02db0">
+<h2 id="orgda02db0">Agenda</h2>
+<ol>
+<li>Learn the basics of Malware Analysis</li>
+<li>Learn some Threat Hunting skills</li>
+<li>Small look at Reverse Engineering and Digital Forensics</li>
+
+</ol>
+
+</section>
+</section>
+<section>
+<section id="slide-orgb85ee20">
+<h2 id="orgb85ee20">Malware Investigations</h2>
+<div class="outline-text-2" id="text-orgb85ee20">
+</div>
+</section>
+<section id="slide-org3cfce49">
+<h3 id="org3cfce49">Malware is scary and dangerous, put in a box (container).</h3>
+<p>
+Malware is scary. Malware is dangerous. So it's best to analyze in a contained environment.
+</p>
+<ul>
+<li>Virtual Machines</li>
+<li>Containers (Docker, Podman, etc)</li>
+
+</ul>
+</section>
+<section id="slide-org806437a">
+<h3 id="org806437a">REMnux</h3>
+<p>
+If you want easy button for malware analysis use REMnux is a VM or container!
+</p>
+</section>
+<section id="slide-org5829e0b">
+<h3 id="org5829e0b">Setup REMnux in a Container</h3>
+<p>
+REMnux offers several <a href="https://docs.remnux.org/install-distro/remnux-as-a-container">container</a> images as well the full REMnux distro in a container. The container technology they chose is Docker but I have chosen to use Podamn. Podman seems to have better support in Windows as well as Linux. So I can have Podman running in both the Malware Analysis station and on my Windows machine. This gives me the flexibility to test on either machine or platform.
+</p>
+</section>
+<section id="slide-org9f5a35c">
+<h4 id="org9f5a35c">Install REMnux container</h4>
+<div class="org-src-container">
+
+<pre  class="src src-sh"   ><code trim>podman pull docker.io/remnux/remnux-distro:focal
+</code></pre>
+</div>
+</section>
+<section id="slide-org46774d5">
+<h4 id="org46774d5">Run REMnux as a Transient container</h4>
+<div class="org-src-container">
+
+<pre  class="src src-powershell"   ><code trim>podman run --rm -it -u remnux remnux/remnux-distro:focal bash
+</code></pre>
+</div>
+<ul>
+<li><code>--rm</code> Remove the container after it exists (not the image)</li>
+<li><code>-it</code> Connect the container to the terminal</li>
+<li><code>-u remnux</code> Logged in user</li>
+<li><code>remnux/remnux-distro:focal</code> Container image to use, in this case use the local image</li>
+<li><code>bash</code> Login shell</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-orgf9dbe02">
+<h2 id="orgf9dbe02">Threat Hunting</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-org7f05190">
+<h2 id="org7f05190">Reverse Engineering</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-orgc36601c">
+<h2 id="orgc36601c">Digital Forensics</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-orgf2ef9d2">
+<h2 id="orgf2ef9d2">Conclusion</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-orged18718">
+<h2 id="orged18718">Questions</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-orgd94fe4b">
+<h2 id="orgd94fe4b">Thanks</h2>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+
+});
+
+</script>
+</body>
+</html>
