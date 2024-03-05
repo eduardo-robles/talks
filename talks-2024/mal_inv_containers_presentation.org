@@ -40,6 +40,10 @@ podman run --rm -it -u remnux remnux/remnux-distro:focal bash
 - =-u remnux= Logged in user
 - =remnux/remnux-distro:focal= Container image to use, in this case use the local image
 - =bash= Login shell
+** Capturing Malware Samples
+Safely moving malware around to later analyze can be daunting. Here are some pointers.
+- Defang
+-
 * Threat Hunting
 
 * Reverse Engineering
