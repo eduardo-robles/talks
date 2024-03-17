@@ -4,9 +4,9 @@
 #+OPTIONS: toc:nil num:nil
 #+DATE: 20240216
 #+AUTHOR: Eduardo Robles
-#+TITLE: Malware Investigations and Threat Hunting
+#+TITLE: Quick, Easy, Malware Investigations and Threat Hunting
 
-* Malware Investigations and Threat Hunting
+* Quick, Easy, Malware Investigations and Threat Hunting
 
 * About Me
 - Hi! I'm Eduardo Robles I work for County of Hidalgo IT dept as a Cybersecurity Analyst III
