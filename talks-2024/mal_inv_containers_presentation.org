@@ -48,11 +48,18 @@ podman run --rm -it -u remnux remnux/remnux-distro:focal bash
 - =remnux/remnux-distro:focal= Container image to use, in this case use the local image
 - =bash= Login shell
 * Threat Hunting
-
-* Reverse Engineering
-
+** Malicious Traffic
+- Wireshark
+- iNetSim
+- Firewalls
+- DNS Sinkholes
 * Digital Forensics
-
+** Phishing Email Analysis
+*** ClamAV
+ClamAV is great to scan for malware but also can can =eml= files including email attachments.
+#+begin_src sh
+clamscan --debug /path/to/emailtoscan.eml
+#+end_src
 * Conclusion
 
 * Questions
