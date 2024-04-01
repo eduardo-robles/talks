@@ -20,8 +20,11 @@ A third-party wants to spy on your communications.
 Encrypting the message makes it impossible for a third-party to spy on your communications.
 
 *** Why use encryption? Cont...
-**** Data in Transit
-**** Data at Rest
+**** Attack Surface
+***** Data in Transit
+****** Protect data from insider threats
+***** Data at Rest
+****** Protect data from external threats
 
 *** Examples of Asymmetric Encryption Protocols
 **** PGP
