@@ -10,14 +10,14 @@
 ** What is encryption?
 *** /Encryption/ - ~The process of obscuring information to make it unreadable without special knowledge, key files, or passwords.~
 *** Encryption can benefit everyone because it ensures that the data you are working with is safe from tampering.
-*** It aligns with the CIA triad of Confidentiality, Integretity, and Accessibility.
+*** It aligns with the CIA triad of Confidentiality, Integrity, and Accessibility.
 
 *** Why use encryption?
 **** Problem:
 A third-party wants to spy on your communications.
 
 **** Solution:
-Encrypting the message makes it impossible for a third-party to spy on your communications.
+Encrypting the message makes it impossible for a third party to spy on your communications.
 
 *** Why use encryption? Cont...
 **** Attack Surface
