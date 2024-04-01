@@ -1,0 +1,56 @@
+#+DATE: [2024-03-26 Tue 12:17]
+#+TITLE: Introduction to Encryption
+#+AUTHOR: Eduardo Robles
+#+OPTIONS: toc:nil num:nil
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+REVEAL_THEME: black
+
+
+* Topic: Introduction to Encryption
+** What is encryption?
+*** /Encryption/ - ~The process of obscuring information to make it unreadable without special knowledge, key files, or passwords.~
+*** Encryption can benefit everyone because it ensures that the data you are working with is safe from tampering.
+*** It aligns with the CIA triad of Confidentiality, Integretity, and Accessibility.
+
+*** Why use encryption?
+**** Problem:
+A third-party wants to spy on your communications.
+
+**** Solution:
+Encrypting the message makes it impossible for a third-party to spy on your communications.
+
+*** Why use encryption? Cont...
+**** Data in Transit
+**** Data at Rest
+
+*** Examples of Asymmetric Encryption Protocols
+**** PGP
+**** Twofish
+**** 3DES
+**** RSA
+*** How do you start encrypting your data?
+**** There are a variety of methods you can use to encrypt your data. Today we will be learning how to use [[https://gnupg.org][GPG]] (Gnu Privacy Guard).
+**** With GPG you can create key pairs (Public and Private) that you will use to safely encrypt data or just messages.
+
+*** What is PGP?
+**** PGP - "Pretty Good Privacy", invented by Phil Zimmerman and licensed it under GPL. Later the OpenPGP standard was created which is what most modern implementations of PGP use to implement PGP, for example GPG (GNU Privacy Guard).
+
+*** Managing Keys
+**** Once you created your key pairs, you need to share your /Public/ key so others can use it to encrypt messages to you.
+**** You will also have to get other users /Public/ keys so you can encrypt messages to them.
+
+*** Or simply send your /Public/ key via email or meet in person.
+**** You can export your /Public/ key and save to an ~asc~ file that you can attach to an email.
+**** Or you can also meet in person and exchange keys. The benefit here is that you can be absolutely sure that no one tampered with the keys.
+
+*** Encrypting files
+**** To encrypt a file with gpg is pretty easy.
+**** Encrypt files for yourself ~gpg --output FILETOENCRYPT.gpg --encrypt --recipient YOUREMAIL@example.com FILETOENCRYPT.txt~
+#+REVEAL: split
+**** Decrypt files for yourself ~gpg --output FILETODECRYPT.gpg --decrypt UNENCRYPTEDFILE.txt~ you will be asked for you passphrase.
+**** To encrypt a file for someone simply use the email to their /Public/ key in the command above.
+
+** Final thoughts
+*** Encryption can protect you and others from spying. It takes some work to setup but once it's setup you can feel confident that your communications are safe.
+
+* Thank You!

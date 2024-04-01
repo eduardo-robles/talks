@@ -19,6 +19,8 @@
 3. Small look at Reverse Engineering and Digital Forensics
 
 * Malware Investigations
+** Why do internal malware analysis?
+- Virustotal, JoeSandbox
 ** Malware is scary and dangerous, put in a box (container).
 Malware is scary. Malware is dangerous. So it's best to analyze in a contained environment.
 - Virtual Machines
@@ -47,6 +49,7 @@ podman run --rm -it -u remnux remnux/remnux-distro:focal bash
 - =-u remnux= Logged in user
 - =remnux/remnux-distro:focal= Container image to use, in this case use the local image
 - =bash= Login shell
+
 * Threat Hunting
 ** Malicious Traffic
 - Wireshark
@@ -60,6 +63,18 @@ ClamAV is great to scan for malware but also can can =eml= files including email
 #+begin_src sh
 clamscan --debug /path/to/emailtoscan.eml
 #+end_src
+** Investigating a malicious link
+To investigate a link REMnux offers so many awesome tools. I will cover THUG, which is a “honeyclient”. A honeyclient is a tool that mimicks the behavior of a web browser. Useful for analyzing what a link does when a user clicks on it.
+
+*Running THUG*
+
+#+begin_src sh
+thug -u winchrome49 "[LINKGOESHERE]"
+#+end_src
+Once it begins to “load” the suspicious site it executes any code that may be on the site. Once it is done running/loading the page it dumps a report. The report contains a summary of what occured plus you get any malicious artifacts that the page may have downloaded.
+
+In one exercise I did a suspicous page downloaded an executable and I was able to run the file command from the container to find it was indeed a malicous executable.
+
 * Conclusion
 
 * Questions
