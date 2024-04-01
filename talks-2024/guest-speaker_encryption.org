@@ -22,9 +22,9 @@ Encrypting the message makes it impossible for a third party to spy on your comm
 *** Why use encryption? Cont...
 **** Attack Surface
 ***** Data in Transit
-****** Protect data from insider threats
-***** Data at Rest
 ****** Protect data from external threats
+***** Data at Rest
+****** Protect data from insider threats
 
 *** Examples of Asymmetric Encryption Protocols
 **** PGP
