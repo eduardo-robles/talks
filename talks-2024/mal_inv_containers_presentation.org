@@ -33,9 +33,9 @@ Safely moving malware around to later analyze can be daunting. Here are some poi
 - Defang ex. https://eduardorobles.com --> hxxps://eduardorobles[.]com or =superbad.exe= --> =superbad.malz=
 - Encrypted Archive with password (7zip)
 - Read Only directories
-- Disable network access
+- Disable network access (or simulate network access)
 ** REMnux
-If you want easy button for malware analysis use REMnux as a VM or container!
+If you want easy button for malware analysis use *REMnux* as a VM or container!
 ** Setup REMnux in a Container
 REMnux offers several [[https://docs.remnux.org/install-distro/remnux-as-a-container][container]] images as well the full REMnux distro in a container. The container technology they chose is Docker but I have chosen to use Podman. Podman seems to have better support in Windows as well as Linux. So I can have Podman running in both the Malware Analysis station and on my Windows machine. This gives me the flexibility to test on either machine or platform.
 *** Install REMnux container
@@ -51,7 +51,7 @@ podman run --rm -it -u remnux remnux/remnux-distro:focal bash
 - =-u remnux= Logged in user
 - =remnux/remnux-distro:focal= Container image to use, in this case use the local image
 - =bash= Login shell
-
+** Demo
 * Threat Hunting
 ** Malicious Traffic
 - Wireshark
