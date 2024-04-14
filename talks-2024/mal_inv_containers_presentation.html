@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<title>Malware Investigations and Threat Hunting</title>
+<title>Quick, Easy, Malware Investigations and Threat Hunting</title>
 <meta name="author" content="Eduardo Robles"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -28,19 +28,19 @@
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide"><h1 class="title">Malware Investigations and Threat Hunting</h1><p class="subtitle"></p>
-<h2 class="date">20240216</h2><p class="date">Created: 2024-02-16 Fri 22:11</p>
+<section id="sec-title-slide"><h1 class="title">Quick, Easy, Malware Investigations and Threat Hunting</h1><p class="subtitle"></p>
+<h2 class="date">20240216</h2><p class="date">Created: 2024-03-18 Mon 11:14</p>
 </section>
 
 <section>
-<section id="slide-orga0285be">
-<h2 id="orga0285be">Malware Investigations and Threat Hunting</h2>
+<section id="slide-orga59817f">
+<h2 id="orga59817f">Quick, Easy, Malware Investigations and Threat Hunting</h2>
 
 </section>
 </section>
 <section>
-<section id="slide-org959d1ef">
-<h2 id="org959d1ef">About Me</h2>
+<section id="slide-orgb0ff25e">
+<h2 id="orgb0ff25e">About Me</h2>
 <ul>
 <li>Hi! I'm Eduardo Robles I work for County of Hidalgo IT dept as a Cybersecurity Analyst III</li>
 <li>Founder of South Texas Linux Users Group.</li>
@@ -51,8 +51,8 @@
 </section>
 </section>
 <section>
-<section id="slide-orgda02db0">
-<h2 id="orgda02db0">Agenda</h2>
+<section id="slide-org6b7145e">
+<h2 id="org6b7145e">Agenda</h2>
 <ol>
 <li>Learn the basics of Malware Analysis</li>
 <li>Learn some Threat Hunting skills</li>
@@ -63,44 +63,58 @@
 </section>
 </section>
 <section>
-<section id="slide-orgb85ee20">
-<h2 id="orgb85ee20">Malware Investigations</h2>
-<div class="outline-text-2" id="text-orgb85ee20">
+<section id="slide-org8b51836">
+<h2 id="org8b51836">Malware Investigations</h2>
+<div class="outline-text-2" id="text-org8b51836">
 </div>
 </section>
-<section id="slide-org3cfce49">
-<h3 id="org3cfce49">Malware is scary and dangerous, put in a box (container).</h3>
+<section id="slide-org40dd796">
+<h3 id="org40dd796">Malware is scary and dangerous, put in a box (container).</h3>
 <p>
 Malware is scary. Malware is dangerous. So it's best to analyze in a contained environment.
 </p>
 <ul>
 <li>Virtual Machines</li>
 <li>Containers (Docker, Podman, etc)</li>
+<li><b>Read Only</b> shared storage</li>
 
 </ul>
 </section>
-<section id="slide-org806437a">
-<h3 id="org806437a">REMnux</h3>
+<section id="slide-org7e8938f">
+<h3 id="org7e8938f">Capturing Malware Samples</h3>
 <p>
-If you want easy button for malware analysis use REMnux is a VM or container!
+Safely moving malware around to later analyze can be daunting. Here are some pointers.
+</p>
+<ul>
+<li>Defang ex. <a href="https://eduardorobles.com">https://eduardorobles.com</a> &#x2013;&gt; hxxps://eduardorobles[.]com or <code>superbad.exe</code> &#x2013;&gt; <code>superbad.malz</code></li>
+<li>Encrypted Archive with password (7zip)</li>
+<li>Read Only directories</li>
+<li>Disable network access</li>
+
+</ul>
+</section>
+<section id="slide-org91af377">
+<h3 id="org91af377">REMnux</h3>
+<p>
+If you want easy button for malware analysis use REMnux as a VM or container!
 </p>
 </section>
-<section id="slide-org5829e0b">
-<h3 id="org5829e0b">Setup REMnux in a Container</h3>
+<section id="slide-org8c91f22">
+<h3 id="org8c91f22">Setup REMnux in a Container</h3>
 <p>
-REMnux offers several <a href="https://docs.remnux.org/install-distro/remnux-as-a-container">container</a> images as well the full REMnux distro in a container. The container technology they chose is Docker but I have chosen to use Podamn. Podman seems to have better support in Windows as well as Linux. So I can have Podman running in both the Malware Analysis station and on my Windows machine. This gives me the flexibility to test on either machine or platform.
+REMnux offers several <a href="https://docs.remnux.org/install-distro/remnux-as-a-container">container</a> images as well the full REMnux distro in a container. The container technology they chose is Docker but I have chosen to use Podman. Podman seems to have better support in Windows as well as Linux. So I can have Podman running in both the Malware Analysis station and on my Windows machine. This gives me the flexibility to test on either machine or platform.
 </p>
 </section>
-<section id="slide-org9f5a35c">
-<h4 id="org9f5a35c">Install REMnux container</h4>
+<section id="slide-org3088cf8">
+<h4 id="org3088cf8">Install REMnux container</h4>
 <div class="org-src-container">
 
 <pre  class="src src-sh"   ><code trim>podman pull docker.io/remnux/remnux-distro:focal
 </code></pre>
 </div>
 </section>
-<section id="slide-org46774d5">
-<h4 id="org46774d5">Run REMnux as a Transient container</h4>
+<section id="slide-orgf57b034">
+<h4 id="orgf57b034">Run REMnux as a Transient container</h4>
 <div class="org-src-container">
 
 <pre  class="src src-powershell"   ><code trim>podman run --rm -it -u remnux remnux/remnux-distro:focal bash
@@ -117,38 +131,84 @@ REMnux offers several <a href="https://docs.remnux.org/install-distro/remnux-as-
 </section>
 </section>
 <section>
-<section id="slide-orgf9dbe02">
-<h2 id="orgf9dbe02">Threat Hunting</h2>
+<section id="slide-orgb126178">
+<h2 id="orgb126178">Threat Hunting</h2>
+<div class="outline-text-2" id="text-orgb126178">
+</div>
+</section>
+<section id="slide-org33c4f2a">
+<h3 id="org33c4f2a">Malicious Traffic</h3>
+<ul>
+<li>Wireshark</li>
+<li>iNetSim</li>
+<li>Firewalls</li>
+<li>DNS Sinkholes</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org219612f">
+<h2 id="org219612f">Digital Forensics</h2>
+<div class="outline-text-2" id="text-org219612f">
+</div>
+</section>
+<section id="slide-org659d913">
+<h3 id="org659d913">Phishing Email Analysis</h3>
+<div class="outline-text-3" id="text-org659d913">
+</div>
+</section>
+<section id="slide-org1606564">
+<h4 id="org1606564">ClamAV</h4>
+<p>
+ClamAV is great to scan for malware but also can can <code>eml</code> files including email attachments.
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-sh"   ><code trim>clamscan --debug /path/to/emailtoscan.eml
+</code></pre>
+</div>
+</section>
+<section id="slide-org37ce8ac">
+<h3 id="org37ce8ac">Investigating a malicious link</h3>
+<p>
+To investigate a link REMnux offers so many awesome tools. I will cover THUG, which is a “honeyclient”. A honeyclient is a tool that mimicks the behavior of a web browser. Useful for analyzing what a link does when a user clicks on it.
+</p>
+
+<p>
+<b>Running THUG</b>
+</p>
+
+<div class="org-src-container">
+
+<pre  class="src src-sh"   ><code trim>thug -u winchrome49 <span style="color: #af9fff;">"[LINKGOESHERE]"</span>
+</code></pre>
+</div>
+<p>
+Once it begins to “load” the suspicious site it executes any code that may be on the site. Once it is done running/loading the page it dumps a report. The report contains a summary of what occured plus you get any malicious artifacts that the page may have downloaded.
+</p>
+
+<p>
+In one exercise I did a suspicous page downloaded an executable and I was able to run the file command from the container to find it was indeed a malicous executable.
+</p>
 
 </section>
 </section>
 <section>
-<section id="slide-org7f05190">
-<h2 id="org7f05190">Reverse Engineering</h2>
+<section id="slide-orgb0a5201">
+<h2 id="orgb0a5201">Conclusion</h2>
 
 </section>
 </section>
 <section>
-<section id="slide-orgc36601c">
-<h2 id="orgc36601c">Digital Forensics</h2>
+<section id="slide-orgebcdd36">
+<h2 id="orgebcdd36">Questions</h2>
 
 </section>
 </section>
 <section>
-<section id="slide-orgf2ef9d2">
-<h2 id="orgf2ef9d2">Conclusion</h2>
-
-</section>
-</section>
-<section>
-<section id="slide-orged18718">
-<h2 id="orged18718">Questions</h2>
-
-</section>
-</section>
-<section>
-<section id="slide-orgd94fe4b">
-<h2 id="orgd94fe4b">Thanks</h2>
+<section id="slide-orgf887b6d">
+<h2 id="orgf887b6d">Thanks</h2>
 </section>
 </section>
 </div>

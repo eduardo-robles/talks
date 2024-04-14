@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Introduction to Encryption</title>
+<meta name="author" content="Eduardo Robles"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/black.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdn.jsdelivr.net/npm/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">Introduction to Encryption</h1><p class="subtitle"></p>
+<h2 class="date">2024-03-26 Tue 12:17</h2><p class="date">Created: 2024-04-01 Mon 17:44</p>
+</section>
+
+
+<section>
+<section id="slide-org8346dc3">
+<h2 id="org8346dc3">Topic: Introduction to Encryption</h2>
+<div class="outline-text-2" id="text-org8346dc3">
+</div>
+</section>
+<section id="slide-org66d464c">
+<h3 id="org66d464c">What is encryption?</h3>
+<div class="outline-text-3" id="text-org66d464c">
+</div>
+</section>
+<section id="slide-org6a00ea5">
+<h4 id="org6a00ea5"><i>Encryption</i> - <code>The process of obscuring information to make it unreadable without special knowledge, key files, or passwords.</code></h4>
+</section>
+<section id="slide-org7bd5783">
+<h4 id="org7bd5783">Encryption can benefit everyone because it ensures that the data you are working with is safe from tampering.</h4>
+</section>
+<section id="slide-orgd3ab80b">
+<h4 id="orgd3ab80b">It aligns with the CIA triad of Confidentiality, Integrity, and Accessibility.</h4>
+
+</section>
+<section id="slide-orga64e1e4">
+<h4 id="orga64e1e4">Why use encryption?</h4>
+<div class="outline-text-4" id="text-orga64e1e4">
+</div>
+<ul class="org-ul">
+<li><a id="org69a543b"></a>Problem:<br />
+<p>
+A third-party wants to spy on your communications.
+</p>
+</li>
+
+<li><a id="org9704a6c"></a>Solution:<br />
+<p>
+Encrypting the message makes it impossible for a third party to spy on your communications.
+</p>
+</li>
+</ul>
+
+</section>
+<section id="slide-org0353c60">
+<h4 id="org0353c60">Why use encryption? Cont&#x2026;</h4>
+<div class="outline-text-4" id="text-org0353c60">
+</div>
+<ul class="org-ul">
+<li><a id="org4e3e464"></a>Attack Surface<br />
+<ul class="org-ul">
+<li><a id="org4a88a21"></a>Data in Transit<br />
+<ul class="org-ul">
+<li><a id="org115f5fe"></a>Protect data from external threats<br /></li>
+</ul>
+</li>
+<li><a id="orgf31539c"></a>Data at Rest<br />
+<ul class="org-ul">
+<li><a id="org806586d"></a>Protect data from insider threats<br /></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</section>
+<section id="slide-org589c382">
+<h4 id="org589c382">Examples of Asymmetric Encryption Protocols</h4>
+<div class="outline-text-4" id="text-org589c382">
+</div>
+<ul class="org-ul">
+<li><a id="org786950f"></a>PGP<br /></li>
+<li><a id="orgaca5632"></a>Twofish<br /></li>
+<li><a id="org2fd1ea6"></a>3DES<br /></li>
+<li><a id="org6902c9f"></a>RSA<br /></li>
+</ul>
+</section>
+<section id="slide-org41e46b0">
+<h4 id="org41e46b0">How do you start encrypting your data?</h4>
+<div class="outline-text-4" id="text-org41e46b0">
+</div>
+<ul class="org-ul">
+<li><a id="orgdca0df4"></a>There are a variety of methods you can use to encrypt your data. Today we will be learning how to use <a href="https://gnupg.org">GPG</a> (Gnu Privacy Guard).<br /></li>
+<li><a id="orgb8d3458"></a>With GPG you can create key pairs (Public and Private) that you will use to safely encrypt data or just messages.<br /></li>
+</ul>
+
+</section>
+<section id="slide-orgbf7f253">
+<h4 id="orgbf7f253">What is PGP?</h4>
+<div class="outline-text-4" id="text-orgbf7f253">
+</div>
+<ul class="org-ul">
+<li><a id="org405f073"></a>PGP - "Pretty Good Privacy", invented by Phil Zimmerman and licensed it under GPL. Later the OpenPGP standard was created which is what most modern implementations of PGP use to implement PGP, for example GPG (GNU Privacy Guard).<br /></li>
+</ul>
+
+</section>
+<section id="slide-org0df34af">
+<h4 id="org0df34af">Managing Keys</h4>
+<div class="outline-text-4" id="text-org0df34af">
+</div>
+<ul class="org-ul">
+<li><a id="org51dd8a1"></a>Once you created your key pairs, you need to share your <i>Public</i> key so others can use it to encrypt messages to you.<br /></li>
+<li><a id="org25e8c70"></a>You will also have to get other users <i>Public</i> keys so you can encrypt messages to them.<br /></li>
+</ul>
+
+</section>
+<section id="slide-org9a39f0f">
+<h4 id="org9a39f0f">Or simply send your <i>Public</i> key via email or meet in person.</h4>
+<div class="outline-text-4" id="text-org9a39f0f">
+</div>
+<ul class="org-ul">
+<li><a id="org9280652"></a>You can export your <i>Public</i> key and save to an <code>asc</code> file that you can attach to an email.<br /></li>
+<li><a id="orge3da762"></a>Or you can also meet in person and exchange keys. The benefit here is that you can be absolutely sure that no one tampered with the keys.<br /></li>
+</ul>
+
+</section>
+<section id="slide-orgf99045d">
+<h4 id="orgf99045d">Encrypting files</h4>
+<div class="outline-text-4" id="text-orgf99045d">
+</div>
+<ul class="org-ul">
+<li><a id="org36e38c5"></a>To encrypt a file with gpg is pretty easy.<br /></li>
+<li><a id="org6020c8b"></a>Encrypt files for yourself <code>gpg --output FILETOENCRYPT.gpg --encrypt --recipient YOUREMAIL@example.com FILETOENCRYPT.txt</code><br />
+</section>
+<section id="slide-org6020c8b-split">
+</li>
+<li><a id="org62b48d7"></a>Decrypt files for yourself <code>gpg --output FILETODECRYPT.gpg --decrypt UNENCRYPTEDFILE.txt</code> you will be asked for you passphrase.<br /></li>
+<li><a id="org2bc26fe"></a>To encrypt a file for someone simply use the email to their <i>Public</i> key in the command above.<br /></li>
+</ul>
+
+</section>
+<section id="slide-orgea117a1">
+<h3 id="orgea117a1">Final thoughts</h3>
+<div class="outline-text-3" id="text-orgea117a1">
+</div>
+</section>
+<section id="slide-org192adcd">
+<h4 id="org192adcd">Encryption can protect you and others from spying. It takes some work to setup but once it's setup you can feel confident that your communications are safe.</h4>
+
+</section>
+</section>
+<section>
+<section id="slide-orgb8f2885">
+<h2 id="orgb8f2885">Thank You!</h2>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+
+});
+
+</script>
+</body>
+</html>

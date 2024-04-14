@@ -20,7 +20,9 @@
 
 * Malware Investigations
 ** Why do internal malware analysis?
-- Virustotal, JoeSandbox
+- Existing tools Virustotal, JoeSandbox, etc.
+- Protect sensitive information from 3rd parties.
+- Freedom from reliance on one tool or platform.
 ** Malware is scary and dangerous, put in a box (container).
 Malware is scary. Malware is dangerous. So it's best to analyze in a contained environment.
 - Virtual Machines
