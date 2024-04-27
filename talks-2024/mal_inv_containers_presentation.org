@@ -7,7 +7,7 @@
 #+TITLE: Quick, Easy, Malware Investigations and Threat Hunting
 
 * Quick, Easy, Malware Investigations and Threat Hunting
-
+Learn the basics of Malware Analysis and levarage tools like containers and virtual machines to do your analysis. Sharpen your Threat Hunting skills to better understand threats in your environment. Do all of this with free and open source tools to keep investigation internal and secure.
 * About Me
 - Hi! I'm Eduardo Robles I work for County of Hidalgo IT dept as a Cybersecurity Analyst III
 - Founder of South Texas Linux Users Group.
@@ -71,7 +71,7 @@ To investigate a link REMnux offers so many awesome tools. I will cover THUG, wh
 *Running THUG*
 
 #+begin_src sh
-thug -u winchrome49 "[LINKGOESHERE]"
+thug -u win7chrome49 "[LINKGOESHERE]"
 #+end_src
 Once it begins to “load” the suspicious site it executes any code that may be on the site. Once it is done running/loading the page it dumps a report. The report contains a summary of what occured plus you get any malicious artifacts that the page may have downloaded.
 
