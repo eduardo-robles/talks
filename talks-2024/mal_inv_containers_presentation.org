@@ -92,7 +92,10 @@ This container will receive all the traffic from the REMnux container
 ** Setup REMnux container for Analysis
 This container will route all traffic to the previous container and be managed by the Pod we created earlier
 #+begin_src sh
-podman run
+  podman run -d --name malCapture --pod malInvs \
+         --requires malTraffic \
+         --network container:malTraffic \
+         remnux/remnux-distro:focal bash
 #+end_src
 * Digital Forensics
 ** Phishing Email Analysis
