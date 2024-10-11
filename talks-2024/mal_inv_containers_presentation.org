@@ -69,18 +69,30 @@ Or setup fakenet-ng, experiment and use which ever is easier
 ** Setup up a Pod
 This pod creates the environment where traffic can flow between the containers.
 #+begin_src sh
-podman pod create --name malInvs --share net -p 443:443 -p 53:53/udp ....
+podman pod create --name malInvs --share net -p 443:443 -p 80:80 -p 21:21 -p 53:53/udp
 #+end_src
 ** Setup router container
 This container will receive all the traffic from the REMnux container
 #+begin_src sh
-podman run -d --name malTraffic --pod malInvs --restart unless-stopped --privileged --cap-add NET_ADMIN --device /dev/net/tun:/dev/net/tun .....
+  podman run -d --name malTraffic --pod malInvs \
+         --restart unless-stopped \
+         --privileged \
+         --cap-add NET_ADMIN \
+         -p 127.0.0.1:443:443 \
+         -p 127.0.0.1:80:80 \
+         -p 127.0.0.1:21:21 \
+         -p 127.0.0.1:53:53/udp \
+         -e INETSIM_START_SERVICES=dns,http,https,ftp \
+         -e INETSIM_DNS_VERSION="DNS Version" \
+         -e INETSIM_FTPS_BIND_PORT=21 \
+         -v $(pwd)/user_configs:/opt/inetsim/conf/user_configs:Z \
+         0x4d4c/inetsim
 #+end_src
 *** TODO Complete the command by finishing the configurations for the container either inetsim or fakenet-ng
 ** Setup REMnux container for Analysis
 This container will route all traffic to the previous container and be managed by the Pod we created earlier
 #+begin_src sh
-podman run --rm -it -u remnux --require gluetun --network container:gluetun remnux/remnux-distro:focal bash
+podman run
 #+end_src
 * Digital Forensics
 ** Phishing Email Analysis
