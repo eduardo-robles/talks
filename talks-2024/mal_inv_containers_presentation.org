@@ -73,7 +73,16 @@ thug -u win7chrome49 "[LINKGOESHERE]"
 Once it begins to “load” the suspicious site it executes any code that may be on the site. Once it is done running/loading the page it dumps a report. The report contains a summary of what occured plus you get any malicious artifacts that the page may have downloaded.
 
 In one exercise I did a suspicous page downloaded an executable and I was able to run the file command from the container to find it was indeed a malicous executable.
+** Continued...
+*Running Automater*
+
+#+begin_src python
+./Automater.py -h
+#+end_src
+
 ** Investigating a suspicious PDF
+Malicous content will be embedded. It's best to extract the content in order to inspect it.
+
 * Threat Hunting
 ** Setup REMnux container for Analysis
 This container will route all traffic to the previous container and be managed by the Pod we created earlier
