@@ -79,7 +79,39 @@ In one exercise I did a suspicous page downloaded an executable and I was able t
 #+begin_src python
 ./Automater.py -h
 #+end_src
+*Running Malworeview*
+#+begin_src bash
+/opt/malwoverview/bin/malwoverview.py
+#+end_src
+*Config file*
+#+begin_src conf
+  [VIRUSTOTAL]
+  VTAPI =
 
+  [HYBRID-ANALYSIS]
+  HAAPI =
+
+  [MALSHARE]
+  MALSHAREAPI =
+
+  [HAUSSUBMIT]
+  HAUSSUBMITAPI =
+
+  [POLYSWARM]
+  POLYAPI =
+
+  [ALIENVAULT]
+  ALIENAPI =
+
+  [MALPEDIA]
+  MALPEDIAAPI =
+
+  [TRIAGE]
+  TRIAGEAPI =
+
+  [INQUEST]
+  INQUESTAPI =
+#+end_src
 ** Investigating a suspicious PDF
 Malicous content will be embedded. It's best to extract the content in order to inspect it.
 
@@ -142,4 +174,14 @@ This container will route all traffic to the previous container and be managed b
          --network container:malTraffic \
          --privileged \
          remnux/remnux-distro:focal bash
+#+end_src
+** Fedora CoreOS
+Lightweight VM for running containers
+*** Qemu install
+#+begin_src bash
+qemu-kvm -m 2048 -cpu host -nographic -snapshot -drive if=virtio,file="/home/erobles/Downloads/fedora-coreos-40.20241006.3.0-qemu.x86_64.qcow2" -fw_cfg name=opt/com.coreos/config,file=/home/erobles/Projects/Configurations/butane/fcore_mal.ign -nic user,model=virtio,hostfwd=tcp::2222-:22
+#+end_src
+*** Virt Install
+#+begin_src bash
+virt-install --connect="qemu:///system" --name="fcore_mal" --vcpus="2" --memory="2048" --os-variant="fedora-coreos-stable" --import --graphics=none --disk="size=30,backing_store=/home/erobles/Projects/isos/fedora-coreos-40.20241006.3.0-qemu.x86_64.qcow2" --network bridge=virbr0 --qemu-commandline="-fw_cfg name=opt/com.coreos/config,file=/home/erobles/Projects/Configurations/butane/fcore_mal.ign"
 #+end_src
