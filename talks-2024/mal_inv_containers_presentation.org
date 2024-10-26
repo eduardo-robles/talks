@@ -25,8 +25,8 @@ Learn the basics of Malware Analysis and levarage tools like containers and virt
 Malware is scary. Malware is dangerous. So it's best to analyze in a contained environment.
 - Virtual Machines
 - Containers (Docker, Podman, etc)
-- *Read Only* shared storage
-** Capturing Malware Samples
+- !IDEA *Read Only* shared storage
+** Working with Malware Samples
 Safely moving malware around to later analyze can be daunting. Here are some pointers.
 - Defang ex. https://eduardorobles.com --> hxxps://eduardorobles[.]com or =superbad.exe= --> =superbad.malz=
 - Encrypted Archive with password (7zip)
@@ -46,9 +46,13 @@ REMnux offers several [[https://docs.remnux.org/install-distro/remnux-as-a-conta
 podman pull docker.io/remnux/remnux-distro:focal
 #+end_src
 *** Run REMnux as a Transient container
-#+begin_src powershell
-podman run --rm -it -u remnux remnux/remnux-distro:focal bash
+#+begin_src sh :dir /ssh:malVM:
+podman run --rm -d --name malContainer -v /var/home/core/SAMPLES:/home/remnux/files --privileged remnux/remnux-distro:focal
 #+end_src
+
+#+RESULTS:
+: 020095e44926ecf544db82dfe2b3fd02fe5cc984a7e39632293247ac146f9a65
+
 - =--rm= Remove the container after it exists (not the image)
 - =-it= Connect the container to the terminal
 - =-u remnux= Logged in user
@@ -58,60 +62,74 @@ podman run --rm -it -u remnux remnux/remnux-distro:focal bash
 * Digital Forensics
 ** Phishing Email Analysis
 *** ClamAV
-ClamAV is great to scan for malware but also can can =eml= files including email attachments.
-#+begin_src sh
-clamscan --debug /path/to/emailtoscan.eml
+ClamAV is great to scan for malware but also can can =eml= files including email attachments. Use the =--debug= flag for more info on the scan.
+#+begin_src sh :dir /ssh:malVM|podman:malContainer:/home/remnux/files :results raw
+clamscan sample.eml
 #+end_src
+
+#+RESULTS:
+/home/remnux/files/sample.eml: OK
+
+----------- SCAN SUMMARY -----------
+Known viruses: 8698885
+Engine version: 0.103.8
+Scanned directories: 0
+Scanned files: 1
+Infected files: 0
+Data scanned: 0.00 MB
+Data read: 0.00 MB (ratio 0.00:1)
+Time: 12.980 sec (0 m 12 s)
+Start Date: 2024:10:26 05:53:29
+End Date:   2024:10:26 05:53:42
+/home/remnux/files/sample.eml: OK
+
+
 ** Investigating a malicious link
 To investigate a link REMnux offers so many awesome tools. I will cover THUG, which is a “honeyclient”. A honeyclient is a tool that mimicks the behavior of a web browser. Useful for analyzing what a link does when a user clicks on it.
 
 *Running THUG*
 
-#+begin_src sh
-thug -u win7chrome49 "[LINKGOESHERE]"
+#+begin_src sh :dir /ssh:malVM|podman:malContainer:/home/remnux/files :results raw
+thug -u win7chrome49 "https://eduardorobles.com"
 #+end_src
+
+#+RESULTS:
+
 Once it begins to “load” the suspicious site it executes any code that may be on the site. Once it is done running/loading the page it dumps a report. The report contains a summary of what occured plus you get any malicious artifacts that the page may have downloaded.
 
 In one exercise I did a suspicous page downloaded an executable and I was able to run the file command from the container to find it was indeed a malicous executable.
-** Continued...
+*** Continued...
 *Running Automater*
-
-#+begin_src python
-./Automater.py -h
+#+begin_quote
+Automater is a URL/Domain, IP Address, and Md5 Hash OSINT tool aimed at making the analysis process easier for intrusion Analysts.
+#+end_quote
+Automater is a python tool found in =/usr/local/automater=
+#+begin_src sh :dir /ssh:malVM|podman:malContainer:/usr/local/automater :results raw
+  ./Automater.py https://eduardorobles.com
 #+end_src
-*Running Malworeview*
-#+begin_src bash
-/opt/malwoverview/bin/malwoverview.py
-#+end_src
-*Config file*
-#+begin_src conf
-  [VIRUSTOTAL]
-  VTAPI =
 
-  [HYBRID-ANALYSIS]
-  HAAPI =
+#+RESULTS:
+____________________     Results found for: https://eduardorobles.com     ____________________
+No results found in the FNet URL
+No results found in the Un Redirect
+[+] IP from URLVoid: No results found
+[+] Blacklist from URLVoid: No results found
+[+] Domain Age from URLVoid: No results found
+[+] Geo Coordinates from URLVoid: No results found
+[+] Country from URLVoid: No results found
+[+] pDNS data from VirusTotal: No results found
+[+] pDNS malicious URLs from VirusTotal: No results found
+[+] Malc0de Date: No results found
+[+] Malc0de IP: No results found
+[+] Malc0de Country: No results found
+[+] Malc0de ASN: No results found
+[+] Malc0de ASN Name: No results found
+[+] Malc0de MD5: No results found
+No results found in the THIP
+[+] McAfee Web Risk: No results found
+[+] McAfee Web Category: No results found
+[+] McAfee Last Seen: No results found
 
-  [MALSHARE]
-  MALSHAREAPI =
-
-  [HAUSSUBMIT]
-  HAUSSUBMITAPI =
-
-  [POLYSWARM]
-  POLYAPI =
-
-  [ALIENVAULT]
-  ALIENAPI =
-
-  [MALPEDIA]
-  MALPEDIAAPI =
-
-  [TRIAGE]
-  TRIAGEAPI =
-
-  [INQUEST]
-  INQUESTAPI =
-#+end_src
 ** Investigating a suspicious PDF
 Malicous content will be embedded. It's best to extract the content in order to inspect it.
 
@@ -174,6 +192,40 @@ This container will route all traffic to the previous container and be managed b
          --network container:malTraffic \
          --privileged \
          remnux/remnux-distro:focal bash
+#+end_src
+
+*Running Malworeview*
+#+begin_src bash
+/opt/malwoverview/bin/malwoverview.py
+#+end_src
+*Config file*
+#+begin_src conf
+  [VIRUSTOTAL]
+  VTAPI =
+
+  [HYBRID-ANALYSIS]
+  HAAPI =
+
+  [MALSHARE]
+  MALSHAREAPI =
+
+  [HAUSSUBMIT]
+  HAUSSUBMITAPI =
+
+  [POLYSWARM]
+  POLYAPI =
+
+  [ALIENVAULT]
+  ALIENAPI =
+
+  [MALPEDIA]
+  MALPEDIAAPI =
+
+  [TRIAGE]
+  TRIAGEAPI =
+
+  [INQUEST]
+  INQUESTAPI =
 #+end_src
 ** Fedora CoreOS
 Lightweight VM for running containers

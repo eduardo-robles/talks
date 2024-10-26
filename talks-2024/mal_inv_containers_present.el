@@ -24,7 +24,9 @@
   "run Clamscan on eml file"
   (demo-it-show-shell "clamscan --debug /path/to/emailtoscan.eml")) ;; use demo-it-shart-shell and the function run-remnux before this function
 
-
+(defun mal-demo/run-thug ()
+  "run thug demo"
+  (demo-it-run-in-shell "thug -u win7chrome49 https://eduardorobles.com"))
 
 (demo-it-create :windows-below :fullscreen :advance-mode :use-shell :variable-width :insert-fast :text-large
 		(demo-it-presentation "mal_inv_containers.org")
