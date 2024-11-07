@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Quick, Easy, Malware Investigations and Threat Hunting</title>
+<meta name="author" content="Eduardo Robles"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/white.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdn.jsdelivr.net/npm/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">Quick, Easy, Malware Investigations and Threat Hunting</h1><p class="subtitle"></p>
+<h2 class="date">20240216</h2><p class="date">Created: 2024-11-03 Sun 08:15</p>
+</section>
+
+<section>
+<section id="slide-orgb90b971">
+<h2 id="orgb90b971">Bsides Austin 2024</h2>
+<div class="org-center">
+<p>
+Quick, Easy, Malware Investigations and Threat Hunting
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org1cf643c">
+<h2 id="org1cf643c">About Me</h2>
+<ul>
+<li>Hi! I'm Eduardo Robles I work for County of Hidalgo IT dept as a Cybersecurity Analyst IV</li>
+<li>Founder of South Texas Linux Users Group.</li>
+<li>You can check out my skills on my blog or LinkedIn.</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org23fd3cc">
+<h2 id="org23fd3cc">Agenda</h2>
+<ol>
+<li>Learn the basics of Malware Analysis</li>
+<li>Learn some Threat Hunting skills</li>
+<li>Small look at Reverse Engineering and Digital Forensics</li>
+
+</ol>
+</section>
+</section>
+<section>
+<section id="slide-org8ebf2b4">
+<h2 id="org8ebf2b4">Malware Investigations</h2>
+<div class="outline-text-2" id="text-org8ebf2b4">
+</div>
+</section>
+<section id="slide-org7c6614c">
+<h3 id="org7c6614c">Why do internal malware analysis?</h3>
+<ul>
+<li>Existing tools Virustotal, JoeSandbox, etc.</li>
+<li>Protect sensitive information from 3rd parties.</li>
+<li>Freedom from reliance on one tool or platform.</li>
+
+</ul>
+</section>
+<section id="slide-orga1e9d18">
+<h3 id="orga1e9d18">Malware is scary and dangerous, put in a box (container).</h3>
+<p>
+Malware is scary. Malware is dangerous. So it's best to analyze in a contained environment.
+</p>
+<ul>
+<li>Virtual Machines</li>
+<li>Containers (Docker, Podman, etc)</li>
+
+</ul>
+</section>
+<section id="slide-org20691ef">
+<h3 id="org20691ef">Working with Malware Samples</h3>
+<p>
+Safely moving malware around to later analyze can be daunting. Here are some pointers.
+</p>
+</section>
+<section id="slide-org6e9dce9">
+<h4 id="org6e9dce9">Defang</h4>
+<p>
+Take a normal hyperlink or file extention and defang it so it's not active.
+</p>
+<ul>
+<li>Normal</li>
+
+</ul>
+<pre class="example" id="org2a2ac2c">
+https://eduardorobles.com or superbadmalware.exe
+</pre>
+<ul>
+<li>Defanged</li>
+
+</ul>
+<pre class="example" id="orgfb3f07d">
+hxxps://eduardorobles[.]com or superbadmalware.malz
+</pre>
+</section>
+<section id="slide-org9ca9a3a">
+<h4 id="org9ca9a3a">Encrypted Archive with a Password (7zip)</h4>
+<p>
+User 7zip to password encrypted an archive. This add an extra layer of protection by not allowing someone to accidently open the archive.
+</p>
+</section>
+<section id="slide-org631aaab">
+<h4 id="org631aaab">Disable network access</h4>
+<p>
+You can disable network access to your malware analysis station. This stops malware from communicating to a C2 infrastruture. Or you can also simulate network traffic if you want to analyze what the malware might be trying to communicate with.
+</p>
+</section>
+<section id="slide-orgf3d28d2">
+<h3 id="orgf3d28d2">REMnux</h3>
+<p>
+If you want easy button for malware analysis use <b>REMnux</b> as a VM or a container!
+<a href="https://remnux.org">https://remnux.org</a>
+</p>
+<blockquote >
+<p>
+REMnux: A Linux Toolkit for Malware Analysis
+</p>
+</blockquote>
+
+</section>
+<section id="slide-org3911b00">
+<h3 id="org3911b00">Setup REMnux in a Container</h3>
+<p>
+REMnux offers several <a href="https://docs.remnux.org/install-distro/remnux-as-a-container">container</a> images as well the full REMnux distro in a container. The container technology they chose is Docker but I have chosen to use Podman. Podman seems to have better support in Windows as well as Linux. So I can have Podman running in both the Malware Analysis station and on my Windows machine. This gives me the flexibility to test on either machine or platform.
+</p>
+</section>
+<section id="slide-org8c5698e">
+<h4 id="org8c5698e">Install REMnux container</h4>
+<div class="org-src-container">
+
+<pre  class="src src-sh"   ><code trim>podman pull docker.io/remnux/remnux-distro:focal
+</code></pre>
+</div>
+</section>
+<section id="slide-org9bbdf15">
+<h4 id="org9bbdf15">Run REMnux as a Transient container</h4>
+<div class="org-src-container">
+
+<pre  class="src src-sh"   ><code trim>podman run <span style="color: #af9fff;">\</span>
+       --rm <span style="color: #af9fff;">\</span>
+       -d <span style="color: #af9fff;">\</span>
+       --name malContainer <span style="color: #af9fff;">\</span>
+       -v /var/home/core/SAMPLES:/home/remnux/files <span style="color: #af9fff;">\</span>
+       --privileged <span style="color: #af9fff;">\</span>
+       --network none <span style="color: #af9fff;">\</span>
+       remnux/remnux-distro:focal
+</code></pre>
+</div>
+</section>
+<section id="slide-orga27406b">
+<h4 id="orga27406b">Continued</h4>
+<p>
+What the previous command did
+</p>
+<ul>
+<li><code>--rm</code> Remove the container after it exists (not the image)</li>
+<li><code>-it</code> Connect the container to the terminal</li>
+<li><code>-u remnux</code> Logged in user (optional)</li>
+<li><code>--privileged</code> Runs container with Root privileges (optional)</li>
+
+</ul>
+<p>
+= <code>--network none</code> Disables any network from the container (optional)
+</p>
+<ul>
+<li><code>remnux/remnux-distro:focal</code> Container image to use, in this case use the local image</li>
+<li><code>bash</code> Login shell</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-orga0038e0">
+<h2 id="orga0038e0">Digital Forensics</h2>
+<div class="outline-text-2" id="text-orga0038e0">
+</div>
+</section>
+<section id="slide-org548e365">
+<h3 id="org548e365">Phishing Email Analysis</h3>
+<div class="outline-text-3" id="text-org548e365">
+</div>
+</section>
+<section id="slide-org04d9513">
+<h4 id="org04d9513">ClamAV</h4>
+<p>
+ClamAV is great to scan for malware but also can can <code>eml</code> files including email attachments. Use the <code>--debug</code> flag for more info on the scan.
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-sh"   ><code trim>clamscan sample.eml
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgd0b89e6">
+<h4 id="orgd0b89e6">Continued</h4>
+<p>
+You can also use ClamAV to scan any suspicious file.
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-sh"   ><code trim>clamscan sample.zip
+</code></pre>
+</div>
+</section>
+<section id="slide-org995a253">
+<h3 id="org995a253">Tools</h3>
+<div class="outline-text-3" id="text-org995a253">
+</div>
+</section>
+<section id="slide-orgd9ad1e3">
+<h4 id="orgd9ad1e3">Cyberchef</h4>
+<p>
+A great tool!
+</p>
+<blockquote >
+<p>
+GCHQ CyberChef in a container. CyberChef is the Cyber Swiss Army Knife web app for encryption, encoding, compression and data analysis.
+</p>
+</blockquote>
+<p>
+Let's run it in a container!
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-sh"   ><code trim>podman run <span style="color: #af9fff;">\</span>
+       -d <span style="color: #af9fff;">\</span>
+       --name cyberchef <span style="color: #af9fff;">\</span>
+       -p 8000:8000 <span style="color: #af9fff;">\</span>
+       mpepping/cyberchef
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgd242c92">
+<h3 id="orgd242c92">Investigating a malicious link</h3>
+<p>
+To investigate a link REMnux offers so many awesome tools. I will cover THUG and Automater.
+</p>
+</section>
+<section id="slide-org5a1a306">
+<h4 id="org5a1a306">THUG</h4>
+<p>
+THUG is a “honeyclient”. A honeyclient is a tool that mimicks the behavior of a web browser. Useful for analyzing what a link does when a user clicks on it.
+</p>
+
+<div class="org-src-container">
+
+<pre  class="src src-sh"   ><code trim>thug -u win7chrome49 <span style="color: #af9fff;">"https://eduardorobles.com"</span>
+</code></pre>
+</div>
+</section>
+<section id="slide-org76986bc">
+<h4 id="org76986bc">Continued&#x2026;</h4>
+<p>
+Once it begins to “load” the suspicious site it executes any code that may be on the site. Once it is done running/loading the page it dumps a report. The report contains a summary of what occured plus you get any malicious artifacts that the page may have downloaded.
+</p>
+
+<p>
+In one exercise a suspicous page downloaded an executable and I was able to analyze the executable from the container and it was indeed a malicous executable. Yikes!
+</p>
+</section>
+<section id="slide-orgafe375d">
+<h4 id="orgafe375d">Automater</h4>
+<blockquote >
+<p>
+Automater is a URL/Domain, IP Address, and Md5 Hash OSINT tool aimed at making the analysis process easier for intrusion Analysts. Given a target (URL, IP, or HASH) or a file full of targets Automater will return relevant results from sources like the following: IPvoid.com, Robtex.com, Fortiguard.com, unshorten.me, Urlvoid.com, Labs.alienvault.com, ThreatExpert, VxVault, and VirusTotal.
+</p>
+</blockquote>
+</section>
+<section id="slide-orga756ddf">
+<h4 id="orga756ddf">Continued&#x2026;</h4>
+<p>
+Automater is a python tool found in <code>/usr/local/automater</code>
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-sh"   ><code trim>./Automater.py https://eduardorobles.com
+</code></pre>
+</div>
+
+
+</section>
+<section id="slide-org19e254f">
+<h3 id="org19e254f">Investigating a suspicious PDF</h3>
+<p>
+Malicous content will be embedded. It's best to extract the content in order to inspect it.
+</p>
+
+</section>
+<section id="slide-orgfec5b40">
+<h4 id="orgfec5b40">Strings</h4>
+<p>
+You can use the command <code>strings</code> to view all the different system call a file contains.
+</p>
+<pre  class="example" >
+strings sus_invoice.pdf | grep http
+</pre>
+
+<p>
+You can also pipe grep to single out things like <code>http</code> links or hashes.
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org7891df3">
+<h2 id="org7891df3">Threat Hunting</h2>
+<div class="outline-text-2" id="text-org7891df3">
+</div>
+</section>
+<section id="slide-org92f291e">
+<h3 id="org92f291e">Setup REMnux container for Analysis</h3>
+<p>
+This container will route all traffic to the previous container and be managed by the Pod we created earlier
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-sh"   ><code trim>podman run --rm -it <span style="color: #af9fff;">\</span>
+       --name malContainer <span style="color: #af9fff;">\</span>
+       --privileged <span style="color: #af9fff;">\</span>
+       remnux/remnux-distro:focal bash
+</code></pre>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-orgd239c91">
+<h2 id="orgd239c91">Conclusion</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-org9bd3fd4">
+<h2 id="org9bd3fd4">Questions</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-orgb0562aa">
+<h2 id="orgb0562aa">Thanks</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-org889085d">
+<h2 id="org889085d">Extra</h2>
+<div class="outline-text-2" id="text-org889085d">
+</div>
+</section>
+<section id="slide-org6db03f7">
+<h3 id="org6db03f7">Malicious Traffic</h3>
+<ul>
+<li>Wireshark</li>
+<li>iNetSim</li>
+<li>Firewalls</li>
+<li>DNS Sinkholes</li>
+
+</ul>
+</section>
+<section id="slide-orgb1075c8">
+<h3 id="orgb1075c8">Setup capture of malicious traffic</h3>
+<div class="outline-text-3" id="text-orgb1075c8">
+</div>
+</section>
+<section id="slide-org79e6256">
+<h4 id="org79e6256"><span class="todo TODO">TODO</span> <a href="https://hub.docker.com/r/0x4d4c/inetsim">https://hub.docker.com/r/0x4d4c/inetsim</a></h4>
+<p>
+Review docs and setup a iNetSim container so traffic can flow to it from our remnux container
+</p>
+</section>
+<section id="slide-org2c782c5">
+<h4 id="org2c782c5"><span class="todo TODO">TODO</span> <a href="https://github.com/mandiant/flare-fakenet-ng">https://github.com/mandiant/flare-fakenet-ng</a></h4>
+<p>
+Or setup fakenet-ng, experiment and use which ever is easier
+</p>
+</section>
+<section id="slide-orgfde5edf">
+<h3 id="orgfde5edf">Setup up a Pod</h3>
+<p>
+This pod creates the environment where traffic can flow between the containers.
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-sh"   ><code trim>podman pod create --name malInvs --share net -p 4443:443 -p 8043:80 -p 2143:21 -p 5343:53/udp
+</code></pre>
+</div>
+</section>
+<section id="slide-org4846ad8">
+<h3 id="org4846ad8">Setup router container</h3>
+<p>
+This container will receive all the traffic from the REMnux container
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-sh"   ><code trim>podman run -d --name malTraffic --pod malInvs <span style="color: #af9fff;">\</span>
+       --restart unless-stopped <span style="color: #af9fff;">\</span>
+       --privileged <span style="color: #af9fff;">\</span>
+       --network none <span style="color: #af9fff;">\</span>
+       -e <span style="color: #78afff;">INETSIM_START_SERVICES</span>=dns,http,https,ftp <span style="color: #af9fff;">\</span>
+       -e <span style="color: #78afff;">INETSIM_DNS_VERSION</span>=<span style="color: #af9fff;">"DNS Version"</span> <span style="color: #af9fff;">\</span>
+       -e <span style="color: #78afff;">INETSIM_FTPS_BIND_PORT</span>=21 <span style="color: #af9fff;">\</span>
+       -e <span style="color: #78afff;">INETSIM_CREATE_REPORTS</span>=yes <span style="color: #af9fff;">\</span>
+       -e <span style="color: #78afff;">INETSIM_REPORT_LANGUAGE</span>=en <span style="color: #af9fff;">\</span>
+       -v $(<span style="color: #3fb83f; font-weight: bold;">pwd</span>)/user_configs:/opt/inetsim/conf/user_configs:Z <span style="color: #af9fff;">\</span>
+       -v $(<span style="color: #3fb83f; font-weight: bold;">pwd</span>)/user_configs:/opt/inetsim/log:Z <span style="color: #af9fff;">\</span>
+       -v $(<span style="color: #3fb83f; font-weight: bold;">pwd</span>)/user_configs:/opt/inetsim/report:Z <span style="color: #af9fff;">\</span>
+       0x4d4c/inetsim
+</code></pre>
+</div>
+</section>
+<section id="slide-org810b6b7">
+<h4 id="org810b6b7"><span class="todo TODO">TODO</span> Complete the command by finishing the configurations for the container either inetsim or fakenet-ng</h4>
+</section>
+<section id="slide-orgcf41d65">
+<h3 id="orgcf41d65">Setup REMnux container for Analysis</h3>
+<p>
+This container will route all traffic to the previous container and be managed by the Pod we created earlier
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-sh"   ><code trim>podman run --rm -it <span style="color: #af9fff;">\</span>
+       --name malContainer <span style="color: #af9fff;">\</span>
+       --pod malInvs <span style="color: #af9fff;">\</span>
+       --requires malTraffic <span style="color: #af9fff;">\</span>
+       --network container:malTraffic <span style="color: #af9fff;">\</span>
+       --privileged <span style="color: #af9fff;">\</span>
+       remnux/remnux-distro:focal bash
+</code></pre>
+</div>
+
+<p>
+<b>Running Malworeview</b>
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-bash"   ><code trim>/opt/malwoverview/bin/malwoverview.py
+</code></pre>
+</div>
+<p>
+<b>Config file</b>
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-conf"   ><code trim>[<span style="color: #7fcfdf;">VIRUSTOTAL</span>]
+<span style="color: #78afff;">VTAPI</span> =
+
+[<span style="color: #7fcfdf;">HYBRID-ANALYSIS</span>]
+<span style="color: #78afff;">HAAPI</span> =
+
+[<span style="color: #7fcfdf;">MALSHARE</span>]
+<span style="color: #78afff;">MALSHAREAPI</span> =
+
+[<span style="color: #7fcfdf;">HAUSSUBMIT</span>]
+<span style="color: #78afff;">HAUSSUBMITAPI</span> =
+
+[<span style="color: #7fcfdf;">POLYSWARM</span>]
+<span style="color: #78afff;">POLYAPI</span> =
+
+[<span style="color: #7fcfdf;">ALIENVAULT</span>]
+<span style="color: #78afff;">ALIENAPI</span> =
+
+[<span style="color: #7fcfdf;">MALPEDIA</span>]
+<span style="color: #78afff;">MALPEDIAAPI</span> =
+
+[<span style="color: #7fcfdf;">TRIAGE</span>]
+<span style="color: #78afff;">TRIAGEAPI</span> =
+
+[<span style="color: #7fcfdf;">INQUEST</span>]
+<span style="color: #78afff;">INQUESTAPI</span> =
+</code></pre>
+</div>
+</section>
+<section id="slide-org8b6a871">
+<h3 id="org8b6a871">Fedora CoreOS</h3>
+<p>
+Lightweight VM for running containers
+</p>
+</section>
+<section id="slide-orgb78b983">
+<h4 id="orgb78b983">Qemu install</h4>
+<div class="org-src-container">
+
+<pre  class="src src-bash"   ><code trim>qemu-kvm -m 2048 -cpu host -nographic -snapshot -drive <span style="color: #78afff;">if</span>=virtio,<span style="color: #78afff;">file</span>=<span style="color: #af9fff;">"/home/erobles/Downloads/fedora-coreos-40.20241006.3.0-qemu.x86_64.qcow2"</span> -fw_cfg <span style="color: #78afff;">name</span>=opt/com.coreos/config,<span style="color: #78afff;">file</span>=/home/erobles/Projects/Configurations/butane/fcore_mal.ign -nic user,<span style="color: #78afff;">model</span>=virtio,<span style="color: #78afff;">hostfwd</span>=tcp::2222-:22
+</code></pre>
+</div>
+</section>
+<section id="slide-orgb3c8a1a">
+<h4 id="orgb3c8a1a">Virt Install</h4>
+<p>
+Be sure that your user is in the libvirt group. But also
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-bash"   ><code trim>virt-install --connect=<span style="color: #af9fff;">"qemu:///system"</span> --name=<span style="color: #af9fff;">"fcore_mal"</span> --vcpus=<span style="color: #af9fff;">"2"</span> --memory=<span style="color: #af9fff;">"2048"</span> --os-variant=<span style="color: #af9fff;">"fedora-coreos-stable"</span> --import --graphics=none --disk=<span style="color: #af9fff;">"size=30,backing_store=/home/erobles/Projects/isos/fedora-coreos-40.20241006.3.0-qemu.x86_64.qcow2"</span> --network <span style="color: #78afff;">bridge</span>=virbr0 --qemu-commandline=<span style="color: #af9fff;">"-fw_cfg name=opt/com.coreos/config,file=/home/erobles/Projects/Configurations/butane/fcore_mal.ign"</span>
+</code></pre>
+</div>
+<ul class="org-ul">
+<li><a id="org5063a1b"></a>Permission on qcow and ign files<br />
+<p>
+Be sure to set these on the qcow and ign files
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-bash"   ><code trim>chcon -t svirt_home_t fcore_mal.ign
+chcon -t svirt_home_t fedora-coreos-40.20241006.3.0-qemu.x86_64.qcow2
+
+</code></pre>
+</div>
+</li>
+</ul>
+</section>
+<section id="slide-orgaf04665">
+<h3 id="orgaf04665">freshclam</h3>
+<div class="org-src-container">
+
+<pre  class="src src-sh"   ><code trim>podman exec -it malContainer /bin/freshclam
+</code></pre>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org1f6ae06">
+<h2 id="org1f6ae06">Quick, Easy, Malware Investigations and Threat Hunting</h2>
+<p>
+Learn the basics of Malware Analysis and levarage tools like containers and virtual machines to do your analysis. Sharpen your Threat Hunting skills to better understand threats in your environment. Do all of this with free and open source tools to keep investigation internal and secure.
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+
+});
+
+</script>
+</body>
+</html>

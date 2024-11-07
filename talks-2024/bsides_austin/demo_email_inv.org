@@ -1,0 +1,42 @@
+#+TITLE: Suspicious Email in Finance Department
+#+AUTHOR: Eduardo Robles
+#+EMAIL: eduardo@eduardorobles.com
+
+* Investigations
+** IN-PROGRESS Investigation#001: Suspicious Email in Finance Deparment Date Created: 20241205
+:properties:
+:export_file_name: 20241205_suspicious_email_findept
+:end:
+*** Vendor
+Super Duper Mega Corps.
+*** Title
+Suspicious Email in Finance Department
+*** Assigned:
+Eduardo Robles
+*** Contacts
+- Cyber Team
+- Eduardo Robles
+*** Description
+We received a phone call to investigatge a suspicious email at the Finance department.
+*** Questions
+1. Who was the email receipient?
+2. What did they do with the suspicious email?
+3. Who else received this email?
+*** Solutions [%]
+- [ ] Investigate who may have received this email
+- [ ] Speak with employee who's email is in question and their supervisor
+- [ ] Flag the email as suspicious
+*** Notes
+:LOGBOOK:
+- Note taken on [2024-11-03 Sun 19:45] \\
+  No major issues found.
+- Note taken on [2024-11-03 Sun 19:41] \\
+  Run the eml file in clamscan
+:END:
+*** Debug/Troubleshooting Logs
+:LOGBOOK:
+:END:
+*** Email/Chat Logs
+:LOGBOOK:
+
+:END:

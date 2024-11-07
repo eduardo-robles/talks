@@ -1,0 +1,106 @@
+
+* Extra
+** Malicious Traffic
+- Wireshark
+- iNetSim
+- Firewalls
+- DNS Sinkholes
+** Setup capture of malicious traffic
+*** TODO https://hub.docker.com/r/0x4d4c/inetsim
+Review docs and setup a iNetSim container so traffic can flow to it from our remnux container
+*** TODO https://github.com/mandiant/flare-fakenet-ng
+Or setup fakenet-ng, experiment and use which ever is easier
+** Setup up a Pod
+This pod creates the environment where traffic can flow between the containers.
+#+begin_src sh
+podman pod create --name malInvs --share net -p 4443:443 -p 8043:80 -p 2143:21 -p 5343:53/udp
+#+end_src
+** Setup router container
+This container will receive all the traffic from the REMnux container
+#+begin_src sh
+  podman run -d --name malTraffic --pod malInvs \
+         --restart unless-stopped \
+         --privileged \
+         --network none \
+         -e INETSIM_START_SERVICES=dns,http,https,ftp \
+         -e INETSIM_DNS_VERSION="DNS Version" \
+         -e INETSIM_FTPS_BIND_PORT=21 \
+         -e INETSIM_CREATE_REPORTS=yes \
+         -e INETSIM_REPORT_LANGUAGE=en \
+         -v $(pwd)/user_configs:/opt/inetsim/conf/user_configs:Z \
+         -v $(pwd)/user_configs:/opt/inetsim/log:Z \
+         -v $(pwd)/user_configs:/opt/inetsim/report:Z \
+         0x4d4c/inetsim
+#+end_src
+*** TODO Complete the command by finishing the configurations for the container either inetsim or fakenet-ng
+** Setup REMnux container for Analysis
+This container will route all traffic to the previous container and be managed by the Pod we created earlier
+#+begin_src sh
+  podman run --rm -it \
+         --name malContainer \
+         --pod malInvs \
+         --requires malTraffic \
+         --network container:malTraffic \
+         --privileged \
+         remnux/remnux-distro:focal bash
+#+end_src
+
+*Running Malworeview*
+#+begin_src bash
+/opt/malwoverview/bin/malwoverview.py
+#+end_src
+*Config file*
+#+begin_src conf
+  [VIRUSTOTAL]
+  VTAPI =
+
+  [HYBRID-ANALYSIS]
+  HAAPI =
+
+  [MALSHARE]
+  MALSHAREAPI =
+
+  [HAUSSUBMIT]
+  HAUSSUBMITAPI =
+
+  [POLYSWARM]
+  POLYAPI =
+
+  [ALIENVAULT]
+  ALIENAPI =
+
+  [MALPEDIA]
+  MALPEDIAAPI =
+
+  [TRIAGE]
+  TRIAGEAPI =
+
+  [INQUEST]
+  INQUESTAPI =
+#+end_src
+** Fedora CoreOS
+Lightweight VM for running containers
+*** Qemu install
+#+begin_src bash
+qemu-kvm -m 2048 -cpu host -nographic -snapshot -drive if=virtio,file="/home/erobles/Downloads/fedora-coreos-40.20241006.3.0-qemu.x86_64.qcow2" -fw_cfg name=opt/com.coreos/config,file=/home/erobles/Projects/Configurations/butane/fcore_mal.ign -nic user,model=virtio,hostfwd=tcp::2222-:22
+#+end_src
+*** Virt Install
+Be sure that your user is in the libvirt group. But also
+#+begin_src bash
+virt-install --connect="qemu:///system" --name="fcore_mal" --vcpus="2" --memory="2048" --os-variant="fedora-coreos-stable" --import --graphics=none --disk="size=30,backing_store=/home/erobles/Projects/isos/fedora-coreos-40.20241006.3.0-qemu.x86_64.qcow2" --network bridge=virbr0 --qemu-commandline="-fw_cfg name=opt/com.coreos/config,file=/home/erobles/Projects/Configurations/butane/fcore_mal.ign"
+#+end_src
+**** Permission on qcow and ign files
+Be sure to set these on the qcow and ign files
+#+begin_src bash
+chcon -t svirt_home_t fcore_mal.ign
+chcon -t svirt_home_t fedora-coreos-40.20241006.3.0-qemu.x86_64.qcow2
+
+#+end_src
+** freshclam
+#+begin_src sh :dir /ssh:malVM:
+podman exec -it malContainer /bin/freshclam
+#+end_src
+* Quick, Easy, Malware Investigations and Threat Hunting
+
+
+Learn the basics of Malware Analysis and levarage tools like containers and virtual machines to do your analysis. Sharpen your Threat Hunting skills to better understand threats in your environment. Do all of this with free and open source tools to keep investigation internal and secure.
