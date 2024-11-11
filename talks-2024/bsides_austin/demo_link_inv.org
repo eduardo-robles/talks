@@ -1,31 +1,27 @@
-#+TITLE:
+#+TITLE: Suspicious Link in logs
 #+AUTHOR:
 #+EMAIL:
 
 * Investigations
-** IN-PROGRESS Investigation#: Suspicious Powershell Command  Date Created: 20230101
+** IN-PROGRESS Investigation#: Suspicious Link found in Logs Date Created: 20241206
 :properties:
-:export_file_name: 20230101_investigation_suspciouspowershell
+:export_file_name: 20241206_suspicious_link
 :end:
 *** Vendor
 Super Duper Cybers Corps.
 *** Title
-Suspicious Powershell Command Executed by Finance Department
+Suspicious Link found in Logs
 *** Assigned:
 Eduardo Robles
 *** Contacts
 - Cyber Team
 - Eduardo Robles
 *** Description
-Our IDR logged an a suspicious Powershell command executed from the Finance department.
+We found a suspicious link while analyzing logs in our NDR.
 *** Questions
-1. Was this an intentional execution?
-2. What is the purpose of the Powershell command?
-3. Did anyone verify with I.T department regarding the Powershell command in question?
+1. What is this link?
 *** Solutions [%]
-- [ ] Investigate the origin of the Powershell command
-- [ ] Speak with employee who's work station is in question and their supervisor
-- [ ] Flag the Powershell command as suspicious
+- [ ] Investigate the link found.
 *** Notes
 :LOGBOOK:
 :END:

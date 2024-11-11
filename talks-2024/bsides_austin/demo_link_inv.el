@@ -1,4 +1,4 @@
-;;; Malicious File Investigation - Demo
+;;; Malicious Link Investigation - Demo
 ;;
 ;; Author: Eduardo Robles <eduardorobles@proton.me>
 ;;
@@ -48,11 +48,12 @@
   "run automater on link"
   (demo-it-run-in-shell "./Automater.py 'https://eduardorobles.com'"))
 
-(demo-it-create :windows-on-right :advance-mode :use-shell :variable-width :insert-fast :text-large
+(demo-it-create :windows-below :advance-mode :use-shell :variable-width :insert-fast :text-large
 		(demo-it-presentation "demo_link_inv.org")
 		(demo-it-start-shell)
-		(demo-it-run-in-shell "ssh malVM")
-		mal-demo/run-remnux
+		;;(demo-it-run-in-shell "ssh malVM")
+		;;mal-demo/run-remnux
+		(demo-it-run-in-shell "cd files")
 		mal-demo/run-thug
 		(demo-it-run-in-shell "cd /usr/local/automater")
 		mal-demo/run-automater

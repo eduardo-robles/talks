@@ -26,10 +26,7 @@ We flagged a suspcious file in our scheduled AV scans. We extracted the file to 
 - [ ] Speak with employee who's work station is in question and their supervisor
 *** Notes
 :LOGBOOK:
-- Note taken on [2024-11-03 Sun 19:48] \\
-  Found a suspcious link the document. Will have to further analyze.
-- Note taken on [2024-11-03 Sun 19:46] \\
-  The file in question is a PDf document.
+
 :END:
 *** Debug/Troubleshooting Logs
 :LOGBOOK:

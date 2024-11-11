@@ -28,10 +28,7 @@ We received a phone call to investigatge a suspicious email at the Finance depar
 - [ ] Flag the email as suspicious
 *** Notes
 :LOGBOOK:
-- Note taken on [2024-11-03 Sun 19:45] \\
-  No major issues found.
-- Note taken on [2024-11-03 Sun 19:41] \\
-  Run the eml file in clamscan
+
 :END:
 *** Debug/Troubleshooting Logs
 :LOGBOOK:

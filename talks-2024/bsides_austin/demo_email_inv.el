@@ -1,4 +1,4 @@
-;;; Malicious File Investigation - Demo
+;;; Malicious Email Investigation - Demo
 ;;
 ;; Author: Eduardo Robles <eduardorobles@proton.me>
 ;;
@@ -45,11 +45,12 @@
   (demo-it-run-in-shell "thug -u win7chrome49 https://eduardorobles.com"))
 
 
-(demo-it-create :windows-on-right :fullscreen :advance-mode :use-shell :variable-width :insert-fast :text-large
+(demo-it-create :windows-below :advance-mode :use-shell :variable-width :insert-fast :text-large
 		(demo-it-presentation "demo_email_inv.org")
 		(demo-it-start-shell)
 		(demo-it-run-in-shell "ssh malVM")
                 mal-demo/run-remnux
+		(demo-it-run-in-shell "cd files")
                 mal-demo/eml-clamscan
 		demo-it-presentation-return-noadvance
 		)

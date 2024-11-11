@@ -41,9 +41,11 @@ https://eduardorobles.com or superbadmalware.exe
 hxxps://eduardorobles[.]com or superbadmalware.malz
 #+end_example
 *** Encrypted Archive with a Password (7zip)
-User 7zip to password encrypt an archive. This add an extra layer of protection by not allowing someone to accidently open the archive.
+Use 7zip to password encrypt an archive. This add an extra layer of protection by not allowing someone to accidently open the archive.
 *** Disable network access
-You can disable network access to your malware analysis station. This stops malware from communicating to a C2 infrastruture. Or you can also simulate network traffic if you want to analyze what the malware might be trying to communicate with.
+- You can disable network access to your malware analysis station.
+- This stops malware from communicating to a C2 infrastruture.
+- Or you can also simulate network traffic if you want to analyze what the malware might be trying to communicate with.
 ** REMnux
 If you want easy button for malware analysis use *REMnux* as a VM or a container!
 https://remnux.org
@@ -52,7 +54,10 @@ REMnux: A Linux Toolkit for Malware Analysis
 #+end_quote
 
 ** Setup REMnux in a Container
-REMnux offers several [[https://docs.remnux.org/install-distro/remnux-as-a-container][container]] images as well the full REMnux distro in a container. The container technology they chose is Docker but I have chosen to use Podman. Podman seems to have better support in Windows as well as Linux. So I can have Podman running in both the Malware Analysis station and on my Windows machine. This gives me the flexibility to test on either machine or platform.
+REMnux offers several [[https://docs.remnux.org/install-distro/remnux-as-a-container][container]] images as well the full REMnux distro in a container.
+- The container technology they chose is Docker but I have chosen to use Podman.
+- Podman seems to have better support in Windows as well as Linux.
+- So I can have Podman running in both the Malware Analysis station and on my Windows machine. This gives me the flexibility to test on either machine or platform.
 *** Install REMnux container
 #+begin_src sh :dir /ssh:malVM:
 podman pull docker.io/remnux/remnux-distro:focal
@@ -68,7 +73,7 @@ podman pull docker.io/remnux/remnux-distro:focal
          --network none \
          remnux/remnux-distro:focal
 #+end_src
-*** Continued
+#+begin_notes
 What the previous command did
 - =--rm= Remove the container after it exists (not the image)
 - =-it= Connect the container to the terminal
@@ -77,6 +82,7 @@ What the previous command did
 = =--network none= Disables any network from the container (optional)
 - =remnux/remnux-distro:focal= Container image to use, in this case use the local image
 - =bash= Login shell
+  #+end_notes
 * Digital Forensics
 ** Phishing Email Analysis
 *** ClamAV
@@ -84,12 +90,12 @@ ClamAV is great to scan for malware but also can scan =eml= files including emai
 #+begin_src sh :dir /ssh:malVM|podman:malContainer:/home/remnux/files :results raw
 clamscan sample.eml
 #+end_src
-
 *** Continued
 You can also use ClamAV to scan any suspicious file.
 #+begin_src sh :dir /ssh:malVM|podman:malContainer:/home/remnux/files :results raw
 clamscan sample.zip
 #+end_src
+
 ** Investigating a malicious link
 To investigate a link REMnux offers so many awesome tools. I will cover THUG and Automater.
 *** THUG
@@ -123,8 +129,13 @@ strings sus_invoice.pdf | grep http
 #+end_src
 
 You can also pipe grep to single out things like ~http~ links or hashes.
-
+*** Magika
+#+begin_src
+  pip install magika
+#+end_src
 * Threat Hunting
+** Velociraptor
+Worth every penny!
 ** Setup REMnux container for Analysis
 This container will run in priviledged mode and will have no network attached to it
 #+begin_src sh
@@ -134,7 +145,44 @@ This container will run in priviledged mode and will have no network attached to
          --network none \
          remnux/remnux-distro:focal bash
 #+end_src
+** Yara
+https://github.com/airbnb/binaryalert/blob/master/rules/public/eicar.yara
+#+begin_src yara :tangle /podman:malcontainer:/home/remnux/files/eicar.yara
+rule eicar_av_test {
+    /*
+       Per standard, match only if entire file is EICAR string plus optional trailing whitespace.
+       The raw EICAR string to be matched is:
+       X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*
+    */
 
+    meta:
+        description = "This is a standard AV test, intended to verify that BinaryAlert is working correctly."
+        author = "Austin Byers | Airbnb CSIRT"
+        reference = "http://www.eicar.org/86-0-Intended-use.html"
+
+    strings:
+        $eicar_regex = /^X5O!P%@AP\[4\\PZX54\(P\^\)7CC\)7\}\$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!\$H\+H\*\s*$/
+
+    condition:
+        all of them
+}
+
+rule eicar_substring_test {
+    /*
+       More generic - match just the embedded EICAR string (e.g. in packed executables, PDFs, etc)
+    */
+
+    meta:
+        description = "Standard AV test, checking for an EICAR substring"
+        author = "Austin Byers | Airbnb CSIRT"
+
+    strings:
+        $eicar_substring = "$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!"
+
+    condition:
+        all of them
+}
+#+end_src
 ** Tools
 *** Cyberchef
 A great tool!
