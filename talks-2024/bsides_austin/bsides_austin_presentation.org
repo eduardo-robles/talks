@@ -81,7 +81,7 @@ What the previous command did
 - =--network none= Disables any network from the container (optional)
 - =remnux/remnux-distro:focal= Container image to use, in this case use the local image
 - =bash= Login shell
-
+* Demo
 * Digital Forensics
 ** Phishing Email Analysis
 *** ClamAV

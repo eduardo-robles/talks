@@ -29,12 +29,12 @@
 <div class="reveal">
 <div class="slides">
 <section id="sec-title-slide"><h1 class="title">Quick, Easy, Malware Investigations and Threat Hunting</h1><p class="subtitle"></p>
-<h2 class="date">20240216</h2><p class="date">Created: 2024-11-10 Sun 09:13</p>
+<h2 class="date">20240216</h2><p class="date">Created: 2024-11-17 Sun 22:18</p>
 </section>
 
 <section>
-<section id="slide-orgd388f97">
-<h2 id="orgd388f97">Bsides Austin 2024</h2>
+<section id="slide-org2e22ae5">
+<h2 id="org2e22ae5">Bsides Austin 2024</h2>
 <div class="org-center">
 <p>
 Quick, Easy, Malware Investigations and Threat Hunting
@@ -44,8 +44,8 @@ Quick, Easy, Malware Investigations and Threat Hunting
 </section>
 </section>
 <section>
-<section id="slide-org3c4408e">
-<h2 id="org3c4408e">About Me</h2>
+<section id="slide-orgf8b2dc2">
+<h2 id="orgf8b2dc2">About Me</h2>
 <ul>
 <li>Hi! I'm Eduardo Robles I work for County of Hidalgo IT dept as a Cybersecurity Analyst IV</li>
 <li>Founder of South Texas Linux Users Group.</li>
@@ -55,8 +55,8 @@ Quick, Easy, Malware Investigations and Threat Hunting
 </section>
 </section>
 <section>
-<section id="slide-org6454afd">
-<h2 id="org6454afd">Agenda</h2>
+<section id="slide-org1dcd307">
+<h2 id="org1dcd307">Agenda</h2>
 <ol>
 <li>Learn the basics of Malware Analysis</li>
 <li>Learn some Threat Hunting skills</li>
@@ -66,13 +66,13 @@ Quick, Easy, Malware Investigations and Threat Hunting
 </section>
 </section>
 <section>
-<section id="slide-org6eddf63">
-<h2 id="org6eddf63">Malware Investigations</h2>
-<div class="outline-text-2" id="text-org6eddf63">
+<section id="slide-org5e45abf">
+<h2 id="org5e45abf">Malware Investigations</h2>
+<div class="outline-text-2" id="text-org5e45abf">
 </div>
 </section>
-<section id="slide-org23ac5bb">
-<h3 id="org23ac5bb">Why do internal malware analysis?</h3>
+<section id="slide-orgf4567bd">
+<h3 id="orgf4567bd">Why do internal malware analysis?</h3>
 <ul>
 <li>Existing tools Virustotal, JoeSandbox, etc.</li>
 <li>Protect sensitive information from 3rd parties.</li>
@@ -80,8 +80,8 @@ Quick, Easy, Malware Investigations and Threat Hunting
 
 </ul>
 </section>
-<section id="slide-orga029a06">
-<h3 id="orga029a06">Malware is scary and dangerous, put in a box (container).</h3>
+<section id="slide-org441b841">
+<h3 id="org441b841">Malware is scary and dangerous, put in a box (container).</h3>
 <p>
 Malware is scary. Malware is dangerous. So it's best to analyze in a contained environment.
 </p>
@@ -91,14 +91,14 @@ Malware is scary. Malware is dangerous. So it's best to analyze in a contained e
 
 </ul>
 </section>
-<section id="slide-orgb861b74">
-<h3 id="orgb861b74">Working with Malware Samples</h3>
+<section id="slide-org53dc217">
+<h3 id="org53dc217">Working with Malware Samples</h3>
 <p>
 Safely moving malware around to later analyze can be daunting. Here are some pointers.
 </p>
 </section>
-<section id="slide-org464d263">
-<h4 id="org464d263">Defang</h4>
+<section id="slide-orgee49fd0">
+<h4 id="orgee49fd0">Defang</h4>
 <p>
 Take a normal hyperlink or file extention and defang it so it's not active.
 </p>
@@ -106,25 +106,25 @@ Take a normal hyperlink or file extention and defang it so it's not active.
 <li>Normal</li>
 
 </ul>
-<pre class="example" id="org3689fd9">
+<pre class="example" id="orgf886aea">
 https://eduardorobles.com or superbadmalware.exe
 </pre>
 <ul>
 <li>Defanged</li>
 
 </ul>
-<pre class="example" id="org93727af">
+<pre class="example" id="org02f8e5b">
 hxxps://eduardorobles[.]com or superbadmalware.malz
 </pre>
 </section>
-<section id="slide-org50aa8c6">
-<h4 id="org50aa8c6">Encrypted Archive with a Password (7zip)</h4>
+<section id="slide-org55628a0">
+<h4 id="org55628a0">Encrypted Archive with a Password (7zip)</h4>
 <p>
 Use 7zip to password encrypt an archive. This add an extra layer of protection by not allowing someone to accidently open the archive.
 </p>
 </section>
-<section id="slide-orgdfbab64">
-<h4 id="orgdfbab64">Disable network access</h4>
+<section id="slide-org3e2725d">
+<h4 id="org3e2725d">Disable network access</h4>
 <ul>
 <li>You can disable network access to your malware analysis station.</li>
 <li>This stops malware from communicating to a C2 infrastruture.</li>
@@ -132,8 +132,8 @@ Use 7zip to password encrypt an archive. This add an extra layer of protection b
 
 </ul>
 </section>
-<section id="slide-org3e88e69">
-<h3 id="org3e88e69">REMnux</h3>
+<section id="slide-org22ce87e">
+<h3 id="org22ce87e">REMnux</h3>
 <p>
 If you want easy button for malware analysis use <b>REMnux</b> as a VM or a container!
 <a href="https://remnux.org">https://remnux.org</a>
@@ -145,8 +145,8 @@ REMnux: A Linux Toolkit for Malware Analysis
 </blockquote>
 
 </section>
-<section id="slide-org8cc472f">
-<h3 id="org8cc472f">Setup REMnux in a Container</h3>
+<section id="slide-org75b9f87">
+<h3 id="org75b9f87">Setup REMnux in a Container</h3>
 <p>
 REMnux offers several <a href="https://docs.remnux.org/install-distro/remnux-as-a-container">container</a> images as well the full REMnux distro in a container.
 </p>
@@ -157,16 +157,16 @@ REMnux offers several <a href="https://docs.remnux.org/install-distro/remnux-as-
 
 </ul>
 </section>
-<section id="slide-org6330285">
-<h4 id="org6330285">Install REMnux container</h4>
+<section id="slide-org68f2f74">
+<h4 id="org68f2f74">Install REMnux container</h4>
 <div class="org-src-container">
 
 <pre  class="src src-sh"   ><code trim>podman pull docker.io/remnux/remnux-distro:focal
 </code></pre>
 </div>
 </section>
-<section id="slide-org3a53d39">
-<h4 id="org3a53d39">Run REMnux as a Transient container</h4>
+<section id="slide-org5411264">
+<h4 id="org5411264">Run REMnux as a Transient container</h4>
 <div class="org-src-container">
 
 <pre  class="src src-sh"   ><code trim>podman run <span style="color: #af9fff;">\</span>
@@ -179,7 +179,6 @@ REMnux offers several <a href="https://docs.remnux.org/install-distro/remnux-as-
        remnux/remnux-distro:focal
 </code></pre>
 </div>
-<aside class="notes">
 <p>
 What the previous command did
 </p>
@@ -188,33 +187,31 @@ What the previous command did
 <li><code>-it</code> Connect the container to the terminal</li>
 <li><code>-u remnux</code> Logged in user (optional)</li>
 <li><code>--privileged</code> Runs container with Root privileges (optional)</li>
-
-</ul>
-<p>
-= <code>--network none</code> Disables any network from the container (optional)
-</p>
-<ul>
+<li><code>--network none</code> Disables any network from the container (optional)</li>
 <li><code>remnux/remnux-distro:focal</code> Container image to use, in this case use the local image</li>
 <li><code>bash</code> Login shell</li>
 
 </ul>
-
-</aside>
 </section>
 </section>
 <section>
-<section id="slide-org8353c45">
-<h2 id="org8353c45">Digital Forensics</h2>
-<div class="outline-text-2" id="text-org8353c45">
+<section id="slide-org359457b">
+<h2 id="org359457b">Demo</h2>
+</section>
+</section>
+<section>
+<section id="slide-orge65a7ef">
+<h2 id="orge65a7ef">Digital Forensics</h2>
+<div class="outline-text-2" id="text-orge65a7ef">
 </div>
 </section>
-<section id="slide-org17061f9">
-<h3 id="org17061f9">Phishing Email Analysis</h3>
-<div class="outline-text-3" id="text-org17061f9">
+<section id="slide-org68e99c4">
+<h3 id="org68e99c4">Phishing Email Analysis</h3>
+<div class="outline-text-3" id="text-org68e99c4">
 </div>
 </section>
-<section id="slide-org4c26cfe">
-<h4 id="org4c26cfe">ClamAV</h4>
+<section id="slide-orgd75a12c">
+<h4 id="orgd75a12c">ClamAV</h4>
 <p>
 ClamAV is great to scan for malware but also can scan <code>eml</code> files including email attachments. Use the <code>--debug</code> flag for more info on the scan.
 </p>
@@ -224,8 +221,8 @@ ClamAV is great to scan for malware but also can scan <code>eml</code> files inc
 </code></pre>
 </div>
 </section>
-<section id="slide-orgec0f4e7">
-<h4 id="orgec0f4e7">Continued</h4>
+<section id="slide-org51aaa37">
+<h4 id="org51aaa37">Continued</h4>
 <p>
 You can also use ClamAV to scan any suspicious file.
 </p>
@@ -236,14 +233,14 @@ You can also use ClamAV to scan any suspicious file.
 </div>
 
 </section>
-<section id="slide-org6ee9cd8">
-<h3 id="org6ee9cd8">Investigating a malicious link</h3>
+<section id="slide-orgeefc449">
+<h3 id="orgeefc449">Investigating a malicious link</h3>
 <p>
 To investigate a link REMnux offers so many awesome tools. I will cover THUG and Automater.
 </p>
 </section>
-<section id="slide-org627e9d6">
-<h4 id="org627e9d6">THUG</h4>
+<section id="slide-org5c34d40">
+<h4 id="org5c34d40">THUG</h4>
 <p>
 THUG is a “honeyclient”. A honeyclient is a tool that mimicks the behavior of a web browser. Useful for analyzing what a link does when a user clicks on it.
 </p>
@@ -254,8 +251,8 @@ THUG is a “honeyclient”. A honeyclient is a tool that mimicks the behavior o
 </code></pre>
 </div>
 </section>
-<section id="slide-org7ae69de">
-<h4 id="org7ae69de">Continued&#x2026;</h4>
+<section id="slide-orgd8e5ca5">
+<h4 id="orgd8e5ca5">Continued&#x2026;</h4>
 <p>
 Once it begins to “load” the suspicious site it executes any code that may be on the site. Once it is done running/loading the page it dumps a report. The report contains a summary of what occured plus you get any malicious artifacts that the page may have downloaded.
 </p>
@@ -264,16 +261,16 @@ Once it begins to “load” the suspicious site it executes any code that may b
 In one exercise a suspicous page downloaded an executable and I was able to analyze the executable from the container and it was indeed a malicous executable. Yikes!
 </p>
 </section>
-<section id="slide-orgc3c5415">
-<h4 id="orgc3c5415">Automater</h4>
+<section id="slide-orgbc458a3">
+<h4 id="orgbc458a3">Automater</h4>
 <blockquote >
 <p>
 Automater is a URL/Domain, IP Address, and Md5 Hash OSINT tool aimed at making the analysis process easier for intrusion Analysts. Given a target (URL, IP, or HASH) or a file full of targets Automater will return relevant results from sources like the following: IPvoid.com, Robtex.com, Fortiguard.com, unshorten.me, Urlvoid.com, Labs.alienvault.com, ThreatExpert, VxVault, and VirusTotal.
 </p>
 </blockquote>
 </section>
-<section id="slide-org8895ed9">
-<h4 id="org8895ed9">Continued&#x2026;</h4>
+<section id="slide-org8f6989a">
+<h4 id="org8f6989a">Continued&#x2026;</h4>
 <p>
 Automater is a python tool found in <code>/usr/local/automater</code>
 </p>
@@ -285,15 +282,15 @@ Automater is a python tool found in <code>/usr/local/automater</code>
 
 
 </section>
-<section id="slide-org87cad40">
-<h3 id="org87cad40">Investigating a suspicious PDF</h3>
+<section id="slide-orga0e554a">
+<h3 id="orga0e554a">Investigating a suspicious PDF</h3>
 <p>
 Malicous content will be embedded. It's best to extract the content in order to inspect it.
 </p>
 
 </section>
-<section id="slide-orgcb13427">
-<h4 id="orgcb13427">Strings</h4>
+<section id="slide-orgda037ed">
+<h4 id="orgda037ed">Strings</h4>
 <p>
 You can use the command <code>strings</code> to view all the different system call a file contains.
 </p>
@@ -305,27 +302,27 @@ strings sus_invoice.pdf | grep http
 You can also pipe grep to single out things like <code>http</code> links or hashes.
 </p>
 </section>
-<section id="slide-org0ddeddb">
-<h4 id="org0ddeddb">Magika</h4>
+<section id="slide-org9e0bd5b">
+<h4 id="org9e0bd5b">Magika</h4>
 <pre  class="example" >
 pip install magika
 </pre>
 </section>
 </section>
 <section>
-<section id="slide-org3d5c7ef">
-<h2 id="org3d5c7ef">Threat Hunting</h2>
-<div class="outline-text-2" id="text-org3d5c7ef">
+<section id="slide-orgdbcec38">
+<h2 id="orgdbcec38">Threat Hunting</h2>
+<div class="outline-text-2" id="text-orgdbcec38">
 </div>
 </section>
-<section id="slide-org41cb2cc">
-<h3 id="org41cb2cc">Velociraptor</h3>
+<section id="slide-org26d02dd">
+<h3 id="org26d02dd">Velociraptor</h3>
 <p>
 Worth every penny!
 </p>
 </section>
-<section id="slide-orga3f585a">
-<h3 id="orga3f585a">Setup REMnux container for Analysis</h3>
+<section id="slide-org4495f35">
+<h3 id="org4495f35">Setup REMnux container for Analysis</h3>
 <p>
 This container will run in priviledged mode and will have no network attached to it
 </p>
@@ -339,8 +336,8 @@ This container will run in priviledged mode and will have no network attached to
 </code></pre>
 </div>
 </section>
-<section id="slide-org15b19f3">
-<h3 id="org15b19f3">Yara</h3>
+<section id="slide-org0db36a0">
+<h3 id="org0db36a0">Yara</h3>
 <p>
 <a href="https://github.com/airbnb/binaryalert/blob/master/rules/public/eicar.yara">https://github.com/airbnb/binaryalert/blob/master/rules/public/eicar.yara</a>
 </p>
@@ -383,13 +380,13 @@ This container will run in priviledged mode and will have no network attached to
 </code></pre>
 </div>
 </section>
-<section id="slide-org6fd3c03">
-<h3 id="org6fd3c03">Tools</h3>
-<div class="outline-text-3" id="text-org6fd3c03">
+<section id="slide-orge1b9fb2">
+<h3 id="orge1b9fb2">Tools</h3>
+<div class="outline-text-3" id="text-orge1b9fb2">
 </div>
 </section>
-<section id="slide-org01e89b4">
-<h4 id="org01e89b4">Cyberchef</h4>
+<section id="slide-org29a9578">
+<h4 id="org29a9578">Cyberchef</h4>
 <p>
 A great tool!
 </p>
@@ -413,20 +410,20 @@ Let's run it in a container!
 </section>
 </section>
 <section>
-<section id="slide-org23757f9">
-<h2 id="org23757f9">Conclusion</h2>
+<section id="slide-org358d480">
+<h2 id="org358d480">Conclusion</h2>
 
 </section>
 </section>
 <section>
-<section id="slide-org2b6d8ae">
-<h2 id="org2b6d8ae">Questions</h2>
+<section id="slide-orgdab26e1">
+<h2 id="orgdab26e1">Questions</h2>
 
 </section>
 </section>
 <section>
-<section id="slide-orgf2faaf0">
-<h2 id="orgf2faaf0">Thanks</h2>
+<section id="slide-org285c49f">
+<h2 id="org285c49f">Thanks</h2>
 </section>
 </section>
 </div>
