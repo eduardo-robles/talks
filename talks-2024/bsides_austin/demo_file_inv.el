@@ -52,6 +52,10 @@
   "run strings on a file"
   (demo-it-run-in-shell "strings invoice1_legit.pdf | grep http"))
 
+(defun mal-demo/yara-file0 ()
+  "run yara on a file"
+  (demo-it-run-in-shell "yara -s eicar.yara sample.txt"))
+
 (demo-it-create :windows-below :advance-mode :use-shell :variable-width :insert-fast :text-large
 		(demo-it-presentation "demo_file_inv.org")
 		(demo-it-start-shell)
@@ -61,6 +65,7 @@
 		mal-demo/strings-file0
 		mal-demo/strings-file1
 		mal-demo/pdf-clamscan
+		mal-demo/yara-file0
    		demo-it-presentation-return-noadvance
 		)
 

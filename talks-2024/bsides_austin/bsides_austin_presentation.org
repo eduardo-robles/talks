@@ -7,8 +7,22 @@
 #+TITLE: Quick, Easy, Malware Investigations and Threat Hunting
 
 * Bsides Austin 2024
+#+begin_example
+▀█████████▄     ▄████████  ▄█  ████████▄     ▄████████    ▄████████        ▄████████ ███    █▄     ▄████████     ███      ▄█  ███▄▄▄▄
+  ███    ███   ███    ███ ███  ███   ▀███   ███    ███   ███    ███       ███    ███ ███    ███   ███    ███ ▀█████████▄ ███  ███▀▀▀██▄
+  ███    ███   ███    █▀  ███▌ ███    ███   ███    █▀    ███    █▀        ███    ███ ███    ███   ███    █▀     ▀███▀▀██ ███▌ ███   ███
+ ▄███▄▄▄██▀    ███        ███▌ ███    ███  ▄███▄▄▄       ███              ███    ███ ███    ███   ███            ███   ▀ ███▌ ███   ███
+▀▀███▀▀▀██▄  ▀███████████ ███▌ ███    ███ ▀▀███▀▀▀     ▀███████████     ▀███████████ ███    ███ ▀███████████     ███     ███▌ ███   ███
+  ███    ██▄          ███ ███  ███    ███   ███    █▄           ███       ███    ███ ███    ███          ███     ███     ███  ███   ███
+  ███    ███    ▄█    ███ ███  ███   ▄███   ███    ███    ▄█    ███       ███    ███ ███    ███    ▄█    ███     ███     ███  ███   ███
+▄█████████▀   ▄████████▀  █▀   ████████▀    ██████████  ▄████████▀        ███    █▀  ████████▀   ▄████████▀     ▄████▀   █▀    ▀█   █▀
+
+#+end_example
+
 #+begin_center
 Quick, Easy, Malware Investigations and Threat Hunting
+by
+Eduardo Robles
 #+end_center
 
 * About Me
@@ -50,7 +64,7 @@ Use 7zip to password encrypt an archive. This add an extra layer of protection b
 If you want easy button for malware analysis use *REMnux* as a VM or a container!
 https://remnux.org
 #+begin_quote
-REMnux: A Linux Toolkit for Malware Analysis
+"REMnux: A Linux Toolkit for Malware Analysis"
 #+end_quote
 
 ** Setup REMnux in a Container
@@ -66,16 +80,17 @@ podman pull docker.io/remnux/remnux-distro:focal
 #+begin_src sh
   podman run \
          --rm \
-         -d \
+         -it \
          --name malContainer \
          -v /var/home/core/SAMPLES:/home/remnux/files \
          --privileged \
          --network none \
-         remnux/remnux-distro:focal
+         remnux/remnux-distro:focal bash
 #+end_src
 What the previous command did
 - =--rm= Remove the container after it exists (not the image)
 - =-it= Connect the container to the terminal
+- =--name= Name the container
 - =-u remnux= Logged in user (optional)
 - =--privileged= Runs container with Root privileges (optional)
 - =--network none= Disables any network from the container (optional)
@@ -109,7 +124,7 @@ Once it begins to “load” the suspicious site it executes any code that may b
 In one exercise a suspicous page downloaded an executable and I was able to analyze the executable from the container and it was indeed a malicous executable. Yikes!
 *** Automater
 #+begin_quote
-Automater is a URL/Domain, IP Address, and Md5 Hash OSINT tool aimed at making the analysis process easier for intrusion Analysts. Given a target (URL, IP, or HASH) or a file full of targets Automater will return relevant results from sources like the following: IPvoid.com, Robtex.com, Fortiguard.com, unshorten.me, Urlvoid.com, Labs.alienvault.com, ThreatExpert, VxVault, and VirusTotal.
+"Automater is a URL/Domain, IP Address, and Md5 Hash OSINT tool aimed at making the analysis process easier for intrusion Analysts. Given a target (URL, IP, or HASH) or a file full of targets Automater will return relevant results from sources like the following: IPvoid.com, Robtex.com, Fortiguard.com, unshorten.me, Urlvoid.com, Labs.alienvault.com, ThreatExpert, VxVault, and VirusTotal."
 #+end_quote
 *** Continued...
 Automater is a python tool found in =/usr/local/automater=
@@ -134,7 +149,8 @@ You can also pipe grep to single out things like ~http~ links or hashes.
 #+end_src
 * Threat Hunting
 ** Velociraptor
-Worth every penny!
+"Velociraptor is an advanced digital forensic and incident response tool that enhances your visibility into your endpoints."
+https://docs.velociraptor.app/
 ** Setup REMnux container for Analysis
 This container will run in priviledged mode and will have no network attached to it
 #+begin_src sh
@@ -197,7 +213,8 @@ Let's run it in a container!
          mpepping/cyberchef
 #+end_src
 * Conclusion
-
+- Hope you learned some quick tools to add to your daily workflow.
+- Analyzing malware can be tricky but it shouldn't be intimidating.
 * Questions
 
 * Thanks

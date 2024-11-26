@@ -34,7 +34,7 @@
 
 (defun mal-demo/eml-clamscan ()
   "run Clamscan on eml file"
-  (demo-it-run-in-shell "clamscan sample.eml")) ;; use demo-it-shart-shell and the function run-remnux before this function
+  (demo-it-run-in-shell "clamscan Hell0.eml")) ;; use demo-it-shart-shell and the function run-remnux before this function
 
 (defun mal-demo/pdf-clamscan ()
   "run Clamscan on eml file"

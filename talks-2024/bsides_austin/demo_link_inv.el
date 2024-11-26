@@ -53,7 +53,7 @@
 		(demo-it-start-shell)
 		;;(demo-it-run-in-shell "ssh malVM")
 		;;mal-demo/run-remnux
-		(demo-it-run-in-shell "cd files")
+		;;(demo-it-run-in-shell "cd files")
 		mal-demo/run-thug
 		(demo-it-run-in-shell "cd /usr/local/automater")
 		mal-demo/run-automater
