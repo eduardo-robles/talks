@@ -24,6 +24,10 @@
   "exec into REMnux Container"
   (demo-it-run-in-shell "podman exec -it malContainer -w /home/remnux/files /bin/bash"))
 
+(defun mal-demo/run-clamscan ()
+  "run clamscan container"
+  (demo-it-run-in-shell "podman run --rm -it --name clamscan -v /var/home/core/SAMPLES:/scandir --privileged clamav/clamav:latest bash"))
+
 (defun mal-demo/init-clamscan ()
   "initialize/update clamscan"
   (demo-it-run-in-shell "freshclam")) ;; get updated command
@@ -34,7 +38,7 @@
 
 (defun mal-demo/eml-clamscan ()
   "run Clamscan on eml file"
-  (demo-it-run-in-shell "clamscan Hell0.eml")) ;; use demo-it-shart-shell and the function run-remnux before this function
+  (demo-it-run-in-shell "clamscan Hell0.eml --debug")) ;; use demo-it-shart-shell and the function run-remnux before this function
 
 (defun mal-demo/pdf-clamscan ()
   "run Clamscan on eml file"
@@ -51,6 +55,7 @@
 		(demo-it-run-in-shell "ssh malVM")
                 mal-demo/run-remnux
 		(demo-it-run-in-shell "cd files")
+		mal-demo/init-clamscan
                 mal-demo/eml-clamscan
 		demo-it-presentation-return-noadvance
 		)
