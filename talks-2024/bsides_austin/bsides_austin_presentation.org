@@ -33,6 +33,8 @@ Eduardo Robles
 1. Learn the basics of Malware Analysis
 2. Learn some Threat Hunting skills
 3. Small look at Reverse Engineering and Digital Forensics
+* Disclaimer
+Everything in this talk is my own research and opinion.
 * Malware Investigations
 ** Why do internal malware analysis?
 - Existing tools Virustotal, JoeSandbox, etc.
@@ -69,8 +71,8 @@ https://remnux.org
 
 ** Setup REMnux in a Container
 REMnux offers several [[https://docs.remnux.org/install-distro/remnux-as-a-container][container]] images as well the full REMnux distro in a container.
-- The container technology they chose is Docker but I have chosen to use Podman.
-- Podman seems to have better support in Windows as well as Linux.
+- They chose Docker in their documentation but I have chosen to use Podman.
+- Podman was easier to install and use in Windows as well as Linux.
 - So I can have Podman running in both the Malware Analysis station and on my Windows machine. This gives me the flexibility to test on either machine or platform.
 *** Install REMnux container
 #+begin_src sh
@@ -134,7 +136,7 @@ Automater is a python tool found in =/usr/local/automater=
 
 
 ** Investigating a suspicious PDF
-Malicous content will be embedded. It's best to extract the content in order to inspect it.
+Malicious content will be embedded. It's best to extract the content in order to inspect it.
 
 *** Strings
 You can use the command =strings= to view all the different system call a file contains.

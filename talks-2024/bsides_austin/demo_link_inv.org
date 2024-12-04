@@ -1,6 +1,6 @@
 #+TITLE: Suspicious Link in logs
-#+AUTHOR:
-#+EMAIL:
+#+AUTHOR: Eduardo Robles
+#+EMAIL: eduardorobles@proton.me
 
 * Investigations
 ** IN-PROGRESS Investigation#: Suspicious Link found in Logs Date Created: 20241206
@@ -17,7 +17,7 @@ Eduardo Robles
 - Cyber Team
 - Eduardo Robles
 *** Description
-We found a suspicious link while analyzing logs in our NDR.
+We found a suspicious link while analyzing logs in our IDR.
 *** Questions
 1. What is this link?
 *** Solutions [%]
