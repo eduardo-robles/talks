@@ -32,7 +32,7 @@ Eduardo Robles
 * Agenda
 1. Learn the basics of Malware Analysis
 2. Learn some Threat Hunting skills
-3. Small look at Reverse Engineering and Digital Forensics
+3. Small look into Digital Forensics
 * Disclaimer
 Everything in this talk is my own research and opinion.
 * Malware Investigations
@@ -41,7 +41,7 @@ Everything in this talk is my own research and opinion.
 - Protect sensitive information from 3rd parties.
 - Freedom from reliance on one tool or platform.
 ** Malware is scary and dangerous, put in a box (container).
-Malware is scary. Malware is dangerous. So it's best to analyze in a contained environment.
+Malware is scary. Malware is dangerous. So it's best to analyze in a "contained" environment.
 - Virtual Machines
 - Containers (Docker, Podman, etc)
 ** Working with Malware Samples
@@ -153,6 +153,10 @@ You can also pipe grep to single out things like ~http~ links or hashes.
 ** Velociraptor
 "Velociraptor is an advanced digital forensic and incident response tool that enhances your visibility into your endpoints."
 https://docs.velociraptor.app/
+
+#+begin_example
+Velociraptor.exe gui
+#+end_example
 ** Setup REMnux container for Analysis
 This container will run in priviledged mode and will have no network attached to it
 #+begin_src sh
@@ -216,7 +220,9 @@ Let's run it in a container!
 #+end_src
 * Conclusion
 - Hope you learned some quick tools to add to your daily workflow.
+- Automation?? A.I?? ¯\_(ツ)_/¯
 - Analyzing malware can be tricky but it shouldn't be intimidating.
 * Questions
 
 * Thanks
+¯\_(ツ)_/¯

@@ -42,7 +42,7 @@
 
 (defun mal-demo/run-thug ()
   "run thug demo"
-  (demo-it-run-in-shell "thug -u win7chrome49 'https://eduardorobles.com'"))
+  (demo-it-run-in-shell "thug -n /tmp -Z -F -u win7chrome49 'https://eduardorobles.com'"))
 
 (defun mal-demo/run-automater ()
   "run automater on link"

@@ -54,7 +54,7 @@
 
 (defun mal-demo/yara-file0 ()
   "run yara on a file"
-  (demo-it-run-in-shell "yara -s eicar.yara sample.txt"))
+  (demo-it-run-in-shell "yara -s eicar.yara invoice1_legit.pdf"))
 
 (demo-it-create :windows-below :advance-mode :use-shell :variable-width :insert-fast :text-large
 		(demo-it-presentation "demo_file_inv.org")
