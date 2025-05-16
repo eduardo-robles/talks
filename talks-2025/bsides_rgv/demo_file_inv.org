@@ -1,0 +1,38 @@
+#+TITLE: Investigate a Suspicious File
+#+AUTHOR: Eduardo Robles
+#+EMAIL: eduardorobles@proton.me
+
+* Investigations
+** IN-PROGRESS Investigation#: Suspicious File in HR department  Date Created: 20241206
+:properties:
+:export_file_name: 20241206_inv_suspicous_file
+:end:
+*** Company/Vendor
+Super Duper Mega Corps.
+*** Title
+Suspicious File in HR department
+*** Assigned:
+Eduardo Robles
+*** Contacts
+- Cyber Team
+- Eduardo Robles
+*** Description
+We flagged a suspcious file in our scheduled AV scans. We extracted the file to further analyze its properties.
+*** Questions
+1. When was this file created?
+2. What is the purpose of this file?
+*** Solutions [%]
+- [ ] Investigate the origin of the file
+- [ ] Speak with employee who's work station is in question and their supervisor
+*** Notes
+:LOGBOOK:
+
+:END:
+*** Debug/Troubleshooting Logs
+:LOGBOOK:
+
+:END:
+*** Email/Chat Logs
+:LOGBOOK:
+
+:END:

@@ -1,0 +1,34 @@
+#+TITLE: Suspicious Link in logs
+#+AUTHOR: Eduardo Robles
+#+EMAIL: eduardorobles@proton.me
+
+* Investigations
+** IN-PROGRESS Investigation#: Suspicious Link found in Logs Date Created: 20241206
+:properties:
+:export_file_name: 20241206_suspicious_link
+:end:
+*** Vendor
+Super Duper Cybers Corps.
+*** Title
+Suspicious Link found in Logs
+*** Assigned:
+Eduardo Robles
+*** Contacts
+- Cyber Team
+- Eduardo Robles
+*** Description
+We found a suspicious link while analyzing logs in our IDR.
+*** Questions
+1. What is this link?
+*** Solutions [%]
+- [ ] Investigate the link found.
+*** Notes
+:LOGBOOK:
+:END:
+*** Debug/Troubleshooting Logs
+:LOGBOOK:
+:END:
+*** Email/Chat Logs
+:LOGBOOK:
+
+:END:
