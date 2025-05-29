@@ -56,9 +56,9 @@
   "run yara on a file"
   (demo-it-run-in-shell "yara -s eicar.yara invoice1_legit.pdf"))
 
-(demo-it-create :windows-below :advance-mode :use-shell :variable-width :insert-fast :text-large
+(demo-it-create :single-window :advance-mode :use-shell :variable-width :insert-fast :text-large
 		(demo-it-presentation "demo_file_inv.org")
-		(demo-it-start-shell)
+		(demo-it-start-shell nil nil "malVM" :right :large 120)
 		;;(demo-it-run-in-shell "ssh malVM")
 		;;mal-demo/run-remnux
 		;;(demo-it-run-in-shell "cd files")

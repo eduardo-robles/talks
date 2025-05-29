@@ -2,11 +2,11 @@
 #+REVEAL_THEME: white
 #+REVEAL_SLIDE:
 #+OPTIONS: toc:nil num:nil
-#+DATE: 20240216
+#+DATE: 20250531
 #+AUTHOR: Eduardo Robles
 #+TITLE: Quick, Easy, Malware Investigations and Threat Hunting
 
-* Bsides Austin 2024
+* BSIDEDS RGV 2025
 #+begin_center
 Quick, Easy, Malware Investigations and Threat Hunting
 #+end_center
@@ -85,8 +85,14 @@ What the previous command did
   #+end_notes
 
 * Demo
-Hello I'm Eduardo! Welcome to a day in the life of a...
 
+* Email Investigation
+Let's do an email investigation and write an email report on our findings.
+* Suspicious PDF Investigation
+Let's investigate a suspicious file with some basic command line applications.
+
+* Suspicious Link Investigation
+Let's investigate a suspicious link with Open Source tools.
 * Conclusion
 
 * Questions

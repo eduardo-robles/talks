@@ -40,8 +40,55 @@
   "run thug demo"
   (demo-it-run-in-shell "thug -u win7chrome49 https://eduardorobles.com"))
 
-(demo-it-create :windows-below :fullscreen :simple-mode :use-shell :variable-width :insert-fast :text-large
-		(demo-it-presentation "bsides_austin_presentation.org")
+(defun mal-demo/show-template-email ()
+  "show template"
+  (demo-it-load-file "demo_email_inv.org"))
+
+(defun mal-demo/show-template-email-clamav ()
+  "show clamav section"
+  (kill-buffer "demo_email_inv.org")
+  (demo-it-load-part-file "demo_email_inv.org" :line 33 37 :right :large 120))
+
+(defun mal-demo/show-analysis-email ()
+  "show analysis of email"
+  (demo-it-load-file "demo_email_analysis.org"))
+
+(defun mal-demo/clean-up0 ()
+  "closes all open buffers with files"
+  (interactive)
+  (ignore-errors
+    (kill-buffer "demo_email_inv.org")))
+
+(defun mal-demo/show-template-file ()
+  "show template"
+  (demo-it-load-file "demo_file_inv.org"))
+
+(defun mal-demo/show-analysis-file ()
+  "show analysis of email"
+  (demo-it-load-file "demo_file_analysis.org"))
+
+(defun mal-demo/clean-up1 ()
+  "closes all open buffers with files"
+  (interactive)
+  (ignore-errors
+    (kill-buffer "demo_file_inv.org")))
+
+(defun mal-demo/show-template-link ()
+  "show template"
+  (demo-it-load-file "demo_link_inv.org"))
+
+(defun mal-demo/show-analysis-link ()
+  "show analysis of email"
+  (demo-it-load-file "demo_link_analysis.org"))
+
+(defun mal-demo/clean-up2 ()
+  "closes all open buffers with files"
+  (interactive)
+  (ignore-errors
+    (kill-buffer "demo_link_inv.org")))
+
+(demo-it-create :advanced-mode :use-eshell :variable-width :insert-fast :text-large
+		(demo-it-presentation "bside_rgv_presentation_draft.org")
 		;;Quick, Easy, Malware Investigations and Threat Hunting
 		demo-it-presentation-advance
 		;;About Me
@@ -71,45 +118,75 @@
 		;;Run REMnux as a Transient container
 		demo-it-presentation-advance
 		;;Demo
-		demo-it-presentation-advance
+		;;demo-it-presentation-return
+		;;Email Investigation
+		demo-it-presentation-return
+		;;Show Template
+		mal-demo/show-template-email
+		;;Go back
+		demo-it-presentation-return-noadvance
+		;;Show Email Analysis
+		mal-demo/show-analysis-email
+		;;Close lingering buffer
+		mal-demo/clean-up0
+		;;Suspicious PDF Investigation
+		demo-it-presentation-return
+		;;Show Template
+		mal-demo/show-template-file
+		;;Go back
+		demo-it-presentation-return-noadvance
+		;;Show PDF analysis
+		mal-demo/show-analysis-file
+		;;Close lingering buffer
+		mal-demo/clean-up1
+		;;Supicious Link Investigation
+		demo-it-presentation-return
+		;;Show Template
+		mal-demo/show-template-link
+		;;Go back
+		demo-it-presentation-return-noadvance
+		;;Show Link analysis
+		mal-demo/show-analysis-link
+		;;Close lingering buffer
+		mal-demo/clean-up2
 		;;Digital Forensics
-		demo-it-presentation-advance
+		;;demo-it-presentation-advance
 		;;Phishing Email Analysis
-		demo-it-presentation-advance
+		;;demo-it-presentation-advance
 		;;Clamav
-		demo-it-presentation-advance
+		;;demo-it-presentation-advance
 		;;Continued
-		demo-it-presentation-advance
+		;;demo-it-presentation-advance
 		;;Investigating a malicous link
-		demo-it-presentation-advance
+		;;demo-it-presentation-advance
 		;;Investigating a malicious link (THUG)
-		demo-it-presentation-advance
+		;;demo-it-presentation-advance
 		;;Continued
-		demo-it-presentation-advance
+		;;demo-it-presentation-advance
 		;;Automater
-		demo-it-presentation-advance
+		;;demo-it-presentation-advance
 		;;Continued
-		demo-it-presentation-advance
+		;;demo-it-presentation-advance
 		;;Investigating a suspicous PDF
-		demo-it-presentation-advance
+		;;demo-it-presentation-advance
 		;;Strings
-		demo-it-presentation-advance
+		;;demo-it-presentation-advance
 		;;Magika
-		demo-it-presentation-advance
+		;;demo-it-presentation-advance
 		;;Threat Hunting
-		demo-it-presentation-advance
+		;;demo-it-presentation-advance
 		;;Velociraptor
-		demo-it-presentation-advance
+		;;demo-it-presentation-advance
 		;;Setup REMnux container for Analysis
-		demo-it-presentation-advance
+		;;demo-it-presentation-advance
 		;;Yara
-		demo-it-presentation-advance
+		;;demo-it-presentation-advance
 		;;Tools
-		demo-it-presentation-advance
+		;;demo-it-presentation-advance
 		;;Cyberchef
-		demo-it-presentation-advance
+		;;demo-it-presentation-advance
 		;;Conclusion
-		demo-it-presentation-advance
+		demo-it-presentation-return
 		;;Questions
 		demo-it-presentation-advance
 		;;Thanks

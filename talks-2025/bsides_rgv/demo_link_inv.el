@@ -48,9 +48,9 @@
   "run automater on link"
   (demo-it-run-in-shell "./Automater.py 'https://eduardorobles.com'"))
 
-(demo-it-create :windows-below :advance-mode :use-shell :variable-width :insert-fast :text-large
+(demo-it-create :single-window :advance-mode :use-shell :variable-width :insert-fast :text-large
 		(demo-it-presentation "demo_link_inv.org")
-		(demo-it-start-shell)
+		(demo-it-start-shell nil nil "malVM" :right :large 120)
 		;;(demo-it-run-in-shell "ssh malVM")
 		;;mal-demo/run-remnux
 		;;(demo-it-run-in-shell "cd files")
