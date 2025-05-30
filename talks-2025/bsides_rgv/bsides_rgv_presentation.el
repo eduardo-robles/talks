@@ -114,8 +114,10 @@
 		;;Setup REMnux in a Container
 		demo-it-presentation-advance
 		;;Install REMnux container
-		demo-it-presentation-advance
+		;;demo-it-presentation-advance
 		;;Run REMnux as a Transient container
+		demo-it-presentation-advance
+		;;Tools
 		demo-it-presentation-advance
 		;;Demo
 		;;demo-it-presentation-return
