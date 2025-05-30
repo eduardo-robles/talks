@@ -54,10 +54,7 @@ REMnux: A Linux Toolkit for Malware Analysis
 #+end_quote
 
 ** Setup REMnux in a Container
-REMnux offers several [[https://docs.remnux.org/install-distro/remnux-as-a-container][container]] images as well the full REMnux distro in a container.
-- The container technology they chose is Docker but I have chosen to use Podman.
-- Podman seems to have better support in Windows as well as Linux.
-- So I can have Podman running in both the Malware Analysis station and on my Windows machine. This gives me the flexibility to test on either machine or platform.
+- So I can have a container running on a Malware Analysis station and on my workstation. This gives me the flexibility to test on either machine or platform.
 *** Run REMnux as a Transient container
 #+begin_src sh
   podman run \
