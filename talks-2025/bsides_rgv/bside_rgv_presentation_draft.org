@@ -19,6 +19,8 @@ Quick, Easy, Malware Investigations and Threat Hunting
 1. Learn the basics of Malware Analysis
 2. Learn some Threat Hunting skills
 3. Small look at Reverse Engineering and Digital Forensics
+* Disclaimer
+Everything in this talk is my own research and opinion.
 * Malware Investigations
 ** Why do internal malware analysis?
 - Existing tools Virustotal, JoeSandbox, etc.

@@ -2,11 +2,11 @@
 #+REVEAL_THEME: white
 #+REVEAL_SLIDE:
 #+OPTIONS: toc:nil num:nil
-#+DATE: 20240216
+#+DATE: 20250531
 #+AUTHOR: Eduardo Robles
 #+TITLE: Quick, Easy, Malware Investigations and Threat Hunting
 
-* Bsides Austin 2024
+* BSIDES RGV 2025
 #+begin_center
 Quick, Easy, Malware Investigations and Threat Hunting
 #+end_center
@@ -25,7 +25,7 @@ Everything in this talk is my own research and opinion.
 ** Why do internal malware analysis?
 - Existing tools Virustotal, JoeSandbox, etc.
 - Protect sensitive information from 3rd parties.
-- Freedom from reliance on one tool or platform.
+- Freedom from reliance on one tool or platform. You can still use Virustotal or Any.Run but you can build workflows that don't rely on them.
 ** Malware is scary and dangerous, put in a box (container).
 Malware is scary. Malware is dangerous. So it's best to analyze in a "contained" environment.
 - Virtual Machines
@@ -56,14 +56,7 @@ https://remnux.org
 #+end_quote
 
 ** Setup REMnux in a Container
-REMnux offers several [[https://docs.remnux.org/install-distro/remnux-as-a-container][container]] images as well the full REMnux distro in a container.
-- They chose Docker in their documentation but I have chosen to use Podman.
-- Podman was easier to install and use in Windows as well as Linux.
-- So I can have Podman running in both the Malware Analysis station and on my Windows machine. This gives me the flexibility to test on either machine or platform.
-*** Install REMnux container
-#+begin_src sh
-podman pull docker.io/remnux/remnux-distro:focal
-#+end_src
+- So I can have a container running on a Malware Analysis station and on my workstation. This gives me the flexibility to test on either machine or platform.
 *** Run REMnux as a Transient container
 #+begin_src sh
   podman run \
@@ -75,15 +68,6 @@ podman pull docker.io/remnux/remnux-distro:focal
          --network none \
          remnux/remnux-distro:focal bash
 #+end_src
-What the previous command did
-- =--rm= Remove the container after it exists (not the image)
-- =-it= Connect the container to the terminal
-- =--name= Name the container
-- =-u remnux= Logged in user (optional)
-- =--privileged= Runs container with Root privileges (optional)
-- =--network none= Disables any network from the container (optional)
-- =remnux/remnux-distro:focal= Container image to use, in this case use the local image
-- =bash= Login shell
 * Digital Forensics
 ** Phishing Email Analysis
 *** ClamAV
@@ -97,61 +81,15 @@ You can also use ClamAV to scan any suspicious file.
 clamscan sample.zip
 #+end_src
 
-** Investigating a malicious link
-To investigate a link REMnux offers so many awesome tools. I will cover THUG and Automater.
-*** THUG
-THUG is a “honeyclient”. A honeyclient is a tool that mimicks the behavior of a web browser. Useful for analyzing what a link does when a user clicks on it.
-
-#+begin_src sh
-thug -u win7chrome49 "https://eduardorobles.com"
-#+end_src
-*** Continued...
-Once it begins to “load” the suspicious site it executes any code that may be on the site. Once it is done running/loading the page it dumps a report. The report contains a summary of what occured plus you get any malicious artifacts that the page may have downloaded.
-
-In one exercise a suspicous page downloaded an executable and I was able to analyze the executable from the container and it was indeed a malicous executable. Yikes!
-*** Automater
-#+begin_quote
-"Automater is a URL/Domain, IP Address, and Md5 Hash OSINT tool aimed at making the analysis process easier for intrusion Analysts. Given a target (URL, IP, or HASH) or a file full of targets Automater will return relevant results from sources like the following: IPvoid.com, Robtex.com, Fortiguard.com, unshorten.me, Urlvoid.com, Labs.alienvault.com, ThreatExpert, VxVault, and VirusTotal."
-#+end_quote
-*** Continued...
-Automater is a python tool found in =/usr/local/automater=
-#+begin_src sh
-  ./Automater.py https://eduardorobles.com
-#+end_src
-
-
 ** Investigating a suspicious PDF
 Malicious content will be embedded. It's best to extract the content in order to inspect it.
-
 *** Strings
 You can use the command =strings= to view all the different system call a file contains.
 #+begin_src
 strings sus_invoice.pdf | grep http
 #+end_src
-
 You can also pipe grep to single out things like ~http~ links or hashes.
-*** Magika
-#+begin_src
-  pip install magika
-#+end_src
-* Threat Hunting
-** Velociraptor
-"Velociraptor is an advanced digital forensic and incident response tool that enhances your visibility into your endpoints."
-https://docs.velociraptor.app/
-
-#+begin_example
-Velociraptor.exe gui
-#+end_example
-** Setup REMnux container for Analysis
-This container will run in priviledged mode and will have no network attached to it
-#+begin_src sh
-  podman run --rm -it \
-         --name malContainer \
-         --privileged \
-         --network none \
-         remnux/remnux-distro:focal bash
-#+end_src
-** Yara
+*** Yara
 https://github.com/airbnb/binaryalert/blob/master/rules/public/eicar.yara
 #+begin_src yara
 rule eicar_av_test {
@@ -189,6 +127,27 @@ rule eicar_substring_test {
         all of them
 }
 #+end_src
+** Investigating a malicious link
+To investigate a link REMnux offers so many awesome tools. I will cover THUG and Automater.
+*** THUG
+THUG is a “honeyclient”. A honeyclient is a tool that mimicks the behavior of a web browser. Useful for analyzing what a link does when a user clicks on it.
+
+#+begin_src sh
+thug -u win7chrome49 "https://eduardorobles.com"
+#+end_src
+*** Continued...
+Once it begins to “load” the suspicious site it executes any code that may be on the site. Once it is done running/loading the page it dumps a report. The report contains a summary of what occured plus you get any malicious artifacts that the page may have downloaded.
+
+In one exercise a suspicous page downloaded an executable and I was able to analyze the executable from the container and it was indeed a malicous executable. Yikes!
+
+* Threat Hunting
+** Velociraptor
+"Velociraptor is an advanced digital forensic and incident response tool that enhances your visibility into your endpoints."
+https://docs.velociraptor.app/
+
+#+begin_example
+Velociraptor.exe gui
+#+end_example
 ** Tools
 *** Cyberchef
 A great tool!
