@@ -80,7 +80,10 @@ You can also use ClamAV to scan any suspicious file.
 #+begin_src sh
 clamscan sample.zip
 #+end_src
-
+*** Demo
+#+BEGIN_EXPORT html
+<iframe src="https://archive.org/embed/20250529-email-analysis" width="640" height="480" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen></iframe>
+#+END_EXPORT
 ** Investigating a suspicious PDF
 Malicious content will be embedded. It's best to extract the content in order to inspect it.
 *** Strings
@@ -127,6 +130,10 @@ rule eicar_substring_test {
         all of them
 }
 #+end_src
+*** Demo
+#+BEGIN_EXPORT html
+<iframe src="https://archive.org/embed/20250528-file-analysis" width="640" height="480" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen></iframe>
+#+END_EXPORT
 ** Investigating a malicious link
 To investigate a link REMnux offers so many awesome tools. I will cover THUG and Automater.
 *** THUG
@@ -139,7 +146,10 @@ thug -u win7chrome49 "https://eduardorobles.com"
 Once it begins to “load” the suspicious site it executes any code that may be on the site. Once it is done running/loading the page it dumps a report. The report contains a summary of what occured plus you get any malicious artifacts that the page may have downloaded.
 
 In one exercise a suspicous page downloaded an executable and I was able to analyze the executable from the container and it was indeed a malicous executable. Yikes!
-
+*** Demo
+#+BEGIN_EXPORT html
+<iframe src="https://archive.org/embed/20250529-link-analysis" width="640" height="480" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen></iframe>
+#+END_EXPORT
 * Threat Hunting
 ** Velociraptor
 "Velociraptor is an advanced digital forensic and incident response tool that enhances your visibility into your endpoints."
