@@ -1,0 +1,36 @@
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+REVEAL_THEME: Solarized
+#+REVEAL_SLIDE:
+#+OPTIONS: toc:nil num:nil
+#+DATE: 20250925
+#+AUTHOR: Eduardo Robles
+#+TITLE: I got Malware, BTW. A quick look at the rising trend of Linux Malware.
+
+* Texas Linux Fest 2025
+#+begin_center
+I got Malware, BTW. A quick look at the rising trend of Linux Malware.
+#+end_center
+
+* About Me
+- I'm Eduardo Robles I work for the County of Hidalgo IT department as a Cybersecurity Analyst IV.
+- You can find me on my blog or LinkedIn.
+- I am a Cybersecurity Analyst cosplaying as a Linux Sysadmin.
+* Quick History
+** Supply Chain attack on the Arch User Repository
+*** What is a Supply Chain attack?
+According to [[https://csrc.nist.gov/glossary/term/supply_chain_attack][NIST]]
+#+begin_quote
+Attacks that allow the adversary to utilize implants or other vulnerabilities inserted prior to installation in order to infiltrate data, or manipulate information technology hardware, software, operating systems, peripherals (information technology products) or services at any point during the life cycle.
+#+end_quote
+** Arch Linux response to malware in the AUR
+
+** Malware specifically designed for Linux
+* The Problem
+** Supply Chain attacks
+* The Question
+** Linux is not secure by default, so why do we say it is?
+* The Resolution?
+** Foster FOSS security
+* Conclusion
+
+* Thanks
