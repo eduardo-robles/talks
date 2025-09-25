@@ -25,10 +25,22 @@ Attacks that allow the adversary to utilize implants or other vulnerabilities in
 ** Arch Linux response to malware in the AUR
 
 ** Malware specifically designed for Linux
+According the [[https://unit42.paloaltonetworks.com/elf-based-malware-targets-cloud/][Palo Alto]]
+#+begin_quote
+[Palo Alto] Unit 42 researchers have identified a growing threat to cloud security: Linux Executable and Linkage Format (ELF) files that threat actors are developing to target cloud infrastructure. We predict that threat actors targeting cloud environments will start using more complex tools in their exploits. This will include reworking, improving and tailoring existing tools that historically only targeted Linux operating systems (OS). The ELF malware samples threat actors use will include backdoors, droppers, remote access Trojans (RATs), data wipers and vulnerability-exploiting binaries.
+#+end_quote
 * The Problem
 ** Supply Chain attacks
+/"[[https://arstechnica.com/security/2025/07/open-source-repositories-are-seeing-a-rash-of-supply-chain-attacks/][Poisoning the well]]"/ - Ars Technica
+** Continued
+*** Threat Actors don't need to exploit your system. They let your package manager do it for them.
+*** Trust but verify kinda failed.
+*** There's a lot of money is FOSS exploits so threat actors are busy everyday.
 * The Question
 ** Linux is not secure by default, so why do we say it is?
+*** Host firewalls are usually turned off or not even installed.
+*** NO ANTIVIRUS SOLUTIONS. /Yes, ClamAV exists. I know.../
+*** "Secure" means something different to Red Hat, Canonical, SUSE, etc.
 * The Resolution?
 ** Foster FOSS security
 * Conclusion
