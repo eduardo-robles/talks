@@ -1,0 +1,16 @@
+* Links
+** https://www.mh4ckt3mh4ckt1c4s.xyz/blog/aur-chaos-malware-analysis/
+** https://wiki.archlinux.org/title/Arch_User_Repository
+** https://openssf.org/blog/2025/09/23/open-infrastructure-is-not-free-a-joint-statement-on-sustainable-stewardship/
+** https://arstechnica.com/security/2025/07/open-source-repositories-are-seeing-a-rash-of-supply-chain-attacks/
+** https://unit42.paloaltonetworks.com/elf-based-malware-targets-cloud/
+** https://csrc.nist.gov/glossary/term/supply_chain_attack
+** https://lists.archlinux.org/archives/list/aur-general@lists.archlinux.org/thread/7EZTJXLIAQLARQNTMEW2HBWZYE626IFJ/
+** https://bbs.archlinux.org/viewtopic.php?id=260825
+** https://www.howtogeek.com/how-to-avoid-malware-on-arch-linux/
+** https://www.bleepingcomputer.com/news/security/arch-linux-pulls-aur-packages-that-installed-chaos-rat-malware/
+** https://www.phoronix.com/news/Arch-Linux-Malicious-AURs
+** https://lwn.net/Articles/1032193/
+** https://www.reddit.com/r/linuxmasterrace/comments/1023bxf/aur_can_have_malware/
+** https://bbs.archlinux.org/viewtopic.php?id=285756
+** https://www.trendmicro.com/vinfo/us/security/news/cybercrime-and-digital-threats/the-linux-threat-landscape-report

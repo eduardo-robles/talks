@@ -15,7 +15,16 @@ I got Malware, BTW. A quick look at the rising trend of Linux Malware.
 - I'm Eduardo Robles I work for the County of Hidalgo IT department as a Cybersecurity Analyst IV.
 - You can find me on my blog or LinkedIn. /eduardorobles.com/
 - I am a Cybersecurity Analyst cosplaying as a Linux Sysadmin.
-* Quick History
+
+* Disclaimer
+#+begin_quote
+Everything discussed in this presentation is of my own opinion and research.
+#+end_quote
+
+* Quick Notes
+** Exploits, Vulnerabilties, Malware, etc.
+*** I may use these terms interchangably. I will try my best to highlight the differences between them when it explicitly concerns specific techniques and attacks.
+* The Problems
 ** Supply Chain attack on the Arch User Repository
 *** What is a Supply Chain attack?
 According to [[https://csrc.nist.gov/glossary/term/supply_chain_attack][NIST]]
@@ -29,7 +38,11 @@ According the [[https://unit42.paloaltonetworks.com/elf-based-malware-targets-cl
 #+begin_quote
 [Palo Alto] Unit 42 researchers have identified a growing threat to cloud security: Linux Executable and Linkage Format (ELF) files that threat actors are developing to target cloud infrastructure. We predict that threat actors targeting cloud environments will start using more complex tools in their exploits. This will include reworking, improving and tailoring existing tools that historically only targeted Linux operating systems (OS). The ELF malware samples threat actors use will include backdoors, droppers, remote access Trojans (RATs), data wipers and vulnerability-exploiting binaries.
 #+end_quote
-* The Problems
+** Malware threat are increasing rapidly
+*** Linux Ransomware
+#+begin_quote
+ [Trend Micro] Midyear Security Report cited that our sensors detected a 62% increase in Linux ransomware attack attempts.
+#+end_quote
 ** Supply Chain attacks
 /"[[https://arstechnica.com/security/2025/07/open-source-repositories-are-seeing-a-rash-of-supply-chain-attacks/][Poisoning the well]]"/ - Ars Technica
 ** Continued
