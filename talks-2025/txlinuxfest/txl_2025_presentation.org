@@ -1,7 +1,7 @@
 #+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
-#+REVEAL_THEME: beige
-#+REVEAL_SLIDE:
-#+OPTIONS: toc:nil num:nil
+#+REVEAL_THEME: simple
+#+REVEAL_PLUGINS: notes
+#+OPTIONS: toc:nil num:nil reveal_title_slide:nil
 #+DATE: 20250925
 #+AUTHOR: Eduardo Robles
 #+TITLE: I got Malware, BTW. A quick look at the rising trend of Linux Malware.
@@ -13,7 +13,8 @@ I got Malware, BTW. A quick look at the rising trend of Linux Malware.
 
 * About Me
 - I'm Eduardo Robles I work for the County of Hidalgo IT department as a Cybersecurity Analyst IV.
-- You can find me on my blog or LinkedIn. /eduardorobles.com/
+- You can find me on my blog or LinkedIn.
+- /eduardorobles.com/
 - I am a Cybersecurity Analyst cosplaying as a Linux Sysadmin.
 
 * Disclaimer
@@ -23,7 +24,9 @@ Everything discussed in this presentation is of my own opinion and research.
 
 * Quick Notes
 ** Exploits, Vulnerabilties, Malware, etc.
-*** I may use these terms interchangably. I will try my best to highlight the differences between them when it explicitly concerns specific techniques and attacks.
+#+begin_quote
+I may use these terms interchangably. I will try my best to highlight the differences between them when it explicitly concerns specific techniques and attacks.
+#+end_quote
 * The Problems
 ** Supply Chain attack on the Arch User Repository
 *** What is a Supply Chain attack?
@@ -33,40 +36,66 @@ Attacks that allow the adversary to utilize implants or other vulnerabilities in
 #+end_quote
 ** Arch Linux response to malware in the AUR
 *** /AUR Chaos malware: an analysis. What happened, and an investigation of the malware/ - mh4ckt3mh4ckt1c4s' [[https://www.mh4ckt3mh4ckt1c4s.xyz/blog/aur-chaos-malware-analysis/][blog]]
+#+REVEAL_HTML:<img src="/home/erobles/Projects/talks/talks-2025/txlinuxfest/img/arch_aurResponse.png" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></img><p></p>
+
+#+BEGIN_NOTES
+The blog gives a great timeline of events and a breakdown of the malware threat.
+#+END_NOTES
 ** Malware specifically designed for Linux
 According the [[https://unit42.paloaltonetworks.com/elf-based-malware-targets-cloud/][Palo Alto]]
 #+begin_quote
-[Palo Alto] Unit 42 researchers have identified a growing threat to cloud security: Linux Executable and Linkage Format (ELF) files that threat actors are developing to target cloud infrastructure. We predict that threat actors targeting cloud environments will start using more complex tools in their exploits. This will include reworking, improving and tailoring existing tools that historically only targeted Linux operating systems (OS). The ELF malware samples threat actors use will include backdoors, droppers, remote access Trojans (RATs), data wipers and vulnerability-exploiting binaries.
+[Palo Alto] Unit 42 researchers have identified a growing threat to cloud security: Linux Executable and Linkage Format (ELF) files that threat actors are developing to target cloud infrastructure... The ELF malware samples threat actors use will include backdoors, droppers, remote access Trojans (RATs), data wipers and vulnerability-exploiting binaries.
 #+end_quote
-** Malware threat are increasing rapidly
+** Malware threats are increasing rapidly
 *** Linux Ransomware
 #+begin_quote
- [Trend Micro] Midyear Security Report cited that our sensors detected a 62% increase in Linux ransomware attack attempts.
+ [Trend Micro] Midyear Security Report (2023) cited that our sensors detected a 62% increase in Linux ransomware attack attempts.
 #+end_quote
 ** Supply Chain attacks
 /"[[https://arstechnica.com/security/2025/07/open-source-repositories-are-seeing-a-rash-of-supply-chain-attacks/][Poisoning the well]]"/ - Ars Technica
+#+REVEAL_HTML:<img src="/home/erobles/Projects/talks/talks-2025/txlinuxfest/img/arstechnica.png" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></img><p></p>
 ** Continued
 *** Threat Actors don't need to exploit your system. They let your package manager do it for them.
 *** Trust but verify kinda failed.
 *** There's a lot of money in FOSS exploits so threat actors are busy everyday.
 ** The Hardware store vs. Open Air market problem
 *** Official Arch repositories (or any official repos) are like a "big box" Hardware Store.
+#+BEGIN_NOTES
+Think Home Depot
+#+END_NOTES
 *** The AUR (or any third party repo) is an Open Air market with many different vendors.
+#+BEGIN_NOTES
+Think farmers market
+#+END_NOTES
 * The Question
 ** Linux is not secure by default, so why do we say it is?
-*** NO ANTIVIRUS SOLUTIONS. /Yes, ClamAV exists. I know.../
+*** NO ANTIVIRUS SOLUTIONS.
+- /Yes, ClamAV exists. I know.../
+#+BEGIN_NOTES
+I mean there are not many good consumer level Antivirus solution.
+#+END_NOTES
+*** Continued
+#+REVEAL_HTML:<img src="/home/erobles/Projects/talks/talks-2025/txlinuxfest/img/TuskyConvo1.jpg" width="600" height="600" frameBorder="0" class="giphy-embed" allowFullScreen></img><p></p>
 *** "Secure" means something different to Red Hat, Canonical, SUSE, Arch, NixOS, etc. More a feature not a bug.
 *** FOSS surpases all Windows installs by a huge margin! FOSS is a resource a not a product.
+#+BEGIN_NOTES
+Linux Distros aren't really products like Windows is to Microsoft.
+#+END_NOTES
 * The Solution???
-** Verify all the time! Don't trust all the time but verify some of the time.
+** Verify all the time!
+#+REVEAL_HTML:<img src="/home/erobles/Projects/talks/talks-2025/txlinuxfest/img/yt_aurcoverage.png" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></img><p></p>
+#+BEGIN_NOTES
+Don't trust all the time but verify some of the time.
+#+END_NOTES
 ** User education:
 - Setup host firewall
 - Setup some sort of Antivirus
-** Immutable and Impermanant Systems?
-*** Immutabiltiy give the flexibility of having a system that builds from official sources.
-**** But I'm not sure we can get mass adoption.
-*** Impermanant systems can "blowaway" malware from a system with a simple reboot.
-**** Rebooting is great for non-production systems anything else is a possible nightmare.
+** Immutable and Impermenant Systems?
+*** Immutabiltiy gives the flexibility of having a system that is read-only.
+- But I'm not sure how this works in large scale.
+*** Impermenant systems can "blowaway" malware from a system with a simple reboot.
+- Rebooting is great for non-production systems anything else is a possible nightmare.
 * Conclusion
-
+** Not an easy problem to solve, but it's being worked on.
+** People care about security. We just have to be proactive in changing the narrative.
 * Thanks
